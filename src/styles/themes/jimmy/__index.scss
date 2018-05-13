@@ -1,0 +1,35 @@
+@if $ink--current-theme=='JIMMY' {
+	$ink--font-family: 'Barlow';
+	$ink--border-rad: 2px;
+	$ink--colors-basic: (
+		'bg':#ebeeef,
+		'bg-alt':#ddd,
+		'bg-alt-dark':#dee1e3,
+		'text':#808080,
+		'heading':#435257,
+		'subheading':#999,
+		'subtext':#999,
+		'border':#cbcbcb,
+		'para':#808080,
+		'dark':#000
+	);
+	$ink--colors-theme: (
+		'primary':#2196f3,
+		'primary-o':#1976d2,
+		'secondary':#dbdbdb,
+		'success':#3fc782,
+		'warning':#f78f1e,
+		'error':#e3505a,
+		'danger':#e3505a,
+		'info':#03A9F4,
+		'dark':#2196f3,
+		'subheading':#333,
+		'link-alt':#999
+	);
+	$ink--colors: (
+		'basic':$ink--colors-basic,
+		'theme':$ink--colors-theme
+	);
+
+	$ink--sidebar-bg: #3c444d;
+}
