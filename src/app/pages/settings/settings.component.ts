@@ -1,15 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'inkapp-settings',
+  selector: 'inkapp-settings-page',
   templateUrl: './settings.component.html',
   styles: []
 })
-export class SettingsComponent implements OnInit {
+export class SettingsPage implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }
