@@ -6,7 +6,7 @@ import * as Datastore from 'nedb';
 })
 export class DBService {
   db;
-  constructor() {
+  _constructor() {
     this.db = new Datastore({ filename: 'ink/db' });
     this.db.loadDatabase(e => {});
     const doc = {

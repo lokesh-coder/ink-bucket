@@ -21,6 +21,7 @@ export class InkState {
     state = state.map((a: any) => {
       if (a.id === action.inkData.id) {
         a.value = action.inkData.value;
+        a.meta = action.inkData.meta;
       }
       return a;
     });

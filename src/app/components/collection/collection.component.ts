@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
-import { InkBucket, InkCollection } from '../../ink.model';
+import { InkBucket, InkCollection, InkCollectionMeta } from '../../ink.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -11,7 +11,7 @@ import { map } from 'rxjs/operators';
 })
 export class CollectionComponent implements OnInit {
   bucket: Observable<InkBucket>;
-  collection: InkCollection;
+  collection: InkCollectionMeta;
   constructor(private store: Store) {
     this.store
       .select(s => s.collection)

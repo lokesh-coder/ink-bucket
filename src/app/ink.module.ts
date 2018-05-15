@@ -18,11 +18,14 @@ import { SettingsPage } from './pages/settings/settings.component';
 import { SettingsState, BucketState, CollectionState, InkState } from './store/states';
 import { ColorModule } from './modules/color/color.module';
 
+import { OverlayModule } from '@angular/cdk/overlay';
+
 export const MODULES = [
   RoutingModule,
   NgxsModule.forRoot([SettingsState, BucketState, CollectionState, InkState]),
   NgxsReduxDevtoolsPluginModule.forRoot(),
-  ColorModule
+  ColorModule,
+  OverlayModule
 ];
 export const COMPONENTS = [
   InkApp,

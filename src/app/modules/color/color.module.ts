@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
 import { ColorAlphaModule } from 'ngx-color/alpha'; // <color-alpha-picker></color-alpha-picker>
 import { ColorBlockModule } from 'ngx-color/block'; // <color-block></color-block>
-import { ColorChromeModule } from 'ngx-color/chrome'; // <color-chrome></color-chrome>
+import { ColorChromeModule, ChromeComponent } from 'ngx-color/chrome'; // <color-chrome></color-chrome>
 import { ColorCircleModule } from 'ngx-color/circle'; // <color-circle></color-circle>
 import { ColorCompactModule } from 'ngx-color/compact'; // <color-compact></color-compact>
 import { ColorGithubModule } from 'ngx-color/github'; // <color-github></color-github>
@@ -12,13 +14,13 @@ import { ColorSketchModule } from 'ngx-color/sketch'; // <color-sketch></color-s
 import { ColorSliderModule } from 'ngx-color/slider'; // <color-slider></color-slider>
 import { ColorSwatchesModule } from 'ngx-color/swatches'; // <color-swatches></color-swatches>
 import { ColorTwitterModule } from 'ngx-color/twitter'; // <color-twitter></color-twitter>
-
-import { CommonModule } from '@angular/common';
+import { ChromeColorPickerComponent } from './components/chrome-color-picker.component';
 
 @NgModule({
   imports: [CommonModule, ColorChromeModule],
-  exports: [ColorChromeModule],
-  declarations: [],
-  providers: []
+  exports: [ColorChromeModule, ChromeColorPickerComponent],
+  declarations: [ChromeColorPickerComponent],
+  providers: [],
+  entryComponents: [ChromeComponent, ChromeColorPickerComponent]
 })
 export class ColorModule {}
