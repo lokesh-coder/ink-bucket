@@ -1,1 +1,7 @@
-<inkapp-ink></inkapp-ink>
+<h3>{{bucketData.name}}</h3>
+<button class="btn primary-outline" (click)="addNewInk()">Add new color</button>
+<div class="d-flex">
+  <ng-container *ngFor="let color of ink|async">
+    <inkapp-ink [inkData]="color"></inkapp-ink>
+  </ng-container>
+</div>

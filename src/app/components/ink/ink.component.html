@@ -1,3 +1,7 @@
-<p>
-  ink works!
-</p>
+<div class="comp-ink">
+  <div class="color" [style.backgroundColor]="inkData.value" (click)="openColorPicker()"></div>
+  <div class="data">
+    {{inkData.value}}
+  </div>
+  <color-chrome (onChange)="colorChanged(inkData.id,$event)"></color-chrome>
+</div>

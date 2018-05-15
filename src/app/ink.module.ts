@@ -15,9 +15,15 @@ import { InkApp } from './ink.component';
 import { RoutingModule } from './ink.routing';
 import { HomePage } from './pages/home/home.component';
 import { SettingsPage } from './pages/settings/settings.component';
-import { SettingsState } from './store/states/settings.state';
+import { SettingsState, BucketState, CollectionState, InkState } from './store/states';
+import { ColorModule } from './modules/color/color.module';
 
-export const MODULES = [RoutingModule, NgxsModule.forRoot([SettingsState]), NgxsReduxDevtoolsPluginModule.forRoot()];
+export const MODULES = [
+  RoutingModule,
+  NgxsModule.forRoot([SettingsState, BucketState, CollectionState, InkState]),
+  NgxsReduxDevtoolsPluginModule.forRoot(),
+  ColorModule
+];
 export const COMPONENTS = [
   InkApp,
   NavbarComponent,

@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Store } from '@ngxs/store';
+import { InkBucket, Ink, InkBucketMeta } from '../../ink.model';
+import { Observable } from 'rxjs';
+import { filter, tap, map } from 'rxjs/operators';
+import { AddNewInk } from '../../store/actions/ink.action';
 
 @Component({
   selector: 'inkapp-bucket',
@@ -6,10 +11,15 @@ import { Component, OnInit } from '@angular/core';
   styles: []
 })
 export class BucketComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
+  @Input() collectionId: number;
+  @Input() bucketData: InkBucketMeta;
+  ink: Observable<Ink>;
+  constructor(private store: Store) {
+    this.ink = this.store.select(s => s.ink).pipe(map(x => x.filter(y => y.bucketId === this.bucketData.id)));
   }
 
+  ngOnInit() {}
+  addNewInk() {
+    this.store.dispatch(new AddNewInk({ bucketId: this.bucketData.id, value: '#fff', meta: {} }));
+  }
 }

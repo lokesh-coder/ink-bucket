@@ -1,1 +1,6 @@
-<inkapp-bucket></inkapp-bucket>
+<ng-container *ngIf="collection as coll">
+  <h4>{{coll.name}}</h4>
+  <ng-container *ngFor="let b of bucket|async">
+    <inkapp-bucket [bucketData]="b"></inkapp-bucket>
+  </ng-container>
+</ng-container>

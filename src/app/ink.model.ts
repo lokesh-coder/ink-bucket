@@ -4,18 +4,32 @@ export enum InkColorType {
   HSL
 }
 
-export interface InkColor {
-  name?: string;
-  value: string;
-  type: InkColorType;
-  belongsTo: string;
+export interface InkBucketMeta {
+  id: number;
+  name: string;
+  collectionId: number;
 }
 
-export interface InkCollection {
+export type InkBucket = InkBucketMeta[];
+
+export interface InkColor {
+  id?: string;
+  name?: string;
+  value: string;
+  meta: any;
+  bucketId: number;
+}
+
+export type Ink = InkColor[];
+
+export interface InkCollectionMeta {
+  id: number;
   name: string;
-  colors: InkColor[];
   created: Date;
 }
+
+export type InkCollection = InkCollectionMeta[];
+
 export enum InkAppView {
   ROUND,
   RECT,

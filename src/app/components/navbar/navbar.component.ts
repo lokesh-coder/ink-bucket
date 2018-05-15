@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngxs/store';
+import { CreateBucket } from '../../store/actions/bucket.action';
 
 @Component({
   selector: 'inkapp-navbar',
@@ -6,10 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styles: []
 })
 export class NavbarComponent implements OnInit {
+  constructor(private store: Store) {}
 
-  constructor() { }
+  ngOnInit() {}
 
-  ngOnInit() {
+  newBucket() {
+    this.store.dispatch(new CreateBucket({ collectionId: 1, id: 1, name: 'Hello-123' }));
   }
-
 }
