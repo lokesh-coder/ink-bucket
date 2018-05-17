@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
 import { InkBucket, InkCollection, InkCollectionMeta } from '../../ink.model';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, filter } from 'rxjs/operators';
 
 @Component({
   selector: 'inkapp-collection',
@@ -15,7 +15,7 @@ export class CollectionComponent implements OnInit {
   constructor(private store: Store) {
     this.store
       .select(s => s.collection)
-      .pipe(map(x => x[0]))
+      .pipe(filter(s => s.length > 0), map(x => x[0]))
       .subscribe(r => {
         console.log('CColl', r);
         this.collection = r;

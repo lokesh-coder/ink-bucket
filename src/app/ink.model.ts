@@ -5,9 +5,9 @@ export enum InkColorType {
 }
 
 export interface InkBucketMeta {
-  id: number;
+  id?: string;
   name: string;
-  collectionId: number;
+  collectionId: string;
 }
 
 export type InkBucket = InkBucketMeta[];
@@ -17,13 +17,13 @@ export interface InkColor {
   name?: string;
   value: string;
   meta: any;
-  bucketId: number;
+  bucketId: string;
 }
 
 export type Ink = InkColor[];
 
 export interface InkCollectionMeta {
-  id: number;
+  id: string;
   name: string;
   created: Date;
 }

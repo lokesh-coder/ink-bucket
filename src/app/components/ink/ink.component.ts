@@ -14,7 +14,7 @@ import { map, debounceTime } from 'rxjs/operators';
 })
 export class InkComponent implements OnInit, OnDestroy {
   @Input() inkData: InkColor;
-  @Input() bucketId: number;
+  @Input() bucketId: string;
   overlayRef: OverlayRef;
   colorPanelPortal: ComponentPortal<ChromeComponent>;
   colorPickerRef: ComponentRef<ChromeComponent>;
@@ -41,7 +41,7 @@ export class InkComponent implements OnInit, OnDestroy {
     }
     this.colorPickerRef.instance.onChange.pipe(map(c => c.color)).subscribe(color => {
       this.store.dispatch(
-        new UpdateInkColor({ bucketId: this.bucketId, value: color.hex, meta: color, id: this.inkData.id })
+        new UpdateInkColor({ bucketId: this.inkData.bucketId, value: color.hex, meta: color, id: this.inkData.id })
       );
     });
     this.overlayRef.backdropClick().subscribe(b => {
