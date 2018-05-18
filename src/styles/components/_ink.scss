@@ -1,23 +1,2 @@
 inkapp-ink {
 }
-.comp-ink {
-  display: flex;
-  flex-direction: column;
-  padding: 1rem;
-  text-align: center;
-  .color {
-    display: inline-block;
-    width: 5rem;
-    height: 5rem;
-    border-radius: 100%;
-    margin-bottom: 1rem;
-    box-shadow: 0px 3px 13px #ebeaf7;
-    cursor: pointer;
-  }
-  .data {
-    text-transform: uppercase;
-    font-weight: 600;
-    color: #444753;
-    font-size: 0.9rem;
-  }
-}

@@ -1,0 +1,29 @@
+$size: 4rem;
+
+.ink-color-sticker {
+  padding: 1rem;
+  font-size: 1.6rem;
+
+  .ink-color {
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    width: $size;
+    height: $size;
+    border-radius: 100%;
+    margin-bottom: 1rem;
+    box-shadow: 0px 3px 13px clr('shadow');
+    cursor: pointer;
+  }
+  &.-empty .ink-color {
+    border: 1px dashed clr('border');
+    box-shadow: none;
+  }
+  .ink-name {
+    text-transform: uppercase;
+    font-weight: 500;
+    color: transparentize($color: clr('dark'), $amount: 0.5);
+    font-size: 0.9rem;
+  }
+}

@@ -1,0 +1,12 @@
+inkapp-bucket {
+  display: block;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 3px;
+  box-shadow: 0px 8px 13px clr('shadow');
+  margin-bottom: 1rem;
+  h3 {
+    font-weight: 400;
+    color: clr('dark', 'theme');
+  }
+}

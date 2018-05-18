@@ -38,27 +38,27 @@ $icons: (
 );
 
 @font-face {
-	font-family: 'ink';
-	font-style: normal;
-	font-weight: normal;
-	src: url('#{$ink--icon-font-path}/ink.ttf?olqd7c') format('truetype'),
-		url('#{$ink--icon-font-path}/ink.woff?olqd7c') format('woff'),
-		url('#{$ink--icon-font-path}/ink.svg?olqd7c#choosy') format('svg');
+  font-family: 'ink';
+  font-style: normal;
+  font-weight: normal;
+  src: url('#{$ink--icon-font-path}/ink.ttf?olqd7c') format('truetype'),
+    url('#{$ink--icon-font-path}/ink.woff?olqd7c') format('woff'),
+    url('#{$ink--icon-font-path}/ink.svg?olqd7c#choosy') format('svg');
 }
 
-.doc-icon {
-	/* use !important to prevent issues with browser extensions that change fonts */
-	font-family: $ink--icons-font !important;
+.ink-icon {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: $ink--icons-font !important;
 
-	/* Better Font Rendering =========== */
-	-webkit-font-smoothing: antialiased;
-	font-style: normal;
-	font-variant: normal;
-	font-weight: normal;
-	line-height: 1;
-	-moz-osx-font-smoothing: grayscale;
-	speak: none;
-	text-transform: none;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  line-height: 1;
+  -moz-osx-font-smoothing: grayscale;
+  speak: none;
+  text-transform: none;
 }
 @each $icon in $icons {
   .icon-#{nth($icon, 1)} {
