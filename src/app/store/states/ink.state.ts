@@ -1,5 +1,5 @@
 import { State, Action, StateContext } from '@ngxs/store';
-import { Ink } from '../../ink.model';
+import { Ink } from '../../models';
 import { AddNewInk, UpdateInkColor } from '../actions/ink.action';
 import { LoadInitialData } from '../actions/general.action';
 import { DBService } from '../../services/db.service';

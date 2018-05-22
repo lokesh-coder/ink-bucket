@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { Ink, InkColor } from '../../../ink.model';
+import { Ink, InkColor } from '../../../models';
 import { AddNewInk, UpdateInkColor } from '../../../store/actions/ink.action';
 import { Subject } from 'rxjs';
 

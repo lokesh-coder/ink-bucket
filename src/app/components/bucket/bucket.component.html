@@ -1,5 +1,5 @@
 <h3>{{bucketData.name}}</h3>
-<div class="d-flex">
+<div class="d-flex flex-wrap">
   <ng-container *ngFor="let color of ink|async">
     <inkapp-ink [inkData]="color"></inkapp-ink>
   </ng-container>

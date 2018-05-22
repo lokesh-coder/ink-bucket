@@ -1,4 +1,4 @@
-import { InkColor } from '../../ink.model';
+import { InkColor } from '../../models';
 
 export class AddNewInk {
   static readonly type = '[Ink] Add new ink';

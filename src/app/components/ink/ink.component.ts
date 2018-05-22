@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnDestroy, ComponentRef, ElementRef } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { InkColor } from '../../ink.model';
+import { InkColor } from '../../models';
 import { UpdateInkColor } from '../../store/actions/ink.action';
 import { Overlay, OverlayRef, OverlayConfig } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';

@@ -9,19 +9,19 @@ import { map, tap, filter } from 'rxjs/operators';
   styles: []
 })
 export class NavbarComponent implements OnInit {
-  currentCollectionId: string;
+  currentBoardId: string;
   constructor(private store: Store) {}
 
   ngOnInit() {
     this.store
-      .select(s => s.collection)
+      .select(s => s.board)
       .pipe(filter(s => s.length > 0), map(s => s[0].id))
-      .subscribe(r => (this.currentCollectionId = r));
+      .subscribe(r => (this.currentBoardId = r));
   }
 
   newBucket() {
-    if (this.currentCollectionId) {
-      this.store.dispatch(new CreateBucket({ collectionId: this.currentCollectionId, name: 'Hello-123' }));
+    if (this.currentBoardId) {
+      this.store.dispatch(new CreateBucket({ boardId: this.currentBoardId, name: 'Hello-123' }));
     }
   }
 }

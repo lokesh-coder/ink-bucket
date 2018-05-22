@@ -1,4 +1,4 @@
-import { InkAppView } from '../../ink.model';
+import { InkAppView } from '../../models';
 
 export class ChangeView {
   static readonly type = '[Settings] change view';

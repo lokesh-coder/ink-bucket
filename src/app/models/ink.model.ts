@@ -1,3 +1,11 @@
+import {
+  InkDbBoardCollection,
+  InkDbInkCollection,
+  InkDbBucketCollection,
+  InkDbSettingsCollection
+} from './inkdb.model';
+import { RxDatabase } from 'rxdb';
+
 export enum InkColorType {
   RGB,
   HEX,
@@ -7,7 +15,7 @@ export enum InkColorType {
 export interface InkBucketMeta {
   id?: string;
   name: string;
-  collectionId: string;
+  boardId: string;
 }
 
 export type InkBucket = InkBucketMeta[];
@@ -22,13 +30,13 @@ export interface InkColor {
 
 export type Ink = InkColor[];
 
-export interface InkCollectionMeta {
+export interface InkBoardMeta {
   id: string;
   name: string;
   created: Date;
 }
 
-export type InkCollection = InkCollectionMeta[];
+export type InkBoard = InkBoardMeta[];
 
 export enum InkAppView {
   ROUND,
@@ -38,4 +46,11 @@ export enum InkAppView {
 export interface InkAppSettings {
   view: InkAppView;
   sortBy: string;
+}
+
+export interface InkDb extends RxDatabase {
+  board?: InkDbBoardCollection;
+  ink?: InkDbInkCollection;
+  bucket?: InkDbBucketCollection;
+  settings?: InkDbSettingsCollection;
 }

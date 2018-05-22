@@ -1,5 +1,5 @@
 import { State, Action, StateContext } from '@ngxs/store';
-import { InkAppSettings } from '../../ink.model';
+import { InkAppSettings } from '../../models';
 import { ChangeView } from '../actions/settings.action';
 
 @State<Partial<InkAppSettings>>({

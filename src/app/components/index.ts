@@ -1,5 +1,5 @@
 export { NavbarComponent } from './navbar/navbar.component';
-export { CollectionComponent } from './collection/collection.component';
+export { BoardComponent } from './board/board.component';
 export { BucketComponent } from './bucket/bucket.component';
 export { PromptComponent } from './prompt/prompt.component';
 export { ColorPickerComponent } from './color-picker/color-picker.component';

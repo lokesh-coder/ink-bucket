@@ -4,7 +4,7 @@ import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import {
   BucketComponent,
-  CollectionComponent,
+  BoardComponent,
   ColorFormComponent,
   ColorPickerComponent,
   InkComponent,
@@ -15,14 +15,14 @@ import { InkApp } from './ink.component';
 import { RoutingModule } from './ink.routing';
 import { HomePage } from './pages/home/home.component';
 import { SettingsPage } from './pages/settings/settings.component';
-import { SettingsState, BucketState, CollectionState, InkState } from './store/states';
+import { SettingsState, BucketState, BoardState, InkState } from './store/states';
 import { ColorModule } from './modules/color/color.module';
 
 import { OverlayModule } from '@angular/cdk/overlay';
 
 export const MODULES = [
   RoutingModule,
-  NgxsModule.forRoot([SettingsState, BucketState, CollectionState, InkState]),
+  NgxsModule.forRoot([SettingsState, BucketState, BoardState, InkState]),
   NgxsReduxDevtoolsPluginModule.forRoot(),
   ColorModule,
   OverlayModule
@@ -30,7 +30,7 @@ export const MODULES = [
 export const COMPONENTS = [
   InkApp,
   NavbarComponent,
-  CollectionComponent,
+  BoardComponent,
   BucketComponent,
   PromptComponent,
   ColorPickerComponent,

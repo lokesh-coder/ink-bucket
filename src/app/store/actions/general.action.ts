@@ -1,4 +1,4 @@
-import { InkBucket, InkBucketMeta } from '../../ink.model';
+import { InkBucket, InkBucketMeta } from '../../models';
 
 export class LoadInitialData {
   static readonly type = '[General] Load initial data';

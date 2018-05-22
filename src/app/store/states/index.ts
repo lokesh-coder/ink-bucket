@@ -1,4 +1,4 @@
 export { BucketState } from './bucket.state';
-export { CollectionState } from './collection.state';
+export { BoardState } from './board.state';
 export { SettingsState } from './settings.state';
 export { InkState } from './ink.state';

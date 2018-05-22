@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { InkBucket, Ink, InkBucketMeta } from '../../ink.model';
+import { InkBucket, Ink, InkBucketMeta } from '../../models';
 import { Observable } from 'rxjs';
 import { filter, tap, map } from 'rxjs/operators';
 import { AddNewInk } from '../../store/actions/ink.action';
@@ -11,7 +11,7 @@ import { AddNewInk } from '../../store/actions/ink.action';
   styles: []
 })
 export class BucketComponent implements OnInit {
-  @Input() collectionId: number;
+  @Input() boardId: number;
   @Input() bucketData: InkBucketMeta;
   ink: Observable<Ink>;
   constructor(private store: Store) {

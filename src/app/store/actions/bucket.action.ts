@@ -1,4 +1,4 @@
-import { InkBucket, InkBucketMeta } from '../../ink.model';
+import { InkBucket, InkBucketMeta } from '../../models';
 
 export class CreateBucket {
   static readonly type = '[Bucket] Create new bucket';

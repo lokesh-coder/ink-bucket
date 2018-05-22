@@ -3,20 +3,23 @@ import * as Datastore from 'nedb';
 import { bindCallback } from 'rxjs';
 import { Store } from '@ngxs/store';
 import { LoadInitialData } from '../store/actions/general.action';
+import { LocalDatabase } from './localdb.service';
+import { RxDatabase } from 'rxdb';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DBService {
-  db = { bucket: null, ink: null, collection: null };
-  constructor(private store: Store) {
-    Object.keys(this.db).forEach(key => {
-      this.db[key] = new Datastore({ filename: `ink/db/${key}`, autoload: true });
-      this.db[key].find({}, (err, docs) => {
-        this.store.dispatch(new LoadInitialData(key, docs));
-        console.log('while loading..', docs);
-      });
-    });
+  conn: Promise<RxDatabase> = null;
+  db = { bucket: null, ink: null, board: null };
+  constructor(private store: Store, public localDb: LocalDatabase) {
+    // Object.keys(this.db).forEach(key => {
+    //   this.db[key] = new Datastore({ filename: `ink/db/${key}`, autoload: true });
+    //   this.db[key].find({}, (err, docs) => {
+    //     this.store.dispatch(new LoadInitialData(key, docs));
+    //     console.log('while loading..', docs);
+    //   });
+    // });
   }
 
   findDocument(coll, q = {}) {

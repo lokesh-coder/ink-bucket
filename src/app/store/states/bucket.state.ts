@@ -1,5 +1,5 @@
 import { State, Action, StateContext } from '@ngxs/store';
-import { InkAppSettings, InkBucket } from '../../ink.model';
+import { InkAppSettings, InkBucket } from '../../models';
 import { CreateBucket, UpdateBucket } from '../actions/bucket.action';
 import { DBService } from '../../services/db.service';
 import { LoadInitialData } from '../actions/general.action';
