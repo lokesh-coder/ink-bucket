@@ -1,10 +1,4 @@
-import {
-  InkDbBoardCollection,
-  InkDbInkCollection,
-  InkDbBucketCollection,
-  InkDbSettingsCollection
-} from './inkdb.model';
-import { RxDatabase } from 'rxdb';
+import { RxDatabase, RxDocument, RxCollection } from 'rxdb';
 
 export enum InkColorType {
   RGB,
@@ -12,30 +6,34 @@ export enum InkColorType {
   HSL
 }
 
+export interface InkBoardMeta {
+  name?: string;
+  _id?: string;
+  description?: string;
+  createdAt?: string;
+}
 export interface InkBucketMeta {
-  id?: string;
-  name: string;
+  name?: string;
+  _id?: string;
+  description?: string;
   boardId: string;
+}
+export interface InkColorMeta {
+  name?: string;
+  _id?: string;
+  description?: string;
+  meta: any;
+  displayValue: string;
+  bucketId: string;
+}
+export interface InkSettingsMeta {
+  key: string;
+  _id?: string;
+  value: string;
 }
 
 export type InkBucket = InkBucketMeta[];
-
-export interface InkColor {
-  id?: string;
-  name?: string;
-  value: string;
-  meta: any;
-  bucketId: string;
-}
-
-export type Ink = InkColor[];
-
-export interface InkBoardMeta {
-  id: string;
-  name: string;
-  created: Date;
-}
-
+export type Ink = InkColorMeta[];
 export type InkBoard = InkBoardMeta[];
 
 export enum InkAppView {
@@ -48,9 +46,25 @@ export interface InkAppSettings {
   sortBy: string;
 }
 
+/* doc methods */
+export interface InkDocMethods {
+  log(): any;
+}
+
+/* documents */
+export type InkBoardDoc = RxDocument<InkBoardMeta, InkDocMethods>;
+export type InkBucketDoc = RxDocument<InkBucketMeta, InkDocMethods>;
+export type InkInkDoc = RxDocument<InkColorMeta, InkDocMethods>;
+export type InkSettingsDoc = RxDocument<InkSettingsMeta, InkDocMethods>;
+/* collections */
+export interface InkBoardColl extends RxCollection<InkBoardMeta, InkDocMethods> {}
+export interface InkBucketColl extends RxCollection<InkBucketMeta, InkDocMethods> {}
+export interface InkInkColl extends RxCollection<InkColorMeta, InkDocMethods> {}
+export interface InkSettingsColl extends RxCollection<InkSettingsMeta, InkDocMethods> {}
+/* database */
 export interface InkDb extends RxDatabase {
-  board?: InkDbBoardCollection;
-  ink?: InkDbInkCollection;
-  bucket?: InkDbBucketCollection;
-  settings?: InkDbSettingsCollection;
+  board?: InkBoardColl;
+  ink?: InkInkColl;
+  bucket?: InkBucketColl;
+  settings?: InkSettingsColl;
 }

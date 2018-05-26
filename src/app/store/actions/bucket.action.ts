@@ -5,6 +5,11 @@ export class CreateBucket {
   constructor(public bucketData: InkBucketMeta) {}
 }
 export class UpdateBucket {
-  static readonly type = '[Ink] Update bucket';
+  static readonly type = '[Bucket] Update bucket';
   constructor(public bucketData: InkBucketMeta) {}
+}
+
+export class LoadBuckets {
+  static readonly type = '[Bucket] Load all buckets';
+  constructor(public buckets: InkBucketMeta[]) {}
 }

@@ -4,19 +4,16 @@ export const BucketSchema = {
   description: 'buckets',
   type: 'object',
   properties: {
-    id: {
-      type: 'string',
-      primary: true
-    },
     name: {
       type: 'string'
     },
     description: {
-      type: 'string'
+      type: 'string',
+      default: ''
     },
     boardId: {
       type: 'string'
     }
   },
-  required: ['id', 'name', 'boardId']
+  required: ['name', 'boardId']
 };

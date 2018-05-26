@@ -4,15 +4,16 @@ export const BoardSchema = {
   description: 'boards',
   type: 'object',
   properties: {
-    id: {
-      type: 'string',
-      primary: true
-    },
     name: {
       type: 'string'
     },
     description: {
-      type: 'string'
+      type: 'string',
+      default: ''
+    },
+    createdAt: {
+      type: 'string',
+      default: '123'
     }
   },
   required: ['name']

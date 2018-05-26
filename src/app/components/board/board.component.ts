@@ -1,28 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
-import { InkBucket, InkBoard, InkBoardMeta } from '../../models';
+import { InkBucket, InkBoard, InkBoardMeta, InkBucketMeta } from '../../models';
 import { Observable } from 'rxjs';
-import { map, filter } from 'rxjs/operators';
+import { map, filter, tap } from 'rxjs/operators';
+import { BucketService } from '../../services/bucket.service';
+import { LoadBuckets } from '../../store/actions/bucket.action';
 
 @Component({
   selector: 'inkapp-board',
-  templateUrl: './board.component.html',
-  styles: []
+  templateUrl: './board.component.html'
 })
 export class BoardComponent implements OnInit {
-  bucket: Observable<InkBucket>;
-  board: InkBoardMeta;
-  constructor(private store: Store) {
-    this.store
-      .select(s => s.board)
-      .pipe(filter(s => s.length > 0), map(x => x[0]))
-      .subscribe(r => {
-        console.log('CColl', r);
-        this.board = r;
-      });
-  }
+  buckets: Observable<InkBucketMeta[]>;
+  @Input() data: InkBoardMeta;
+  constructor(private _store: Store, private _bucketService: BucketService) {}
 
   ngOnInit() {
-    this.bucket = this.store.select(s => s.bucket).pipe(map(x => x.filter(y => y.boardId === this.board.id)));
+    this.buckets = this._store
+      .select(s => s.bucket)
+      .pipe(map(buckets => buckets.filter(s => s.boardId === this.data._id)));
+    console.log('get buckets', this.data._id);
+    this._bucketService.getBucketsInBoard(this.data._id).then(buckets => {
+      console.log('load buckets', buckets);
+      this._store.dispatch(new LoadBuckets(buckets));
+    });
   }
 }
