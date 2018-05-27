@@ -62,6 +62,11 @@ export class LocalDatabase {
     return LocalDatabase.DbConn;
   }
 
+  async deleteDatabase() {
+    const db = await this.getDatabase();
+    return db.remove();
+  }
+
   private setupDatabase(): Promise<any> {
     return RxDB.create(DatabaseSettings)
       .then(async (db: InkDb) => {

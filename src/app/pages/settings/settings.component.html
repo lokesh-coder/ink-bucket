@@ -4,11 +4,21 @@
       <i class="ink-icon icon-settings"></i> Settings</h3>
     <inkapp-settings-item>
       <div class="description">
-        <h5>Export complete database</h5>
+        <h5>Export database</h5>
         <p>JSON file with all necessary information to import</p>
       </div>
       <div class="action">
         <button class="btn btn-primary" routerLink="/export">Export</button>
+      </div>
+    </inkapp-settings-item>
+
+    <inkapp-settings-item>
+      <div class="description">
+        <h5>Delete app data</h5>
+        <p>Will clear all data and reset to initial</p>
+      </div>
+      <div class="action">
+        <button class="btn btn-danger" (click)="deleteDatabase()">delete</button>
       </div>
     </inkapp-settings-item>
   </div>

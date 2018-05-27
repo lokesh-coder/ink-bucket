@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LocalDatabase } from '../../services/localdb.service';
 
 @Component({
   selector: 'inkapp-settings-page',
@@ -6,7 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styles: []
 })
 export class SettingsPage implements OnInit {
-  constructor() {}
+  constructor(private _localDatabase: LocalDatabase) {}
 
   ngOnInit() {}
+  deleteDatabase() {
+    this._localDatabase.deleteDatabase();
+  }
 }
