@@ -3,7 +3,7 @@
 </inkapp-magic-title>
 <div class="d-flex flex-wrap">
   <ng-container *ngFor="let color of ink|async">
-    <inkapp-ink [inkData]="color"></inkapp-ink>
+    <inkapp-ink [inkData]="color" [bucketId]="bucketData._id"></inkapp-ink>
   </ng-container>
   <span class="ink-color-sticker -empty" (click)="addNewInk()">
     <div class="ink-color">

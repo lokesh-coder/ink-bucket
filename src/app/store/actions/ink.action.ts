@@ -1,11 +1,16 @@
-import { InkColor } from '../../models';
+import { InkColorMeta } from '../../models';
 
-export class AddNewInk {
+export class AddInkColor {
   static readonly type = '[Ink] Add new ink';
-  constructor(public inkData: InkColor) {}
+  constructor(public bucketId: string, public inkData: InkColorMeta) {}
 }
 
 export class UpdateInkColor {
   static readonly type = '[Ink] Update color';
-  constructor(public inkData: InkColor) {}
+  constructor(public id: string, public inkData: InkColorMeta) {}
+}
+
+export class LoadInkColorsInBucket {
+  static readonly type = '[Ink] get colors in bucket';
+  constructor(public colors: InkColorMeta[]) {}
 }

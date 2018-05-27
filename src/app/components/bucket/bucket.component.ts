@@ -1,12 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { InkBucket, Ink, InkBucketMeta } from '../../models';
+import { InkBucket, Ink, InkBucketMeta, InkColorMeta } from '../../models';
 import { Observable } from 'rxjs';
 import { filter, tap, map } from 'rxjs/operators';
-import { AddNewInk } from '../../store/actions/ink.action';
+import { AddInkColor, LoadInkColorsInBucket } from '../../store/actions/ink.action';
 import { BucketService } from '../../services/bucket.service';
 import { ENETDOWN } from 'constants';
 import { RenameBucket } from '../../store/actions/bucket.action';
+import { InkColorService } from '../../services/ink.service';
 
 @Component({
   selector: 'inkapp-bucket',
@@ -17,13 +18,25 @@ export class BucketComponent implements OnInit {
   @Input() index: number;
   @Input() bucketData: InkBucketMeta;
   ink: Observable<Ink>;
-  constructor(private _store: Store, private _bucketService: BucketService) {
+  constructor(private _store: Store, private _bucketService: BucketService, private _inkColorService: InkColorService) {
     this.ink = this._store.select(s => s.ink).pipe(map(x => x.filter(y => y.bucketId === this.bucketData._id)));
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this._inkColorService.getInkColorsInBuckets(this.bucketData._id).then(docs => {
+      this._store.dispatch(new LoadInkColorsInBucket(docs));
+    });
+  }
   addNewInk() {
-    this._store.dispatch(new AddNewInk({ bucketId: this.bucketData._id, value: '#fff', meta: {} }));
+    const data: InkColorMeta = {
+      bucketId: this.bucketData._id,
+      displayValue: 'white',
+      meta: {},
+      name: '#fff'
+    };
+    this._inkColorService.addInkColor(this.bucketData._id, data).then(doc => {
+      this._store.dispatch(new AddInkColor(this.bucketData._id, doc as any));
+    });
   }
   onTitleChange(newTitle) {
     this._bucketService.changeBucketName(this.bucketData._id, newTitle).then(bucket => {

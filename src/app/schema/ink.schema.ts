@@ -5,11 +5,10 @@ export const InkSchema = {
   type: 'object',
   uniqueItems: true,
   properties: {
-    id: {
-      type: 'string',
-      primary: true
+    name: {
+      type: 'string'
     },
-    value: {
+    displayValue: {
       type: 'string'
     },
     meta: {
@@ -22,5 +21,5 @@ export const InkSchema = {
       type: 'string'
     }
   },
-  required: ['id', 'name', 'meta', 'bucketId']
+  required: ['displayValue', 'meta', 'bucketId']
 };

@@ -1,7 +1,7 @@
 <div class="ink-color-sticker">
-  <div class="ink-color" [style.backgroundColor]="inkData.value" (click)="openColorPicker()"></div>
+  <div class="ink-color" [style.backgroundColor]="inkColor.displayValue" (click)="openColorPicker()"></div>
   <div class="ink-name">
-    {{inkData.value}}
+    {{inkColor.displayValue}}
   </div>
-  <!-- <color-chrome (onChange)="colorChanged(inkData.id,$event)"></color-chrome> -->
+  <!-- <color-chrome (onChange)="colorChanged(inkColor.id,$event)"></color-chrome> -->
 </div>
