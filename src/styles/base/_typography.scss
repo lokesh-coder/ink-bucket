@@ -1,10 +1,13 @@
-.doc-intro-header{
-	font-family: $ink--font-family-asap;
-	color:clr('secondary','theme');
-	font-size: 2rem;
-	font-weight: 700;
-	letter-spacing: -1px; 
+.ink-page-title {
+  font-size: 1.2rem;
+  color: clr('heading');
+  .ink-icon {
+    opacity: 0.8;
+  }
 }
-.doc-intro-desc{
-	color:clr('text');
+
+.ink-pre {
+  font-family: $ink--font-family-monospace;
+  color: clr('dark');
+  font-size: 1rem;
 }

@@ -8,7 +8,10 @@ import { RxCollection, RxDatabase } from 'rxdb';
 
 @Component({
   selector: 'inkapp-root',
-  template: '<router-outlet></router-outlet>'
+  template: `
+  <inkapp-navbar></inkapp-navbar>
+  <router-outlet></router-outlet>
+  `
 })
 export class InkApp implements OnInit {
   constructor(private store: Store, private db: DBService) {
