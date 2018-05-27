@@ -2,11 +2,9 @@ $ink--base-font-size: 14px;
 $ink--base-font-size-xl: 16px;
 $ink--app-name: 'INK BUCKET';
 $ink--debug: false;
-$ink--font-family: 'Rubik', 'Inter UI', 'Nunito Sans', 'Roboto';
-$ink--font-family-asap: 'Asap', 'Roboto';
+$ink--font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
+  'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Rubik', 'Inter UI', 'Nunito Sans';
 $ink--font-family-monospace: 'Courier New', 'Lucida Console', Monaco, Courier, monospace;
-$ink--font-family-roboto: 'Roboto', 'sans-serif';
-$ink--font-family-roboto: 'Roboto', 'sans-serif';
 $ink--current-theme: 'DEFAULT';
 $ink--themes: (
   'default': 'DEFAULT',

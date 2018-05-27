@@ -1,31 +1,30 @@
 .doc-util-flex-2 {
-	flex: 2 !important;
+  flex: 2 !important;
 }
 
 .doc-util-valign-middle {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .doc-util-tt-lowercase {
-	text-transform: lowercase;
+  text-transform: lowercase;
 }
 
-.doc-util-cover-span{
-	display:flex;
-	flex-direction: column;
+.doc-util-cover-span {
+  display: flex;
+  flex-direction: column;
 }
 
-.doc-util-cursor-pointer{
-	cursor: pointer;
+.doc-util-cursor-pointer {
+  cursor: pointer;
 }
 
-.doc-util-pos-right{
-	right: 0;
-    left: auto !important;
+.doc-util-pos-right {
+  right: 0;
+  left: auto !important;
 }
 
-.ff-asap{
-	font-family: $ink--font-family-asap;
+.ff-asap {
 }
