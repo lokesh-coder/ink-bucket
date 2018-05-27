@@ -13,3 +13,8 @@ export class LoadBuckets {
   static readonly type = '[Bucket] Load all buckets';
   constructor(public buckets: InkBucketMeta[]) {}
 }
+
+export class RenameBucket {
+  static readonly type = '[Bucket] Change name';
+  constructor(public id: string, public name: string) {}
+}

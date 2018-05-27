@@ -1,12 +1,26 @@
 inkapp-bucket {
   display: block;
   background: #fff;
-  padding: 2rem;
-  border-radius: 3px;
-  box-shadow: 0px 8px 13px clr('shadow');
+  padding: 1rem;
+  border-radius: 0;
+  border-bottom: 1px dashed transparentize(clr('primary', 'theme'), 0.82);
+  // box-shadow: 0px 8px 13px clr('shadow');
   margin-bottom: 1rem;
-  h3 {
-    font-weight: 400;
-    color: clr('dark', 'theme');
+  h5 {
+    color: clr('heading');
+  }
+
+  h5 > span {
+    color: clr('primary', 'theme');
+  }
+
+  input.form-control {
+    color: clr('heading');
+    font-weight: 500;
+    font-size: 1.25rem;
+    background: clr('bg2');
+    border: 0;
+    padding: 0.75rem 1rem;
+    line-height: 1;
   }
 }

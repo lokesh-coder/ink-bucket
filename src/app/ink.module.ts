@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
@@ -9,7 +10,8 @@ import {
   ColorPickerComponent,
   InkComponent,
   NavbarComponent,
-  PromptComponent
+  PromptComponent,
+  MagicTitleComponent
 } from './components';
 import { InkApp } from './ink.component';
 import { RoutingModule } from './ink.routing';
@@ -22,6 +24,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
 
 export const MODULES = [
   RoutingModule,
+  FormsModule,
   NgxsModule.forRoot([SettingsState, BucketState, BoardState, InkState]),
   NgxsReduxDevtoolsPluginModule.forRoot(),
   ColorModule,
@@ -35,7 +38,8 @@ export const COMPONENTS = [
   PromptComponent,
   ColorPickerComponent,
   ColorFormComponent,
-  InkComponent
+  InkComponent,
+  MagicTitleComponent
 ];
 export const PAGES = [HomePage, SettingsPage];
 

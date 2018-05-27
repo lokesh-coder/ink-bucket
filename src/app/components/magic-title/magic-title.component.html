@@ -1,0 +1,9 @@
+<ng-container *ngIf="!editable else editableTpl">
+  <h5>
+    <span>
+      <ng-content></ng-content>
+    </span> {{title}}</h5>
+</ng-container>
+<ng-template #editableTpl>
+  <input type="text" class="form-control" [(ngModel)]="newTitle" (keyup.enter)="done()" (keyup.esc)="cancel()">
+</ng-template>

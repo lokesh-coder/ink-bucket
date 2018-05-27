@@ -20,4 +20,19 @@ export class BucketService {
     const db = await this._db.getDatabase();
     return db.bucket.find({ boardId }).exec();
   }
+
+  async changeBucketName(bucketId: string, newName: string) {
+    const db = await this._db.getDatabase();
+    return db.bucket
+      .findOne(bucketId)
+      .update({
+        $set: {
+          name: newName
+        }
+      })
+      .catch(error => {
+        console.error('Error while updating bucket name');
+        return null;
+      });
+  }
 }

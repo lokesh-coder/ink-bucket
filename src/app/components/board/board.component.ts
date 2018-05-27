@@ -15,7 +15,7 @@ export class BoardComponent implements OnInit {
   @Input() data: InkBoardMeta;
   constructor(private _store: Store, private _bucketService: BucketService) {}
 
-  ngOnInit() {
+  ngOnInit() { 
     this.buckets = this._store
       .select(s => s.bucket)
       .pipe(map(buckets => buckets.filter(s => s.boardId === this.data._id)));

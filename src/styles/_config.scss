@@ -4,15 +4,18 @@ $ink--app-name: 'INK BUCKET';
 $ink--debug: false;
 $ink--font-family: 'Rubik', 'Inter UI', 'Nunito Sans', 'Roboto';
 $ink--font-family-asap: 'Asap', 'Roboto';
+$ink--font-family-roboto: 'Roboto', 'sans-serif';
+$ink--font-family-roboto: 'Roboto', 'sans-serif';
 $ink--current-theme: 'DEFAULT';
 $ink--themes: (
   'default': 'DEFAULT',
   'jummy': 'JIMMY'
 );
 $ink--colors-basic: (
-  'bg': #eff2f7,
+  'bg': #fff,
+  'bg2': #f3f3f7a6,
   'text': #aaaab1,
-  'heading': #333,
+  'heading': #35335a,
   'border': #cbcbcb,
   'para': #808080,
   'dark': #000,
@@ -20,7 +23,7 @@ $ink--colors-basic: (
 );
 
 $ink--colors-theme: (
-  'primary': #f8768f,
+  'primary': #6b66ca,
   'secondary': #41495d,
   'success': #3fc782,
   'warning': #f78f1e,
