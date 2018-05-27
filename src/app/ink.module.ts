@@ -24,6 +24,8 @@ import { SettingsState, BucketState, BoardState, InkState } from './store/states
 import { ColorModule } from './modules/color/color.module';
 
 import { OverlayModule } from '@angular/cdk/overlay';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 export const MODULES = [
   RoutingModule,
@@ -50,7 +52,7 @@ export const PAGES = [HomePage, SettingsPage, ExportPage];
 
 @NgModule({
   declarations: [...COMPONENTS, ...PAGES, SettingsItemComponent],
-  imports: [BrowserModule, ...MODULES],
+  imports: [BrowserModule, ...MODULES, ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })],
   providers: [],
   bootstrap: [InkApp]
 })
