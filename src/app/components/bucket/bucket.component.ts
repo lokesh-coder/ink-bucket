@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 import { filter, tap, map } from 'rxjs/operators';
 import { AddInkColor, LoadInkColorsInBucket } from '../../store/actions/ink.action';
 import { BucketService } from '../../services/bucket.service';
-import { ENETDOWN } from 'constants';
 import { RenameBucket } from '../../store/actions/bucket.action';
 import { InkColorService } from '../../services/ink.service';
 

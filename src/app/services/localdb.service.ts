@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import RxDB, { RxDatabase, RxCollection } from 'rxdb';
-import PouchdbAdapterIdb from 'pouchdb-adapter-idb';
-import PouchdbAdapterHttp from 'pouchdb-adapter-http';
+import * as PouchdbAdapterIdb from 'pouchdb-adapter-idb';
+import * as PouchdbAdapterHttp from 'pouchdb-adapter-http';
 import RxDBSchemaCheckModule from 'rxdb/plugins/schema-check';
 import RxDBErrorMessagesModule from 'rxdb/plugins/error-messages';
 import RxDBValidateModule from 'rxdb/plugins/validate';

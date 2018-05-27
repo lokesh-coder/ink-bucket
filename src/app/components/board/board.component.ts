@@ -15,13 +15,11 @@ export class BoardComponent implements OnInit {
   @Input() data: InkBoardMeta;
   constructor(private _store: Store, private _bucketService: BucketService) {}
 
-  ngOnInit() { 
+  ngOnInit() {
     this.buckets = this._store
       .select(s => s.bucket)
       .pipe(map(buckets => buckets.filter(s => s.boardId === this.data._id)));
-    console.log('get buckets', this.data._id);
     this._bucketService.getBucketsInBoard(this.data._id).then(buckets => {
-      console.log('load buckets', buckets);
       this._store.dispatch(new LoadBuckets(buckets));
     });
   }

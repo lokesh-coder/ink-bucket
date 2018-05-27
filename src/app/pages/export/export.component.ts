@@ -19,8 +19,7 @@ export class ExportPage implements OnInit {
     this.jsonData = JSON.stringify(await db.dump(), null, ' ');
   }
 
-  copy(content) {
+  copy() {
     this._copyService.copyFromContent(this.jsonData);
-    console.log('copied!');
   }
 }

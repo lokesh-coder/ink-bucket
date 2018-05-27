@@ -12,11 +12,10 @@ import { CreateBoard } from '../store/actions/board.actions';
 export class BoardService {
   constructor(private _db: LocalDatabase, private _store: Store) {
     this.createBoard('Beautiful', 'Default Board').then(doc => {
-      console.log('got this', doc);
       if (!doc) {
         return;
       }
-      const board = { id: doc.id, name: doc.name, description: doc.description, createdAt: doc.createdAt };
+      const board = { _id: doc._id, name: doc.name, description: doc.description, createdAt: doc.createdAt };
       this._store.dispatch(new CreateBoard(board));
     });
   }

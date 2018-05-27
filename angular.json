@@ -110,5 +110,14 @@
   "defaultProject": "ink-bucket",
   "cli": {
     "packageManager": "npm"
+  },
+  "schematics": {
+    "@schematics/angular:component": {
+      "prefix": "inkapp",
+      "styleext": "scss"
+    },
+    "@schematics/angular:directive": {
+      "prefix": "inkapp"
+    }
   }
 }
