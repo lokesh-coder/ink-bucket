@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { InkBucket, Ink, InkBucketMeta, InkColorMeta } from '../../models';
+import { InkBucket, Ink, InkBucketMeta, InkColorMeta, InkAppView, InkAppSettings } from '../../models';
 import { Observable } from 'rxjs';
 import { filter, tap, map } from 'rxjs/operators';
 import { AddInkColor, LoadInkColorsInBucket } from '../../store/actions/ink.action';
@@ -17,8 +17,11 @@ export class BucketComponent implements OnInit {
   @Input() index: number;
   @Input() bucketData: InkBucketMeta;
   ink: Observable<Ink>;
+  settings: Observable<InkAppSettings>;
+  view: InkAppView;
   constructor(private _store: Store, private _bucketService: BucketService, private _inkColorService: InkColorService) {
     this.ink = this._store.select(s => s.ink).pipe(map(x => x.filter(y => y.bucketId === this.bucketData._id)));
+    this.settings = this._store.select(s => s.settings).pipe(map(s => s.filter(x => x.key === 'view')[0]));
   }
 
   ngOnInit() {

@@ -1,7 +1,7 @@
 <inkapp-magic-title [title]="bucketData.name" (changed)="onTitleChange($event)">
   #{{index}}
 </inkapp-magic-title>
-<div class="d-flex flex-wrap">
+<div class="d-flex flex-wrap" [ngClass]="'ink-view-'+(settings|async)?.value">
   <ng-container *ngFor="let color of ink|async">
     <inkapp-ink [inkData]="color" [bucketId]="bucketData._id"></inkapp-ink>
   </ng-container>

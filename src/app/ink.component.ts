@@ -1,10 +1,12 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { ChangeView } from './store/actions/settings.action';
+import { ChangeView, LoadSettings } from './store/actions/settings.action';
 import { InkAppView, InkDb } from './models';
 import { DBService } from './services/db.service';
 import { tap } from 'rxjs/operators';
 import { RxCollection, RxDatabase } from 'rxdb';
+import { LocalDatabase } from './services/localdb.service';
+import { SettingsService } from './services/settings.service';
 
 @Component({
   selector: 'inkapp-root',
@@ -14,10 +16,12 @@ import { RxCollection, RxDatabase } from 'rxdb';
   `
 })
 export class InkApp implements OnInit {
-  constructor(private store: Store, private db: DBService) {
+  constructor(private _store: Store, private _settingsService: SettingsService) {
     // console.log('cons', this.db.conn);
   }
   ngOnInit() {
-    this.store.dispatch(new ChangeView(InkAppView.ROUND));
+    this._settingsService.setDefaultSettings().then((doc: any) => {
+      if (doc) { this._store.dispatch(new LoadSettings(doc)); }
+    });
   }
 }

@@ -1,6 +1,11 @@
-import { InkAppView } from '../../models';
+import { InkAppView, InkAppSettings } from '../../models';
 
-export class ChangeView {
-  static readonly type = '[Settings] change view';
-  constructor(public view: InkAppView) {}
+export class LoadSettings {
+  static readonly type = '[Settings] load all settings';
+  constructor(public settings: InkAppSettings) {}
+}
+
+export class UpdateSettings {
+  static readonly type = '[Settings] update';
+  constructor(public key: string, public value: string) {}
 }

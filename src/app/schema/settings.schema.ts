@@ -5,9 +5,12 @@ export const SettingsSchema = {
   type: 'object',
   uniqueItems: true,
   properties: {
-    view: {
+    key: {
+      type: 'string'
+    },
+    value: {
       type: 'string'
     }
   },
-  required: []
+  required: ['key', 'value']
 };

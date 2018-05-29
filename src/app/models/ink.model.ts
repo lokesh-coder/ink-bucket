@@ -28,8 +28,8 @@ export interface InkColorMeta {
 }
 export interface InkSettingsMeta {
   key: string;
-  _id?: string;
   value: string;
+  _id?: string;
 }
 
 export type InkBucket = InkBucketMeta[];
@@ -41,9 +41,11 @@ export enum InkAppView {
   RECT,
   STRIP
 }
-export interface InkAppSettings {
-  view: InkAppView;
-  sortBy: string;
+export type InkAppSettings = InkAppSettingsItem[];
+
+export interface InkAppSettingsItem {
+  key: string;
+  value: string;
 }
 
 /* doc methods */
