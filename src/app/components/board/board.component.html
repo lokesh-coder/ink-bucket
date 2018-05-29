@@ -1,4 +1,4 @@
 <!-- <h4>{{data.name}}</h4> -->
 <ng-container *ngFor="let bucket of buckets|async; index as i">
-  <inkapp-bucket [bucketData]="bucket" [index]="i+1"></inkapp-bucket>
+  <inkapp-bucket [bucketData]="bucket" [index]="i+1" class="ink-color-container" [ngClass]="'ink-view-'+(settings|async)?.value"></inkapp-bucket>
 </ng-container>

@@ -1,0 +1,16 @@
+.ink-color-container {
+  &.ink-view-thin {
+    border-bottom: 0;
+    .ink-color-sticker {
+      padding: 1rem 0;
+    }
+    .ink-color {
+      height: 1rem !important;
+      border-radius: 0;
+      box-shadow: none;
+    }
+    .ink-name {
+      font-size: 0.7rem;
+    }
+  }
+}

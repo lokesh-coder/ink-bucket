@@ -17,11 +17,9 @@ export class BucketComponent implements OnInit {
   @Input() index: number;
   @Input() bucketData: InkBucketMeta;
   ink: Observable<Ink>;
-  settings: Observable<InkAppSettings>;
   view: InkAppView;
   constructor(private _store: Store, private _bucketService: BucketService, private _inkColorService: InkColorService) {
     this.ink = this._store.select(s => s.ink).pipe(map(x => x.filter(y => y.bucketId === this.bucketData._id)));
-    this.settings = this._store.select(s => s.settings).pipe(map(s => s.filter(x => x.key === 'view')[0]));
   }
 
   ngOnInit() {
