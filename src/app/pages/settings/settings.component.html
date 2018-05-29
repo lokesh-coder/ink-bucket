@@ -9,8 +9,8 @@
       </div>
       <div class="action">
         <select name="" class="custom-select" (change)="onViewChange($event.target.value)">
-          <option value="default">Default</option>
-          <option value="thin">Thin</option>
+          <option value="default" [selected]="view.value=='default'">Default</option>
+          <option value="thin" [selected]="view.value=='thin'">Thin</option>
         </select>
       </div>
     </inkapp-settings-item>

@@ -1,17 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BoardService } from '../../services/board.service';
 import { Store } from '@ngxs/store';
 import { LoadBoard } from '../../store/actions/board.actions';
 import { filter, map } from 'rxjs/operators';
 import { InkBoard, InkBoardMeta } from '../../models';
 import { LocalDatabase } from '../../services/localdb.service';
+import { ClearBuckets } from '../../store/actions/bucket.action';
+import { ClearInkColors } from '../../store/actions/ink.action';
 
 @Component({
   selector: 'inkapp-home-page',
   templateUrl: './home.component.html',
   styles: []
 })
-export class HomePage implements OnInit {
+export class HomePage implements OnInit, OnDestroy {
   boards: InkBoardMeta[];
   constructor(private _boardService: BoardService, private _store: Store, private _localDatabase: LocalDatabase) {}
 
@@ -30,5 +32,10 @@ export class HomePage implements OnInit {
       .then(col => {
         console.log('got settings collection,', col);
       });
+  }
+
+  ngOnDestroy() {
+    this._store.dispatch(new ClearBuckets());
+    this._store.dispatch(new ClearInkColors());
   }
 }

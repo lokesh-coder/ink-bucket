@@ -3,6 +3,7 @@ import { LocalDatabase } from '../../services/localdb.service';
 import { SettingsService } from '../../services/settings.service';
 import { Store } from '@ngxs/store';
 import { UpdateSettings, LoadSettings } from '../../store/actions/settings.action';
+import { InkAppSettings, InkAppSettingsItem } from '../../models';
 
 @Component({
   selector: 'inkapp-settings-page',
@@ -10,6 +11,7 @@ import { UpdateSettings, LoadSettings } from '../../store/actions/settings.actio
   styles: []
 })
 export class SettingsPage implements OnInit {
+  view: InkAppSettingsItem;
   constructor(
     private _store: Store,
     private _localDatabase: LocalDatabase,
@@ -18,6 +20,7 @@ export class SettingsPage implements OnInit {
 
   ngOnInit() {
     this._settingsService.getAll().then(doc => {
+      this.view = doc.filter(d => d.key === 'view')[0];
       this._store.dispatch(new LoadSettings(doc));
     });
   }

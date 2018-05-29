@@ -1,6 +1,6 @@
 import { State, Action, StateContext } from '@ngxs/store';
 import { Ink } from '../../models';
-import { UpdateInkColor, AddInkColor, LoadInkColorsInBucket } from '../actions/ink.action';
+import { UpdateInkColor, AddInkColor, LoadInkColorsInBucket, ClearInkColors } from '../actions/ink.action';
 import { LoadInitialData } from '../actions/general.action';
 import { DBService } from '../../services/db.service';
 import { UtilService } from '../../services/util.service';
@@ -33,5 +33,9 @@ export class InkState {
   loadInkColorsInBucket(ctx: StateContext<Ink>, action: LoadInkColorsInBucket) {
     const state: any = ctx.getState();
     ctx.setState([...state, ...action.colors]);
+  }
+  @Action(ClearInkColors)
+  clearBuckets(ctx: StateContext<Ink>, action: ClearInkColors) {
+    ctx.setState([]);
   }
 }

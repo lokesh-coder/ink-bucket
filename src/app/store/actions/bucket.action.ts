@@ -18,3 +18,8 @@ export class RenameBucket {
   static readonly type = '[Bucket] Change name';
   constructor(public id: string, public name: string) {}
 }
+
+export class ClearBuckets {
+  static readonly type = '[Bucket] clear all';
+  constructor() {}
+}

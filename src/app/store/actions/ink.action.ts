@@ -14,3 +14,7 @@ export class LoadInkColorsInBucket {
   static readonly type = '[Ink] get colors in bucket';
   constructor(public colors: InkColorMeta[]) {}
 }
+export class ClearInkColors {
+  static readonly type = '[Ink] clear all';
+  constructor() {}
+}
