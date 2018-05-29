@@ -14,7 +14,8 @@
     "electron": "electron .",
     "electron-build": "ng build --prod && electron .",
     "server:prod": "http-server -p 1234 -s -o --cors",
-    "generate:changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
+    "generate:changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
+    "release": "gren release --token=TOKEN --override"
   },
   "private": true,
   "dependencies": {
@@ -72,6 +73,7 @@
     "@types/pouchdb": "^6.3.2",
     "codelyzer": "~4.2.1",
     "electron": "^2.0.2",
+    "github-release-notes": "^0.15.0",
     "husky": "^0.14.3",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
