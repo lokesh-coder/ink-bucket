@@ -1,6 +1,6 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { ChangeView, LoadSettings } from './store/actions/settings.action';
+import { LoadSettings } from './store/actions/settings.action';
 import { InkAppView, InkDb } from './models';
 import { DBService } from './services/db.service';
 import { tap } from 'rxjs/operators';
@@ -21,7 +21,9 @@ export class InkApp implements OnInit {
   }
   ngOnInit() {
     this._settingsService.setDefaultSettings().then((doc: any) => {
-      if (doc) { this._store.dispatch(new LoadSettings(doc)); }
+      if (doc) {
+        this._store.dispatch(new LoadSettings(doc));
+      }
     });
   }
 }

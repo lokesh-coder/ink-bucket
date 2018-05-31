@@ -4,7 +4,8 @@
   "main": "main.js",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "config:secrets": "ts-node ./config/env.secrets.ts",
+    "start": "npm run config:secrets && ng serve -o",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -31,6 +32,8 @@
     "@angular/platform-browser-dynamic": "^6.0.0",
     "@angular/pwa": "^0.6.5",
     "@angular/router": "^6.0.0",
+    "@angular/service-worker": "^6.0.0",
+    "@auth0/angular-jwt": "^2.0.0",
     "@ctrl/tinycolor": "^2.0.0",
     "@ngxs/devtools-plugin": "^3.0.1",
     "@ngxs/store": "^3.0.1",
@@ -56,8 +59,7 @@
     "relational-pouch": "^3.0.1",
     "rxdb": "^7.6.0",
     "rxjs": "^6.0.0",
-    "zone.js": "^0.8.26",
-    "@angular/service-worker": "^6.0.0"
+    "zone.js": "^0.8.26"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.6.0",
@@ -72,6 +74,7 @@
     "@types/node": "~8.9.4",
     "@types/pouchdb": "^6.3.2",
     "codelyzer": "~4.2.1",
+    "dotenv": "^5.0.1",
     "electron": "^2.0.2",
     "github-release-notes": "^0.15.0",
     "husky": "^0.14.3",

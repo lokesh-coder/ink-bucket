@@ -4,6 +4,7 @@ import { SettingsService } from '../../services/settings.service';
 import { Store } from '@ngxs/store';
 import { UpdateSettings, LoadSettings } from '../../store/actions/settings.action';
 import { InkAppSettings, InkAppSettingsItem } from '../../models';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'inkapp-settings-page',
@@ -12,6 +13,7 @@ import { InkAppSettings, InkAppSettingsItem } from '../../models';
 })
 export class SettingsPage implements OnInit {
   view: InkAppSettingsItem;
+  accessUrl;
   constructor(
     private _store: Store,
     private _localDatabase: LocalDatabase,
@@ -23,6 +25,10 @@ export class SettingsPage implements OnInit {
       this.view = doc.filter(d => d.key === 'view')[0];
       this._store.dispatch(new LoadSettings(doc));
     });
+    this.accessUrl =
+      'https://github.com/login/oauth/authorize?client_id=' +
+      environment.githubClientID +
+      '&scope=gist&state=kjahfwxbgdcnkockibjfs';
   }
   deleteDatabase() {
     this._localDatabase.deleteDatabase();
