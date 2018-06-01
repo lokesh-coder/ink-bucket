@@ -12,19 +12,36 @@ export class GithubService {
       .set('client_id', environment.githubClientID)
       .set('client_secret', environment.githubClientSecret)
       .set('code', code);
-    return this._http.post('https://github.com/login/oauth/access_token', body.toString(), {
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    return this._http.post('/ghtoken', body.toString(), {
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'Access-Control-Allow-Origin': '*' },
+      responseType: 'text'
     });
   }
-  createGist() {
+  createGist(data) {
     return this._http.post(
-      'https://api.github.com/gists?access_token=' + environment.githubClientSecret,
+      'https://api.github.com/gists?access_token=' + localStorage.getItem('inkapp_access_token'),
       JSON.stringify({
-        description: 'the description for this gist',
+        description: 'Inkapp database',
         public: false,
         files: {
-          'hello.ts': {
-            content: '//String file contents'
+          'inkapp-database.json': {
+            content: JSON.stringify(data)
+          }
+        }
+      }),
+      {
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+      }
+    );
+  }
+
+  editGist(gistId, data) {
+    return this._http.patch(
+      'https://api.github.com/gists/' + gistId + '?access_token=' + localStorage.getItem('inkapp_access_token'),
+      JSON.stringify({
+        files: {
+          'inkapp-database.json': {
+            content: JSON.stringify(data)
           }
         }
       }),

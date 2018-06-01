@@ -14,15 +14,42 @@
         </select>
       </div>
     </inkapp-settings-item>
+
+  </div>
+</div>
+
+<div class="container mt-5">
+  <div class="col-md-8 mx-auto">
+    <h3 class="ink-page-title mb-5">
+      <i class="ink-icon icon-settings"></i> Sync </h3>
     <inkapp-settings-item>
       <div class="description">
         <h5>Sync</h5>
         <p>Save data in github gists</p>
       </div>
       <div class="action">
-        <a [href]="accessUrl" target="_blank" class="btn btn-outline-primary">Connect to github</a>
+        <a [href]="accessUrl" rel="noopener noreferrer" target="_blank" class="btn btn-outline-primary" *ngIf="!connectedToGithub">Connect to github</a>
+        <a (click)="disconnect()" rel="noopener noreferrer" target="_blank" class="btn btn-link text-danger" *ngIf="connectedToGithub">Disconnect github</a>
       </div>
     </inkapp-settings-item>
+
+    <inkapp-settings-item>
+      <div class="description">
+        <h5>Upload</h5>
+        <p>Save local datavse to gists</p>
+      </div>
+      <div class="action">
+        <a (click)="uploadToGists()" class="btn btn-primary">Go</a>
+      </div>
+    </inkapp-settings-item>
+  </div>
+</div>
+
+
+<div class="container mt-5">
+  <div class="col-md-8 mx-auto">
+    <h3 class="ink-page-title mb-5">
+      <i class="ink-icon icon-settings"></i> Import and Export </h3>
     <inkapp-settings-item>
       <div class="description">
         <h5>Export database</h5>
@@ -32,7 +59,6 @@
         <button class="btn btn-primary" routerLink="/export">Export</button>
       </div>
     </inkapp-settings-item>
-
     <inkapp-settings-item>
       <div class="description">
         <h5>Delete app data</h5>

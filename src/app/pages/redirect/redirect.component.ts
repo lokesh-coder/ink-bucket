@@ -10,7 +10,6 @@ export class RedirectPage implements OnInit {
   params: Params = {};
   constructor(private _router: Router, private _route: ActivatedRoute, private _githubService: GithubService) {
     this.params = this._route.snapshot.queryParams;
-    console.log('params', this.params);
   }
 
   ngOnInit() {
@@ -22,8 +21,8 @@ export class RedirectPage implements OnInit {
         .split('&')
         .map(s => s.split('='))
         .map(d => ({ [d[0]]: d[1] }));
-      console.log('got access token', data);
-      localStorage.setItem('inkapp_access_token', data.access_token);
+      localStorage.setItem('inkapp_access_token', data[0].access_token);
+      this._router.navigateByUrl('/settings');
     });
   }
 }
