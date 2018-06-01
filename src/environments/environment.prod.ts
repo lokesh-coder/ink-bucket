@@ -1,3 +1,7 @@
+import { githubClientSecret, githubClientID } from './secrets';
+
 export const environment = {
-  production: true
+  production: true,
+  githubClientSecret,
+  githubClientID
 };

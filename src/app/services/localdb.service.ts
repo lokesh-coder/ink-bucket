@@ -72,7 +72,7 @@ export class LocalDatabase {
       .then(async (db: InkDb) => {
         await Promise.all(this.collections.map((colData: any): Promise<RxCollection<any>> => db.collection(colData)));
         this.showLeader(db);
-        this.sync(db, this.collections);
+        // this.sync(db, this.collections);
         return db;
       })
       .catch(e => {
