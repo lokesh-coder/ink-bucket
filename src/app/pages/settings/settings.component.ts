@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LocalDatabase } from '../../services/localdb.service';
 import { SettingsService } from '../../services/settings.service';
 import { Store } from '@ngxs/store';
+import merge from 'deepmerge';
 import { UpdateSettings, LoadSettings } from '../../store/actions/settings.action';
 import { InkAppSettings, InkAppSettingsItem } from '../../models';
 import { environment } from '../../../environments/environment';
@@ -39,20 +40,29 @@ export class SettingsPage implements OnInit {
     const db = await this._localDatabase.getDatabase();
     const data = await db.dump();
     const gist = await db.settings.findOne({ key: 'gist' }).exec();
-    console.log('database fist', gist);
     if (gist) {
       const gistData = JSON.parse(gist.value);
-      console.log('gistData', gistData);
       this._githubService.editGist(gistData.id, data).subscribe(a => {
         console.log('done!', a);
       });
       return;
     }
     this._githubService.createGist(data).subscribe(res => {
-      console.log('this res', res);
       this._settingsService.add('gist', JSON.stringify(res)).then(doc => {
         console.log('settings updatedw ith sync', doc);
       });
+    });
+  }
+  async loadGists() {
+    const db = await this._localDatabase.getDatabase();
+    const data = await db.dump();
+    this._githubService.getGist().subscribe(async (gist: any) => {
+      if (!gist) {
+        console.log('No gist!');
+        return;
+      }
+      const gistData = JSON.parse(gist.files['inkapp-database.json'].content);
+      await db.importDump(gistData);
     });
   }
   deleteDatabase() {
