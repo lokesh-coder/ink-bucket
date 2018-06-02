@@ -1,6 +1,13 @@
 import { State, Action, StateContext } from '@ngxs/store';
 import { InkAppSettings, InkBucket } from '../../models';
-import { CreateBucket, UpdateBucket, LoadBuckets, RenameBucket, ClearBuckets } from '../actions/bucket.action';
+import {
+  CreateBucket,
+  UpdateBucket,
+  LoadBuckets,
+  RenameBucket,
+  ClearBuckets,
+  DeleteBucket
+} from '../actions/bucket.action';
 import { DBService } from '../../services/db.service';
 import { LoadInitialData } from '../actions/general.action';
 import { UtilService } from '../../services/util.service';
@@ -45,5 +52,11 @@ export class BucketState {
   @Action(ClearBuckets)
   clearBuckets(ctx: StateContext<InkBucket>, action: ClearBuckets) {
     ctx.setState([]);
+  }
+  @Action(DeleteBucket)
+  deleteBucket(ctx: StateContext<InkBucket>, action: DeleteBucket) {
+    const state: any = ctx.getState();
+    const newState = state.filter(b => b._id !== action.bucketId);
+    ctx.setState(newState);
   }
 }

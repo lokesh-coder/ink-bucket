@@ -1,0 +1,31 @@
+.inkapp--titlebar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .title {
+    color: clr('heading');
+    font-size: fs('h5');
+    font-weight: 500;
+    .prefix {
+      color: clr('primary', 'theme');
+      font-style: normal;
+    }
+  }
+  .action {
+  }
+  .prompt {
+    display: none;
+    flex: 1;
+  }
+
+  &.-has-prompt {
+    .title,
+    .action {
+      display: none;
+    }
+    .prompt {
+      display: flex;
+    }
+  }
+}

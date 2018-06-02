@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { filter, tap, map } from 'rxjs/operators';
 import { AddInkColor, LoadInkColorsInBucket } from '../../store/actions/ink.action';
 import { BucketService } from '../../services/bucket.service';
-import { RenameBucket } from '../../store/actions/bucket.action';
+import { RenameBucket, DeleteBucket } from '../../store/actions/bucket.action';
 import { InkColorService } from '../../services/ink.service';
 
 @Component({
@@ -41,6 +41,12 @@ export class BucketComponent implements OnInit {
   onTitleChange(newTitle) {
     this._bucketService.changeBucketName(this.bucketData._id, newTitle).then(bucket => {
       this._store.dispatch(new RenameBucket(this.bucketData._id, bucket.name));
+    });
+  }
+
+  deleteBucket() {
+    this._bucketService.deleteBucket(this.bucketData._id).then(bucket => {
+      this._store.dispatch(new DeleteBucket(this.bucketData._id));
     });
   }
 }

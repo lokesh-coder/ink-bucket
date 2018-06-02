@@ -7,6 +7,8 @@ import { Component, OnInit, EventEmitter, Output, Input, HostListener } from '@a
 export class MagicTitleComponent implements OnInit {
   @Output() changed: EventEmitter<string> = new EventEmitter<string>();
   @Input() title: string;
+  @Input() index: number;
+  @Output() delete: EventEmitter<string> = new EventEmitter();
   editable = false;
   newTitle: string;
   constructor() {}
@@ -15,8 +17,7 @@ export class MagicTitleComponent implements OnInit {
     this.newTitle = this.title;
   }
 
-  @HostListener('dblclick', ['$event.target'])
-  onDblClick(e) {
+  allowEditing(e) {
     this.editable = true;
   }
 
