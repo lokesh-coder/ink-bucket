@@ -1,12 +1,18 @@
-import { State, Action, StateContext } from '@ngxs/store';
+import { State, Action, StateContext, Selector } from '@ngxs/store';
 import { InkAppSettingsItem, InkAppSettings } from '@lib/models';
 import { UpdateSettingsItem, PopulateSettings } from '@store/actions';
+import { SelectMultipleControlValueAccessor } from '@angular/forms';
 
 @State<Partial<InkAppSettings>>({
   name: 'settings',
-  defaults: []
+  defaults: [{ key: 'view', value: 'thin' }]
 })
 export class SettingsState {
+  @Selector()
+  static view() {
+    return state => state.filter(s => s.key === 'view');
+  }
+
   @Action(UpdateSettingsItem)
   updateSettings(ctx: StateContext<InkAppSettings>, action: UpdateSettingsItem) {
     const state = ctx.getState();

@@ -1,7 +1,7 @@
-export { InkBoardService } from './board.service';
-export { InkBucketService } from './bucket.service';
+export { InkBoardsService } from './board.service';
+export { InkBucketsService } from './bucket.service';
 export { InkDatabaseService } from './database.service';
-export { InkDropService } from './drop.service';
+export { InkDropsService } from './drop.service';
 export { InkGistService } from './gist.service';
 export { InkGithubService } from './github.service';
 export { InkSettingsService } from './settings.service';

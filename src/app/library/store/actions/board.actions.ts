@@ -1,5 +1,10 @@
 import { InkBoardMeta } from '@lib/models';
 
+export class PopulateBoardsFromDb {
+  static readonly type = '[Board] Load all boards from database';
+  constructor() {}
+}
+
 export class PopulateBoards {
   static readonly type = '[Board] Load all boards';
   constructor(public boards: InkBoardMeta[]) {}

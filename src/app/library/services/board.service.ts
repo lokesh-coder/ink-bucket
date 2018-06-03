@@ -10,7 +10,7 @@ import { BOARD_DEFAULT_NAME, BOARD_DEFAULT_DESC } from '../../ink.config';
 @Injectable({
   providedIn: 'root'
 })
-export class InkBoardService {
+export class InkBoardsService {
   constructor(private _db: InkDatabaseService, private _store: Store) {
     this.createBoard(BOARD_DEFAULT_NAME, BOARD_DEFAULT_DESC).then(doc => {
       if (!doc) {

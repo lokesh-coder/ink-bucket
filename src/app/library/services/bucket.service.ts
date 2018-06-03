@@ -6,9 +6,9 @@ import { InkDatabaseService } from './database.service';
 @Injectable({
   providedIn: 'root'
 })
-export class InkBucketService {
+export class InkBucketsService {
   constructor(private _db: InkDatabaseService, private _store: Store) {}
-  async newBucket(bucketData: InkBucketMeta) {
+  async create(bucketData: InkBucketMeta) {
     const db = await this._db.getDatabase();
     return db.buckets.insert(bucketData).catch(error => {
       console.error('Error while creating bucket record!', error);
@@ -16,12 +16,17 @@ export class InkBucketService {
     });
   }
 
-  async getBucketsInBoard(boardId) {
+  async get(boardId) {
     const db = await this._db.getDatabase();
     return db.buckets.find({ boardId }).exec();
   }
 
-  async changeBucketName(bucketId: string, newName: string) {
+  async getAll() {
+    const db = await this._db.getDatabase();
+    return db.buckets.find().exec();
+  }
+
+  async changeName(bucketId: string, newName: string) {
     const db = await this._db.getDatabase();
     return db.buckets
       .findOne(bucketId)
@@ -36,7 +41,7 @@ export class InkBucketService {
       });
   }
 
-  async deleteBucket(bucketId: string) {
+  async delete(bucketId: string) {
     const db = await this._db.getDatabase();
     return db.buckets
       .findOne(bucketId)

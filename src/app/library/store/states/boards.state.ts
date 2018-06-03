@@ -1,14 +1,26 @@
-import { State, Action, StateContext } from '@ngxs/store';
+import { State, Action, StateContext, NgxsOnInit, Selector } from '@ngxs/store';
 import { InkBoards } from '@lib/models';
-import { PopulateBoards, CreateBoard, UpdateBoard } from '@store/actions';
+import { PopulateBoards, CreateBoard, UpdateBoard, PopulateBoardsFromDb } from '@store/actions';
+import { InkBoardsService } from '@lib/services';
 
 @State<InkBoards>({
   name: 'boards',
   defaults: []
 })
-export class BoardsState {
-  constructor() {}
+export class BoardsState implements NgxsOnInit {
+  @Selector()
+  static defaultBoard(state: InkBoards) {
+    return state[0]._id;
+  }
 
+  constructor(private _service: InkBoardsService) {}
+  ngxsOnInit(ctx: StateContext<InkBoards>) {}
+
+  @Action(PopulateBoardsFromDb)
+  async populateFromDb(ctx: StateContext<InkBoards>) {
+    const boards = await this._service.getBoards();
+    ctx.setState(boards);
+  }
   @Action(PopulateBoards)
   loadBoard(ctx: StateContext<InkBoards>, action: PopulateBoards) {
     ctx.setState(action.boards);

@@ -1,3 +1,5 @@
 <div class="container">
-  <inkapp-board *ngFor="let board of boards" [data]="board" class=" d-block col-md-8 mx-auto "></inkapp-board>
+  <ng-container *ngFor="let board of boards$|async">
+    <inkapp-board [data]="board" class=" d-block col-md-8 mx-auto "></inkapp-board>
+  </ng-container>
 </div>

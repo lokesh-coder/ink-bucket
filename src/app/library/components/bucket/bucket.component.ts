@@ -1,10 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Store } from '@ngxs/store';
+import { Store, Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { filter, tap, map } from 'rxjs/operators';
-import { InkBucketMeta, InkAppView, InkDropMeta } from '@lib/models';
-import { InkBucketService, InkDropService } from '@lib/services';
+import { InkBucketMeta, InkAppView, InkDropMeta, InkAppSettingsItem, InkDrops } from '@lib/models';
+import { InkBucketsService, InkDropsService } from '@lib/services';
 import { AddDrop, RenameBucket, DeleteBucket, PopulateBuckets, PopulateDrops } from '@store/actions';
+import { SettingsState } from '@store/states';
+import { children } from '@lib/operators';
 
 @Component({
   selector: 'inkapp-bucket',
@@ -13,42 +15,31 @@ import { AddDrop, RenameBucket, DeleteBucket, PopulateBuckets, PopulateDrops } f
 })
 export class BucketComponent implements OnInit {
   @Input() index: number;
-  @Input() bucketData: InkBucketMeta;
-  drop: Observable<InkDropMeta>;
-  view: InkAppView;
+  @Input() data: InkBucketMeta;
+  drops$: Observable<InkDrops>;
   constructor(
     private _store: Store,
-    private _bucketService: InkBucketService,
-    private _inkColorService: InkDropService
-  ) {
-    this.drop = this._store.select(s => s.drops).pipe(map(x => x.filter(y => y.bucketId === this.bucketData._id)));
-  }
+    private _bucketService: InkBucketsService,
+    private _dropsService: InkDropsService
+  ) {}
 
   ngOnInit() {
-    this._inkColorService.getInkColorsInBuckets(this.bucketData._id).then(docs => {
-      this._store.dispatch(new PopulateDrops(docs));
-    });
+    this.drops$ = this._store.select(s => s.drops).pipe(children(this.data._id, 'bucketId'));
   }
-  addNewInk() {
+  newDrop() {
     const data: InkDropMeta = {
-      bucketId: this.bucketData._id,
-      displayValue: 'white',
+      bucketId: this.data._id,
+      displayValue: '#ffffff',
       meta: {},
-      name: '#fff'
+      name: '#ffffff'
     };
-    this._inkColorService.addInkColor(this.bucketData._id, data).then(doc => {
-      this._store.dispatch(new AddDrop(this.bucketData._id, doc as any));
-    });
+    this._store.dispatch(new AddDrop(this.data._id, data));
   }
   onTitleChange(newTitle) {
-    this._bucketService.changeBucketName(this.bucketData._id, newTitle).then(bucket => {
-      this._store.dispatch(new RenameBucket(this.bucketData._id, bucket.name));
-    });
+    this._store.dispatch(new RenameBucket(this.data._id, newTitle));
   }
 
   deleteBucket() {
-    this._bucketService.deleteBucket(this.bucketData._id).then(bucket => {
-      this._store.dispatch(new DeleteBucket(this.bucketData._id));
-    });
+    this._store.dispatch(new DeleteBucket(this.data._id));
   }
 }

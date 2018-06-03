@@ -18,7 +18,8 @@ export const DropSchema = {
       type: 'string'
     },
     bucketId: {
-      type: 'string'
+      type: 'string',
+      ref: 'buckets'
     }
   },
   required: ['displayValue', 'meta', 'bucketId']

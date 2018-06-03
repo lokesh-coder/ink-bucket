@@ -5,17 +5,17 @@ import { InkDatabaseService } from './database.service';
 @Injectable({
   providedIn: 'root'
 })
-export class InkDropService {
+export class InkDropsService {
   constructor(private _db: InkDatabaseService) {}
 
-  async addInkColor(bucketId, inkData: InkDropMeta) {
+  async create(bucketId, dropData: InkDropMeta) {
     const db = await this._db.getDatabase();
-    return db.drops.insert({ ...inkData, bucketId }).catch(error => {
-      console.error('Error while saving ink color!');
+    return db.drops.insert({ ...dropData, bucketId }).catch(error => {
+      console.error('Error while saving ink color!', error);
     });
   }
 
-  async updateInkColor(inkId, inkData: InkDropMeta) {
+  async update(inkId, inkData: InkDropMeta) {
     const db = await this._db.getDatabase();
     return db.drops
       .findOne(inkId)
@@ -29,8 +29,12 @@ export class InkDropService {
       });
   }
 
-  async getInkColorsInBuckets(bucketId) {
+  async get(bucketId) {
     const db = await this._db.getDatabase();
     return db.drops.find({ bucketId }).exec();
+  }
+  async getAll() {
+    const db = await this._db.getDatabase();
+    return db.drops.find().exec();
   }
 }

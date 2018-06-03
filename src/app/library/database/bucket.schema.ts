@@ -12,7 +12,8 @@ export const BucketSchema = {
       default: ''
     },
     boardId: {
-      type: 'string'
+      type: 'string',
+      ref: 'boards'
     }
   },
   required: ['name', 'boardId']
