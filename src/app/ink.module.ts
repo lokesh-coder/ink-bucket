@@ -6,32 +6,20 @@ import { NgxsModule } from '@ngxs/store';
 import { JwtModule } from '@auth0/angular-jwt';
 import { ClipboardModule } from 'ngx-clipboard';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
-import {
-  BucketComponent,
-  BoardComponent,
-  ColorFormComponent,
-  ColorPickerComponent,
-  InkComponent,
-  NavbarComponent,
-  PromptComponent,
-  MagicTitleComponent,
-  SettingsItemComponent
-} from './components';
-import { InkApp } from './ink.component';
-import { RoutingModule } from './ink.routing';
-import { HomePage } from './pages/home/home.component';
-import { SettingsPage } from './pages/settings/settings.component';
-import { ExportPage } from './pages/export/export.component';
-import { RedirectPage } from './pages/redirect/redirect.component';
-import { SettingsState, BucketState, BoardState, InkState } from './store/states';
-import { ColorModule } from './modules/color/color.module';
-
 import { OverlayModule } from '@angular/cdk/overlay';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { BoardComponent, BucketComponent, DropComponent, HeaderComponent } from '@lib/components';
+import { ActionItemElement, EditableTitleElement } from '@lib/elements';
+import { ExportPage, HomePage, NotFoundPage, RedirectPage, SettingsPage } from './pages';
+import { BoardsState, BucketsState, DropsState, SettingsState } from '@lib/store/states';
+import { InkApp } from './ink.component';
+import { ColorModule } from '@lib/modules/color/color.module';
+import { RoutingModule } from './ink.routing';
 import { environment } from '../environments/environment';
+import { GITHUB_ACCESS_TOKEN_NAME } from './ink.config';
 
 export function tokenGetter() {
-  return localStorage.getItem('inkapp_access_token');
+  return localStorage.getItem(GITHUB_ACCESS_TOKEN_NAME);
 }
 
 export const MODULES = [
@@ -39,11 +27,12 @@ export const MODULES = [
   RoutingModule,
   HttpClientModule,
   FormsModule,
-  NgxsModule.forRoot([SettingsState, BucketState, BoardState, InkState]),
+  NgxsModule.forRoot([SettingsState, BoardsState, BucketsState, DropsState]),
   NgxsReduxDevtoolsPluginModule.forRoot(),
   ColorModule,
   ClipboardModule,
   OverlayModule,
+  ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
   JwtModule.forRoot({
     config: {
       tokenGetter: tokenGetter,
@@ -51,24 +40,13 @@ export const MODULES = [
     }
   })
 ];
-export const COMPONENTS = [
-  InkApp,
-  NavbarComponent,
-  BoardComponent,
-  BucketComponent,
-  PromptComponent,
-  ColorPickerComponent,
-  ColorFormComponent,
-  InkComponent,
-  MagicTitleComponent,
-  SettingsItemComponent
-];
-export const PAGES = [HomePage, SettingsPage, ExportPage, RedirectPage];
+export const COMPONENTS = [InkApp, HeaderComponent, BoardComponent, BucketComponent, DropComponent];
+export const ELEMENTS = [ActionItemElement, EditableTitleElement];
+export const PAGES = [HomePage, SettingsPage, ExportPage, RedirectPage, NotFoundPage];
 
 @NgModule({
-  declarations: [...COMPONENTS, ...PAGES, SettingsItemComponent],
-  imports: [...MODULES, ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })],
-  providers: [],
+  declarations: [...COMPONENTS, ...ELEMENTS, ...PAGES],
+  imports: [...MODULES],
   bootstrap: [InkApp]
 })
 export class InkModule {}
