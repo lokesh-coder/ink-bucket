@@ -1,0 +1,18 @@
+{
+  "dataSource": "commits",
+    "template": {
+        "commit": "- {{message}} ([→]({{url}}))",
+        "issue": "- {{labels}} {{name}} [{{text}}]({{url}})",
+        "label": "[**{{label}}**]",
+        "noLabel": "closed",
+        "group": "\n#### {{heading}}\n",
+        "changelogTitle": "# Changelog\n\n",
+        "release": "## {{release}} ({{date}})\n{{body}}",
+        "releaseSeparator": "\n---\n\n"
+    },
+    "groupBy": {
+        "Enhancements:": ["enhancement", "internal"],
+        "Bug Fixes:": ["bug"],
+        "Build Improvements":["view"]
+    }
+}

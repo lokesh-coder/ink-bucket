@@ -1,4 +1,10 @@
 .ink-color-container {
+  &:hover {
+    background-color: clr('bg3');
+    .--only-on-parent-hover {
+      display: inherit !important;
+    }
+  }
   &.ink-view-thin {
     border-bottom: 0;
     margin-bottom: 0;

@@ -35,4 +35,15 @@ export class BucketService {
         return null;
       });
   }
+
+  async deleteBucket(bucketId: string) {
+    const db = await this._db.getDatabase();
+    return db.bucket
+      .findOne(bucketId)
+      .remove()
+      .catch(error => {
+        console.error('Error while removing bucket name');
+        return null;
+      });
+  }
 }

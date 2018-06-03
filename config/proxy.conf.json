@@ -1,0 +1,9 @@
+{
+  "/ghtoken/*": {
+    "target": "https://github.com/login/oauth/access_token",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": { "^/ghtoken": "" }
+  }
+}

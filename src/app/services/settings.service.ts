@@ -16,6 +16,13 @@ export class SettingsService {
       console.log('Error while settings default settings', error);
     });
   }
+  async add(key, value) {
+    const db = await this._localDatabase.getDatabase();
+    return db.settings.insert({ key, value }).catch(error => {
+      console.error('Error while adding settings!', error);
+    });
+  }
+
   async update(key, value) {
     const db = await this._localDatabase.getDatabase();
     return db.settings

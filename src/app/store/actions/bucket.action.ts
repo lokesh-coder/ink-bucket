@@ -20,6 +20,11 @@ export class RenameBucket {
 }
 
 export class ClearBuckets {
-  static readonly type = '[Bucket] clear all';
+  static readonly type = '[Bucket] Clear all';
   constructor() {}
+}
+
+export class DeleteBucket {
+  static readonly type = '[Bucket] Delete';
+  constructor(public bucketId:string) {}
 }
