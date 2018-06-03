@@ -70,3 +70,11 @@ export interface InkDb extends RxDatabase {
   buckets?: InkBucketColl;
   settings?: InkSettingsColl;
 }
+
+export interface InkGist {
+  url: string;
+  id: string;
+  owner_img: string;
+  owner_name: string;
+  owner_profile: string;
+}

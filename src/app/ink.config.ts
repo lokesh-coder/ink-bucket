@@ -11,3 +11,4 @@ export const BOARD_DEFAULT_NAME = 'Beautiful';
 export const BOARD_DEFAULT_DESC = 'Default Board';
 
 export const GITHUB_ACCESS_TOKEN_NAME = 'inkapp_access_token';
+export const GIST_NAME = 'INKAPP :: SYNC SETTINGS';

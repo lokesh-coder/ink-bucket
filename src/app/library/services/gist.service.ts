@@ -1,66 +1,79 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { map, switchMap } from 'rxjs/operators';
+import { map, switchMap, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { GIST_NAME } from '@root/ink.config';
+import { InkUtilsService } from '@lib/services/utility.service';
+import { InkGist } from '@lib/models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InkGistService {
-  constructor(private _http: HttpClient) {}
+  constructor(private _http: HttpClient, private _utilityService: InkUtilsService) {}
   create(data) {
-    return this._http.post(
-      'https://api.github.com/gists?access_token=' + localStorage.getItem('inkapp_access_token'),
-      JSON.stringify({
-        description: 'INKAPP :: SYNC SETTINGS',
+    return this._http
+      .post('https://api.github.com/gists', {
+        description: GIST_NAME,
         public: false,
         files: {
           'inkapp-database.json': {
-            content: JSON.stringify(data)
+            content: JSON.stringify(data, null, ' ')
+          },
+          'last-sync.json': {
+            content: JSON.stringify(this._utilityService.getCurrentStatus(), null, ' ')
           }
         }
-      }),
-      {
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-      }
-    );
+      })
+      .pipe(map(gist => this._getGistBasicData(gist)));
   }
 
   edit(gistId, data) {
-    return this._http.patch(
-      'https://api.github.com/gists/' + gistId + '?access_token=' + localStorage.getItem('inkapp_access_token'),
-      JSON.stringify({
+    return this._http
+      .patch(`https://api.github.com/gists/${gistId}`, {
         files: {
           'inkapp-database.json': {
-            content: JSON.stringify(data)
+            content: JSON.stringify(data, null, ' ')
+          },
+          'last-sync.json': {
+            content: JSON.stringify(this._utilityService.getCurrentStatus(), null, ' ')
           }
         }
-      }),
-      {
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-      }
-    );
-  }
-
-  get() {
-    return this._http
-      .get(`https://api.github.com/gists?access_token=${localStorage.getItem('inkapp_access_token')}`)
+      })
       .pipe(
-        map((gists: any) => gists.filter((g: any) => g.description === 'INKAPP :: SYNC SETTINGS')[0] || null),
-        switchMap(gist => {
-          if (gist) {
-            return this._http.get(
-              `https://api.github.com/gists/${gist.id}?access_token=${localStorage.getItem('inkapp_access_token')}`
-            );
+        map(gist => this._getGistBasicData(gist)),
+        catchError(err => {
+          if (err.status === 404) {
+            return this.create(data);
           }
-          return of(null);
+          return of(new Error('Something went wrong!'));
         })
       );
   }
 
-  delete(gistId) {
-    return this._http.delete(
-      `https://api.github.com/gists/${gistId}?access_token=${localStorage.getItem('inkapp_access_token')}`
+  get() {
+    return this._http.get(`https://api.github.com/gists`).pipe(
+      map((gists: any) => gists.filter((g: any) => g.description === GIST_NAME)[0] || null),
+      switchMap(gist => {
+        if (gist) {
+          return this._http.get(`https://api.github.com/gists/${gist.id}`);
+        }
+        return of(null);
+      })
     );
+  }
+
+  delete(gistId) {
+    return this._http.delete(`https://api.github.com/gists/${gistId}`);
+  }
+
+  private _getGistBasicData(gist): InkGist {
+    return {
+      url: gist.url,
+      id: gist.id,
+      owner_img: gist.owner.avatar_url,
+      owner_name: gist.owner.login,
+      owner_profile: gist.owner.html_url
+    };
   }
 }

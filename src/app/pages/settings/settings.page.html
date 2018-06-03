@@ -22,6 +22,7 @@
   <div class="col-md-8 mx-auto">
     <h3 class="ink-page-title mb-5">
       <i class="ink-icon icon-settings"></i> Sync </h3>
+    <inkapp-user-card-el *ngIf="connectedToGithub" [data]="userData"></inkapp-user-card-el>
     <inkapp-action-item-el>
       <div class="description">
         <h5>Sync</h5>
