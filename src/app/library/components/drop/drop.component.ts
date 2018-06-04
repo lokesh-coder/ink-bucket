@@ -42,6 +42,7 @@ export class DropComponent implements OnInit, OnDestroy {
       };
     });
     this._colorPickerService.backdropClick().subscribe(b => {
+      console.log('backdrop clocked', this.drop, this.data);
       if (this.drop.name !== this.data.name) {
         this._store.dispatch(new UpdateDrop(this.data._id, this.drop));
       }

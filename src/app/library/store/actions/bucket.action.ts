@@ -11,7 +11,7 @@ export class UpdateBucket {
 
 export class PopulateBuckets {
   static readonly type = '[Bucket] Load all buckets';
-  constructor(public buckets: InkBucketMeta[]) {}
+  constructor() {}
 }
 
 export class RenameBucket {

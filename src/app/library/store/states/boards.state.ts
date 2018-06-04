@@ -16,14 +16,11 @@ export class BoardsState implements NgxsOnInit {
   constructor(private _service: InkBoardsService) {}
   ngxsOnInit(ctx: StateContext<InkBoards>) {}
 
-  @Action(PopulateBoardsFromDb)
-  async populateFromDb(ctx: StateContext<InkBoards>) {
-    const boards = await this._service.getBoards();
-    ctx.setState(boards);
-  }
   @Action(PopulateBoards)
-  loadBoard(ctx: StateContext<InkBoards>, action: PopulateBoards) {
-    ctx.setState(action.boards);
+  populateBoards(ctx: StateContext<InkBoards>) {
+    return this._service.getBoards().then(boards => {
+      ctx.setState(boards);
+    });
   }
 
   @Action(CreateBoard)

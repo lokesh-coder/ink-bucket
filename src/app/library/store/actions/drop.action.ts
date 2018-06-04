@@ -12,7 +12,7 @@ export class UpdateDrop {
 
 export class PopulateDrops {
   static readonly type = '[Drop] get colors in bucket';
-  constructor(public drops: InkDropMeta[]) {}
+  constructor() {}
 }
 export class DeleteDrop {
   static readonly type = '[Drop] delete';

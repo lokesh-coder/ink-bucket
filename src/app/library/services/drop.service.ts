@@ -37,4 +37,9 @@ export class InkDropsService {
     const db = await this._db.getDatabase();
     return db.drops.find().exec();
   }
+
+  async deleteAll() {
+    const db = await this._db.getDatabase();
+    return db.drops.find().remove();
+  }
 }

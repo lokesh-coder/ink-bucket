@@ -1,7 +1,8 @@
 import { State, Action, StateContext, Selector } from '@ngxs/store';
 import { InkAppSettingsItem, InkAppSettings } from '@lib/models';
-import { UpdateSettingsItem, PopulateSettings } from '@store/actions';
+import { UpdateSettingsItem, PopulateSettings, MergeSettings } from '@store/actions';
 import { SelectMultipleControlValueAccessor } from '@angular/forms';
+import { InkSettingsService } from '@lib/services';
 
 @State<Partial<InkAppSettings>>({
   name: 'settings',
@@ -9,24 +10,33 @@ import { SelectMultipleControlValueAccessor } from '@angular/forms';
 })
 export class SettingsState {
   @Selector()
-  static view() {
-    return state => state.filter(s => s.key === 'view');
+  static view(state) {
+    return state.filter(s => s.key === 'view')[0].value;
   }
+
+  constructor(private _service: InkSettingsService) {}
 
   @Action(UpdateSettingsItem)
   updateSettings(ctx: StateContext<InkAppSettings>, action: UpdateSettingsItem) {
-    const state = ctx.getState();
-    const newState = state.map(s => {
-      if (s[action.key]) {
-        s[action.key] = action.value;
-      }
-      return s;
+    return this._service.update(action.key, action.value).then((doc: any) => {
+      const state = ctx.getState();
+      const newState = state.map(s => {
+        if (s.key === action.key) {
+          s.value = action.value;
+        }
+        return s;
+      });
+      ctx.setState([...newState]);
     });
-    ctx.setState([...newState]);
   }
 
   @Action(PopulateSettings)
-  load(ctx: StateContext<InkAppSettings>, action: PopulateSettings) {
+  populateSettings(ctx: StateContext<InkAppSettings>, action: PopulateSettings) {
     ctx.setState(action.settings);
+  }
+  @Action(MergeSettings)
+  mergeSettings(ctx: StateContext<InkAppSettings>, action: MergeSettings) {
+    const state = ctx.getState();
+    ctx.setState([...state, ...action.settings]);
   }
 }

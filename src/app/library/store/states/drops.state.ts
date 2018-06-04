@@ -15,29 +15,34 @@ export class DropsState {
   }
   @Action(AddDrop)
   addDrop(ctx: StateContext<InkDrops>, action: AddDrop) {
-    const state = ctx.getState();
-    this._service.create(action.bucketId, action.inkData).then((doc: any) => {
-      state.push(doc);
-      ctx.setState([...state]);
+    return this._service.create(action.bucketId, action.inkData).then((doc: any) => {
+      const state = ctx.getState();
+      ctx.setState([...state, doc]);
     });
   }
 
   @Action(UpdateDrop)
   updateDrop(ctx: StateContext<InkDrops>, action: UpdateDrop) {
-    const state: any = ctx.getState();
-    this._service.update(action.id, action.inkData).then(doc => {
-      const newState = state.map(c => (c._id === action.id ? action.inkData : c));
+    return this._service.update(action.id, action.inkData).then(doc => {
+      const state: any = ctx.getState();
+      console.log('first', state);
+      console.log('incomming', action);
+      const newState = state.map(c => (c._id === action.id ? doc : c));
       ctx.setState([...newState]);
     });
   }
 
   @Action(PopulateDrops)
-  loadBoard(ctx: StateContext<InkDrops>, action: PopulateDrops) {
-    ctx.setState(action.drops);
+  populateDrops(ctx: StateContext<InkDrops>, action: PopulateDrops) {
+    return this._service.getAll().then(drops => {
+      ctx.setState(drops);
+    });
   }
 
   @Action(ClearDrops)
-  clearBuckets(ctx: StateContext<InkDrops>, action: ClearDrops) {
-    ctx.setState([]);
+  clearDrops(ctx: StateContext<InkDrops>, action: ClearDrops) {
+    return this._service.deleteAll().then(doc => {
+      ctx.setState([]);
+    });
   }
 }

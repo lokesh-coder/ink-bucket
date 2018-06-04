@@ -14,7 +14,7 @@ import { children } from '@lib/operators';
 })
 export class BoardComponent implements OnInit {
   @Input() data: InkBoardMeta;
-  @Select(SettingsState.view) view$: Observable<InkAppSettingsItem>;
+  @Select(SettingsState.view) view$: Observable<string>;
   buckets$: Observable<InkBuckets>;
   constructor(private _store: Store) {}
 

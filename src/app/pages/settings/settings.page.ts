@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngxs/store';
+import { Store, Select } from '@ngxs/store';
 import merge from 'deepmerge';
 import { environment } from '../../../environments/environment';
 import { InkAppSettingsItem, InkGist } from '@lib/models';
 import { InkDatabaseService, InkSettingsService, InkGithubService, InkGistService } from '@lib/services';
-import { PopulateSettings, UpdateSettingsItem } from '@store/actions';
+import { PopulateSettings, UpdateSettingsItem, MergeSettings } from '@store/actions';
 import { GITHUB_ACCESS_TOKEN_NAME } from '../../ink.config';
+import { Observable } from 'rxjs';
+import { SettingsState } from '@store/states';
 
 @Component({
   selector: 'inkapp-settings-page',
@@ -13,7 +15,7 @@ import { GITHUB_ACCESS_TOKEN_NAME } from '../../ink.config';
   styles: []
 })
 export class SettingsPage implements OnInit {
-  view: InkAppSettingsItem = { key: null, value: null };
+  @Select(SettingsState.view) view$: Observable<string>;
   connectedToGithub = false;
   userData: InkGist;
   constructor(
@@ -26,13 +28,11 @@ export class SettingsPage implements OnInit {
 
   ngOnInit() {
     this._settingsService.getAll().then(doc => {
-      console.log('user data', doc);
       const user = doc.filter(s => s.key === 'gist');
-      if (user) {
+      if (user.length > 0) {
         this.userData = JSON.parse(user[0].value);
       }
-      this.view = doc.filter(d => d.key === 'view')[0];
-      this._store.dispatch(new PopulateSettings(doc));
+      this._store.dispatch(new MergeSettings(doc));
     });
     this.connectedToGithub = !!localStorage.getItem(GITHUB_ACCESS_TOKEN_NAME);
   }
@@ -48,7 +48,6 @@ export class SettingsPage implements OnInit {
       const gistData = JSON.parse(gist.value);
       this._gistService.edit(gistData.id, data).subscribe(
         res => {
-          console.log('done!', res);
           this._settingsService.update('gist', JSON.stringify(res)).then(doc => {
             console.log('settings updatedw ith sync', doc);
           });
@@ -82,8 +81,7 @@ export class SettingsPage implements OnInit {
   }
 
   onViewChange(view) {
-    this._settingsService.update('view', view).then(doc => {
-      this._store.dispatch(new UpdateSettingsItem('view', view));
-    });
+    console.log('view chnaged', view);
+    this._store.dispatch(new UpdateSettingsItem('view', view));
   }
 }
