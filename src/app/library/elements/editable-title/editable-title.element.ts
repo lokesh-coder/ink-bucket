@@ -17,7 +17,7 @@ export class EditableTitleElement implements OnInit {
     this.newTitle = this.title;
   }
 
-  allowEditing(e) {
+  allowEditing() {
     this.editable = true;
   }
 

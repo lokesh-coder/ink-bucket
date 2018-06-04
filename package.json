@@ -5,8 +5,10 @@
   "scripts": {
     "ng": "ng",
     "config:secrets": "ts-node ./config/env.secrets.ts",
-    "start": "npm run config:secrets && ng serve --proxy-config config/proxy.conf.json -o --host=0.0.0.0 --disable-host-check",
+    "start":
+      "npm run config:secrets && ng serve --proxy-config config/proxy.conf.json -o --host=0.0.0.0 --disable-host-check",
     "build": "ng build",
+    "build:prod": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
@@ -14,7 +16,8 @@
     "db": "pouchdb-server --host 0.0.0.0 -p 10101 -m -d /tmp/pouchdb-server/ -n true",
     "electron": "electron .",
     "electron-build": "ng build --prod && electron .",
-    "server:prod": "http-server -p 1234 -s -o --cors",
+    "server:prod": "http-server dist/ink-bucket -p 1234 -s -o --cors",
+    "run:prod": "npm run build:prod && npm run server:prod",
     "release": "gren release --token=TOKEN --data-source=commits --override",
     "generate:changelog": "gren changelog --token=TOKEN --data-source=commits --override"
   },
