@@ -9,15 +9,12 @@ import { InkDropsService } from '@lib/services';
 })
 export class DropsState {
   constructor(private _service: InkDropsService) {}
-  async ngxsOnInit(ctx: StateContext<InkDrops>) {
-    const drops = await this._service.getAll();
-    ctx.setState(drops);
-  }
+
   @Action(AddDrop)
   addDrop(ctx: StateContext<InkDrops>, action: AddDrop) {
     return this._service.create(action.bucketId, action.inkData).then((doc: any) => {
       const state = ctx.getState();
-      ctx.setState([...state, doc]);
+      ctx.setState([...state, { ...action.inkData, bucketId: action.bucketId }]);
     });
   }
 
