@@ -12,7 +12,7 @@ import { BOARD_DEFAULT_NAME, BOARD_DEFAULT_DESC } from '../../ink.config';
 })
 export class InkBoardsService {
   constructor(private _db: InkDatabaseService, private _store: Store) {
-    this.create(BOARD_DEFAULT_NAME, BOARD_DEFAULT_DESC).then(doc => {
+    this.create({ name: BOARD_DEFAULT_NAME, description: BOARD_DEFAULT_DESC }).then(doc => {
       if (!doc) {
         return;
       }

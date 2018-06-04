@@ -33,6 +33,7 @@ export class InkBucketsService {
 
   async update(bucketData: Partial<InkBucketMeta>) {
     const db = await this._db.getDatabase();
+    console.log('edit', bucketData);
     return db.buckets
       .findOne(bucketData._id)
       .update({

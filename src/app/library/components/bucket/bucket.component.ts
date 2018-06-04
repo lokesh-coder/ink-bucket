@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { filter, tap, map } from 'rxjs/operators';
 import { InkBucketMeta, InkAppView, InkDropMeta, InkAppSettingsItem, InkDrops } from '@lib/models';
 import { InkBucketsService, InkDropsService } from '@lib/services';
-import { AddDrop, RenameBucket, DeleteBucket, PopulateBuckets, PopulateDrops } from '@store/actions';
+import { CreateDrop, UpdateBucket, DeleteBucket } from '@store/actions';
 import { SettingsState } from '@store/states';
 import { children } from '@lib/operators';
 
@@ -33,10 +33,10 @@ export class BucketComponent implements OnInit {
       meta: {},
       name: '#ffffff'
     };
-    this._store.dispatch(new AddDrop(this.data._id, data));
+    this._store.dispatch(new CreateDrop(data));
   }
-  onTitleChange(newTitle) {
-    this._store.dispatch(new RenameBucket(this.data._id, newTitle));
+  onTitleChange(name) {
+    this._store.dispatch(new UpdateBucket({ ...(this.data as any)._data, name }));
   }
 
   deleteBucket() {

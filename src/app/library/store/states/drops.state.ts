@@ -38,7 +38,7 @@ export class DropsState {
   @Action(UpdateDrop)
   ppdateDrop(ctx: StateContext<InkDrops>, action: UpdateDrop) {
     return this._service.update(action.dropData).then(drop => {
-      ctx.dispatch(new PatchDrop(drop));
+      ctx.dispatch(new PatchDrop((drop as any)._data));
     });
   }
 
@@ -52,7 +52,8 @@ export class DropsState {
   @Action(CreateDrop)
   createDrop(ctx: StateContext<InkDrops>, action: CreateDrop) {
     return this._service.create(action.dropData).then(drop => {
-      ctx.dispatch(new AddDrop(drop));
+      console.log('retrive', drop);
+      ctx.dispatch(new AddDrop((drop as any)._data));
     });
   }
 

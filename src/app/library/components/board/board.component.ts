@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { map, filter, tap } from 'rxjs/operators';
 import { InkBoardMeta, InkBucketMeta, InkBuckets, InkAppSettings, InkAppSettingsItem } from '@lib/models';
 import { InkBucketsService } from '@lib/services';
-import { PopulateBoards, PopulateBuckets } from '@store/actions';
 import { BucketsState, SettingsState } from '@store/states';
 import { children } from '@lib/operators';
 
