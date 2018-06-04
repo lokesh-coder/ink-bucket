@@ -2,12 +2,12 @@
   <div class="col-md-8 mx-auto">
     <h3 class="ink-page-title mb-5">
       <i class="ink-icon icon-settings"></i> Settings</h3>
-    <inkapp-action-item-el *ngIf="view$|async as view">
+    <inkapp-action-item-el>
       <h5>Colors view</h5>
       <p>Change the look of an ink color</p>
-      <select name="" class="custom-select" (change)="onViewChange($event.target.value)">
-        <option value="default" [selected]="view=='default'">Default</option>
-        <option value="thin" [selected]="view=='thin'">Thin</option>
+      <select name="current-view" [(ngModel)]="currentView" class="custom-select" (change)="onViewChange()">
+        <option [value]="'default'">Default</option>
+        <option [value]="'thin'">Thin</option>
       </select>
     </inkapp-action-item-el>
 

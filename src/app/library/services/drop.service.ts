@@ -8,21 +8,19 @@ import { InkDatabaseService } from './database.service';
 export class InkDropsService {
   constructor(private _db: InkDatabaseService) {}
 
-  async create(bucketId, dropData: InkDropMeta) {
+  async create(dropData: InkDropMeta) {
     const db = await this._db.getDatabase();
-    return db.drops.insert({ ...dropData, bucketId }).catch(error => {
+    return db.drops.insert(dropData).catch(error => {
       console.error('Error while saving ink color!', error);
     });
   }
 
-  async update(inkId, inkData: InkDropMeta) {
+  async update(dropData: Partial<InkDropMeta>) {
     const db = await this._db.getDatabase();
     return db.drops
-      .findOne(inkId)
+      .findOne(dropData._id)
       .update({
-        $set: {
-          ...inkData
-        }
+        $set: dropData
       })
       .catch(error => {
         console.error('Error while updating ink color!', error);
@@ -38,8 +36,17 @@ export class InkDropsService {
     return db.drops.find().exec();
   }
 
+  async deleteAllUnderBucket(bucketId: string) {
+    const db = await this._db.getDatabase();
+    return db.drops.find({ bucketId: { $eq: bucketId } }).remove();
+  }
+
   async deleteAll() {
     const db = await this._db.getDatabase();
     return db.drops.find().remove();
+  }
+  async delete(dropId: string) {
+    const db = await this._db.getDatabase();
+    return db.drops.find(dropId).remove();
   }
 }

@@ -16,6 +16,7 @@ import { SettingsState } from '@store/states';
 })
 export class SettingsPage implements OnInit {
   @Select(SettingsState.view) view$: Observable<string>;
+  currentView;
   connectedToGithub = false;
   userData: InkGist;
   constructor(
@@ -33,6 +34,10 @@ export class SettingsPage implements OnInit {
         this.userData = JSON.parse(user[0].value);
       }
       this._store.dispatch(new MergeSettings(doc));
+    });
+    this.view$.subscribe(v => {
+      console.log('fot this', v);
+      this.currentView = v;
     });
     this.connectedToGithub = !!localStorage.getItem(GITHUB_ACCESS_TOKEN_NAME);
   }
@@ -80,8 +85,7 @@ export class SettingsPage implements OnInit {
     this._db.deleteDatabase();
   }
 
-  onViewChange(view) {
-    console.log('view chnaged', view);
-    this._store.dispatch(new UpdateSettingsItem('view', view));
+  onViewChange() {
+    this._store.dispatch(new UpdateSettingsItem('view', this.currentView));
   }
 }

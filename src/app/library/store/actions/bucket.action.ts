@@ -1,30 +1,64 @@
-import { InkBucketMeta } from '@lib/models';
+import { InkBucketMeta, InkBuckets } from '@lib/models';
 
+/* fetch all buckets from database */
+export class FetchAllBuckets {
+  static readonly type = '[bucket] fetch all buckets from database';
+}
+/* populate all buckets */
+export class PopulateAllBuckets {
+  static readonly type = '[Bucket] populate all buckets';
+  constructor(public buckets: InkBuckets) {}
+}
+
+/* create bucket */
 export class CreateBucket {
-  static readonly type = '[Bucket] Create new bucket';
+  static readonly type = '[Bucket] create bucket';
   constructor(public bucketData: InkBucketMeta) {}
 }
-export class UpdateBucket {
-  static readonly type = '[Bucket] Update bucket';
+/* add bucket */
+export class AddBucket {
+  static readonly type = '[Bucket] add bucket';
   constructor(public bucketData: InkBucketMeta) {}
 }
 
-export class PopulateBuckets {
-  static readonly type = '[Bucket] Load all buckets';
-  constructor() {}
-}
-
-export class RenameBucket {
-  static readonly type = '[Bucket] Change name';
-  constructor(public id: string, public name: string) {}
-}
-
-export class ClearBuckets {
-  static readonly type = '[Bucket] Clear buckets';
-  constructor() {}
-}
-
+/* delete bucket */
 export class DeleteBucket {
-  static readonly type = '[Bucket] Delete';
+  static readonly type = '[Bucket] delete bucket';
   constructor(public bucketId: string) {}
+}
+/* remove bucket */
+export class RemoveBucket {
+  static readonly type = '[Bucket] remove bucket';
+  constructor(public bucketId: string) {}
+}
+
+/* delete all buckets */
+export class DeleteAllBuckets {
+  static readonly type = '[Bucket] delete all buckets';
+}
+/* remove all buckets */
+export class RemoveAllBuckets {
+  static readonly type = '[Bucket] remove all buckets';
+}
+
+/* delete buckets under board */
+export class DeleteBucketsUnderBoard {
+  static readonly type = '[Bucket] delete buckets under board';
+  constructor(public boardId: string) {}
+}
+/* remove buckets under board */
+export class RemoveBucketsUnderBoard {
+  static readonly type = '[Bucket] remove buckets under board';
+  constructor(public boardId: string) {}
+}
+
+/* update bucket  */
+export class UpdateBucket {
+  static readonly type = '[Bucket] update bucket ';
+  constructor(public bucketData: Partial<InkBucketMeta>) {}
+}
+/* patch bucket */
+export class PatchBucket {
+  static readonly type = '[Bucket] patch bucket ';
+  constructor(public bucketData: Partial<InkBucketMeta>) {}
 }

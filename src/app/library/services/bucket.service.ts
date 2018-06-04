@@ -26,14 +26,17 @@ export class InkBucketsService {
     return db.buckets.find().exec();
   }
 
-  async changeName(bucketId: string, newName: string) {
+  async deleteAll() {
+    const db = await this._db.getDatabase();
+    return db.buckets.find().remove();
+  }
+
+  async update(bucketData: Partial<InkBucketMeta>) {
     const db = await this._db.getDatabase();
     return db.buckets
-      .findOne(bucketId)
+      .findOne(bucketData._id)
       .update({
-        $set: {
-          name: newName
-        }
+        $set: bucketData
       })
       .catch(error => {
         console.error('Error while updating bucket name');

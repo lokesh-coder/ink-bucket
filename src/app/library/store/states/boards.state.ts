@@ -1,44 +1,63 @@
 import { State, Action, StateContext, NgxsOnInit, Selector } from '@ngxs/store';
 import { InkBoards } from '@lib/models';
-import { PopulateBoards, CreateBoard, UpdateBoard, PopulateBoardsFromDb } from '@store/actions';
+import {
+  FetchAllBoards,
+  PopulateAllBoards,
+  CreateBoard,
+  AddBoard,
+  DeleteBoard,
+  RemoveBoard,
+  DeleteAllBoards,
+  RemoveAllBoards
+} from '@store/actions';
 import { InkBoardsService } from '@lib/services';
 
 @State<InkBoards>({
   name: 'boards',
   defaults: []
 })
-export class BoardsState implements NgxsOnInit {
+export class BoardsState {
   @Selector()
   static defaultBoard(state: InkBoards) {
     return state[0]._id;
   }
 
   constructor(private _service: InkBoardsService) {}
-  ngxsOnInit(ctx: StateContext<InkBoards>) {}
 
-  @Action(PopulateBoards)
-  populateBoards(ctx: StateContext<InkBoards>) {
-    return this._service.getBoards().then(boards => {
-      ctx.setState(boards);
+  @Action(FetchAllBoards)
+  fetchAllBoards(ctx: StateContext<InkBoards>, action: FetchAllBoards) {
+    return this._service.fetchAllBoards().then(boards => {
+      ctx.dispatch(new PopulateAllBoards(boards));
     });
+  }
+
+  @Action(PopulateAllBoards)
+  populateAllBoards(ctx: StateContext<InkBoards>, action: PopulateAllBoards) {
+    ctx.setState(action.boards);
   }
 
   @Action(CreateBoard)
   createBoard(ctx: StateContext<InkBoards>, action: CreateBoard) {
-    const state = ctx.getState();
-    state.push({ ...action.boardData });
-    ctx.setState([...state]);
+    return this._service.create(action.boardData).then(board => {
+      ctx.dispatch(new AddBoard(board));
+    });
   }
 
-  @Action(UpdateBoard)
-  updateBoard(ctx: StateContext<InkBoards>, action: UpdateBoard) {
-    let state: any = ctx.getState();
-    state = state.map((a: any) => {
-      if (a.id === action.boardData._id) {
-        a.name = action.boardData.name;
-      }
-      return a;
-    });
-    ctx.setState([...state]);
+  @Action(AddBoard)
+  addBoard(ctx: StateContext<InkBoards>, action: AddBoard) {
+    const state = ctx.getState();
+    ctx.setState([...state, action.boardData]);
   }
+
+  @Action(DeleteBoard)
+  deleteBoard(ctx: StateContext<InkBoards>, action: DeleteBoard) {}
+
+  @Action(RemoveBoard)
+  removeBoard(ctx: StateContext<InkBoards>, action: RemoveBoard) {}
+
+  @Action(DeleteAllBoards)
+  deleteAllBoards(ctx: StateContext<InkBoards>, action: DeleteAllBoards) {}
+
+  @Action(RemoveAllBoards)
+  removeAllBoards(ctx: StateContext<InkBoards>, action: RemoveAllBoards) {}
 }

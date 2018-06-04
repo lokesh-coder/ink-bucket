@@ -1,4 +1,4 @@
-import { State, Action, StateContext, Selector } from '@ngxs/store';
+import { State, Action, StateContext, Selector, NgxsOnInit } from '@ngxs/store';
 import { InkAppSettingsItem, InkAppSettings } from '@lib/models';
 import { UpdateSettingsItem, PopulateSettings, MergeSettings } from '@store/actions';
 import { SelectMultipleControlValueAccessor } from '@angular/forms';
@@ -8,13 +8,18 @@ import { InkSettingsService } from '@lib/services';
   name: 'settings',
   defaults: [{ key: 'view', value: 'thin' }]
 })
-export class SettingsState {
+export class SettingsState implements NgxsOnInit {
   @Selector()
   static view(state) {
     return state.filter(s => s.key === 'view')[0].value;
   }
 
   constructor(private _service: InkSettingsService) {}
+  ngxsOnInit(ctx: StateContext<InkAppSettings>) {
+    return this._service.getAll().then(settings => {
+      ctx.dispatch(new MergeSettings(settings));
+    });
+  }
 
   @Action(UpdateSettingsItem)
   updateSettings(ctx: StateContext<InkAppSettings>, action: UpdateSettingsItem) {

@@ -1,25 +1,42 @@
-import { InkBoardMeta } from '@lib/models';
+import { InkBoardMeta, InkBoards } from '@lib/models';
 
-export class PopulateBoards {
-  static readonly type = '[Board] Load all boards from database';
-  constructor() {}
+/* fetch all boards from database */
+export class FetchAllBoards {
+  static readonly type = '[Board] fetch all boards from database';
+}
+/* populate boards */
+export class PopulateAllBoards {
+  static readonly type = '[Board] populate boards';
+  constructor(public boards: InkBoards) {}
 }
 
+/* create board */
 export class CreateBoard {
-  static readonly type = '[Board] Create new board';
+  static readonly type = '[Board] create board';
+  constructor(public boardData: InkBoardMeta) {}
+}
+/* add new board */
+export class AddBoard {
+  static readonly type = '[Board] add board';
   constructor(public boardData: InkBoardMeta) {}
 }
 
-export class ClearBoards {
-  static readonly type = '[Board] Clear all boards';
-}
-
-export class UpdateBoard {
-  static readonly type = '[Board] Update board';
-  constructor(public boardData: InkBoardMeta) {}
-}
-
+/* delete board */
 export class DeleteBoard {
   static readonly type = '[Board] delete board';
-  constructor(public boardData: InkBoardMeta) {}
+  constructor(public boardId: string) {}
+}
+/* remove board */
+export class RemoveBoard {
+  static readonly type = '[Board] remove board';
+  constructor(public boardId: string) {}
+}
+
+/* delete all boards */
+export class DeleteAllBoards {
+  static readonly type = '[Board] delete all boards';
+}
+/* remove all boards */
+export class RemoveAllBoards {
+  static readonly type = '[Board] remove all boards';
 }
