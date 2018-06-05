@@ -4,7 +4,7 @@ import merge from 'deepmerge';
 import { environment } from '../../../environments/environment';
 import { InkAppSettingsItem, InkGist } from '@lib/models';
 import { InkDatabaseService, InkSettingsService, InkGithubService, InkGistService } from '@lib/services';
-import { PopulateSettings, UpdateSettingsItem, MergeSettings } from '@store/actions';
+import { PopulateSettings, UpdateSettingsItem, MergeSettings, FetchRemoteGist } from '@store/actions';
 import { GITHUB_ACCESS_TOKEN_NAME } from '../../ink.config';
 import { Observable } from 'rxjs';
 import { SettingsState } from '@store/states';
@@ -35,10 +35,7 @@ export class SettingsPage implements OnInit {
       }
       this._store.dispatch(new MergeSettings(doc));
     });
-    this.view$.subscribe(v => {
-      console.log('fot this', v);
-      this.currentView = v;
-    });
+    this.view$.subscribe(v => (this.currentView = v));
     this.connectedToGithub = !!localStorage.getItem(GITHUB_ACCESS_TOKEN_NAME);
   }
   disconnect() {}
@@ -54,7 +51,7 @@ export class SettingsPage implements OnInit {
       this._gistService.edit(gistData.id, data).subscribe(
         res => {
           this._settingsService.update('gist', JSON.stringify(res)).then(doc => {
-            console.log('settings updatedw ith sync', doc);
+            console.log('settings updated with sync', doc);
           });
         },
         err => {
@@ -71,13 +68,7 @@ export class SettingsPage implements OnInit {
   }
   async loadGists() {
     const db = await this._db.getDatabase();
-    const data = await db.dump();
-    this._gistService.get().subscribe(async (gist: any) => {
-      if (!gist) {
-        console.log('No gist!');
-        return;
-      }
-      const gistData = JSON.parse(gist.files['inkapp-database.json'].content);
+    this._store.dispatch(new FetchRemoteGist()).subscribe(async gistData => {
       await db.importDump(gistData);
     });
   }

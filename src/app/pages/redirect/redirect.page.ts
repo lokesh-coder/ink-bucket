@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { InkGithubService } from '@lib/services';
+import { GITHUB_ACCESS_TOKEN_NAME } from '@root/ink.config';
 
 @Component({
   selector: 'inkapp-redirect-page',
@@ -21,7 +22,7 @@ export class RedirectPage implements OnInit {
         .split('&')
         .map(s => s.split('='))
         .map(d => ({ [d[0]]: d[1] }));
-      localStorage.setItem('inkapp_access_token', data[0].access_token);
+      localStorage.setItem(GITHUB_ACCESS_TOKEN_NAME, data[0].access_token);
       this._router.navigateByUrl('/settings');
     });
   }

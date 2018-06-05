@@ -15,5 +15,3 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class RoutingModule {}
-
-export const routedComponents = [HomePage];

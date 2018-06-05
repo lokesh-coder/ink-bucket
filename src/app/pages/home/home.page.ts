@@ -5,13 +5,14 @@ import { InkBoardMeta } from '@lib/models';
 import { InkBoardsService, InkDatabaseService } from '@lib/services';
 import { FetchAllBoards, FetchAllBuckets, FetchAllDrops, RemoveAllBuckets, RemoveAllDrops } from '@store/actions';
 import { BoardsState } from '@store/states';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'inkapp-home-page',
   templateUrl: './home.page.html'
 })
 export class HomePage implements OnInit, OnDestroy {
-  @Select(BoardsState) boards$: InkBoardMeta[];
+  @Select(BoardsState) boards$: Observable<InkBoardMeta[]>;
   constructor(private _store: Store) {}
 
   ngOnInit() {

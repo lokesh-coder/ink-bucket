@@ -10,8 +10,7 @@ import { children } from '@lib/operators';
 
 @Component({
   selector: 'inkapp-bucket',
-  templateUrl: './bucket.component.html',
-  styles: []
+  templateUrl: './bucket.component.html'
 })
 export class BucketComponent implements OnInit {
   @Input() index: number;

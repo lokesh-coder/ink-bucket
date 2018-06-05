@@ -1,8 +1,16 @@
 import { State, Action, StateContext, Selector, NgxsOnInit } from '@ngxs/store';
 import { InkAppSettingsItem, InkAppSettings } from '@lib/models';
-import { UpdateSettingsItem, PopulateSettings, MergeSettings } from '@store/actions';
+import {
+  UpdateSettingsItem,
+  PopulateSettings,
+  MergeSettings,
+  FetchRemoteGist,
+  CreateRemoteGist,
+  UpdateRemoteGist
+} from '@store/actions';
 import { SelectMultipleControlValueAccessor } from '@angular/forms';
-import { InkSettingsService } from '@lib/services';
+import { InkSettingsService, InkGistService } from '@lib/services';
+import { tap } from 'rxjs/operators';
 
 @State<Partial<InkAppSettings>>({
   name: 'settings',
@@ -14,7 +22,7 @@ export class SettingsState implements NgxsOnInit {
     return state.filter(s => s.key === 'view')[0].value;
   }
 
-  constructor(private _service: InkSettingsService) {}
+  constructor(private _service: InkSettingsService, private _gistService: InkGistService) {}
   ngxsOnInit(ctx: StateContext<InkAppSettings>) {
     return this._service.getAll().then(settings => {
       ctx.dispatch(new MergeSettings(settings));
@@ -44,4 +52,20 @@ export class SettingsState implements NgxsOnInit {
     const state = ctx.getState();
     ctx.setState([...state, ...action.settings]);
   }
+
+  @Action(FetchRemoteGist)
+  fetchRemoteGist(ctx: StateContext<InkAppSettings>, action: FetchRemoteGist) {
+    return this._gistService.get();
+  }
+
+  // @Action(CreateRemoteGist)
+  // createRemoteGist(ctx: StateContext<InkAppSettings>, action: CreateRemoteGist) {
+  //   const state = ctx.getState();
+  //   ctx.setState([...state, ...action.settings]);
+  // }
+  // @Action(UpdateRemoteGist)
+  // updateRemoteGist(ctx: StateContext<InkAppSettings>, action: UpdateRemoteGist) {
+  //   const state = ctx.getState();
+  //   ctx.setState([...state, ...action.settings]);
+  // }
 }

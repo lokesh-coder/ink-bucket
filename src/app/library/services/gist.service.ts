@@ -59,7 +59,11 @@ export class InkGistService {
           return this._http.get(`https://api.github.com/gists/${gist.id}`);
         }
         return of(null);
-      })
+      }),
+      map(gist => {
+        return gist.files['inkapp-database.json'].content;
+      }),
+      map(gist => JSON.parse(gist))
     );
   }
 

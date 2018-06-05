@@ -22,12 +22,10 @@ export class DropComponent implements OnInit, OnDestroy {
   constructor(private _store: Store, private _colorPickerService: InkColorPickerService, private _elRef: ElementRef) {}
 
   ngOnInit() {
-    console.log('drop');
     this._colorPickerService.configure(this._elRef);
     this.drop = this.data;
   }
   openColorPicker() {
-    console.log('hsl');
     this.colorPickerRef = this._colorPickerService.getRef();
     if (this.data.meta.hsl) {
       this.colorPickerRef.instance.color = this.data.meta.hsl;
@@ -43,7 +41,6 @@ export class DropComponent implements OnInit, OnDestroy {
     });
     this._colorPickerService.backdropClick().subscribe(b => {
       if (this.drop.name !== this.data.name) {
-        console.log('backdrop clocked update', this.data);
         this._store.dispatch(new UpdateDrop(this.drop));
       }
     });
