@@ -1,16 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
-import { HomePage } from './pages/home/home.component';
-import { SettingsPage } from './pages/settings/settings.component';
-import { ExportPage } from './pages/export/export.component';
-import { RedirectPage } from './pages/redirect/redirect.component';
+import { NotFoundPage, RedirectPage, ExportPage, SettingsPage, HomePage } from '@root/pages';
 
 const routes: Routes = [
   { path: '', component: HomePage },
   { path: 'settings', component: SettingsPage },
   { path: 'export', component: ExportPage },
-  { path: 'redirect', component: RedirectPage }
+  { path: 'redirect', component: RedirectPage },
+  { path: '*', component: NotFoundPage }
 ];
 
 @NgModule({
@@ -18,5 +15,3 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class RoutingModule {}
-
-export const routedComponents = [HomePage];

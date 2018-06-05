@@ -1,7 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": "./src",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
@@ -9,10 +9,15 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "target": "es5",
-    "paths": {
-      "nedb": ["./node_modules/nedb/browser-version/out/nedb.min.js"]
-    },
     "typeRoots": ["node_modules/@types"],
-    "lib": ["es2017", "dom"]
+    "lib": ["es2017", "dom"],
+    "paths": {
+      "@services/*": ["app/library/services/*"],
+      "@elements/*": ["app/library/elements/*"],
+      "@components/*": ["app/library/components/*"],
+      "@store/*": ["app/library/store/*"],
+      "@lib/*": ["app/library/*"],
+      "@root/*": ["app/*"]
+    }
   }
 }
