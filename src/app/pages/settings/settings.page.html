@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="col-md-8 mx-auto">
+    <h3 class="ink-page-title mb-5">
+      <i class="ink-icon icon-settings"></i> Settings</h3>
+    <inkapp-action-item-el>
+      <h5>Colors view</h5>
+      <p>Change the look of an ink color</p>
+      <select name="current-view" [(ngModel)]="currentView" class="custom-select" (change)="onViewChange()">
+        <option [value]="'default'">Default</option>
+        <option [value]="'thin'">Thin</option>
+      </select>
+    </inkapp-action-item-el>
+
+  </div>
+</div>
+
+<div class="container mt-5">
+  <div class="col-md-8 mx-auto">
+    <h3 class="ink-page-title mb-5">
+      <i class="ink-icon icon-settings"></i> Sync </h3>
+    <inkapp-user-card-el *ngIf="connectedToGithub && userData" [data]="userData"></inkapp-user-card-el>
+    <inkapp-action-item-el>
+      <h5>Sync</h5>
+      <p>Save data in github gists</p>
+      <a (click)="requestAuth()" class="btn btn-outline-primary" *ngIf="!connectedToGithub">Connect to github</a>
+      <a (click)="disconnect()" class="btn btn-link text-danger" *ngIf="connectedToGithub">Disconnect github</a>
+    </inkapp-action-item-el>
+
+    <inkapp-action-item-el>
+      <h5>Upload</h5>
+      <p>Save local database to gists</p>
+      <a (click)="uploadToGists()" class="btn btn-outline-success">save</a>
+    </inkapp-action-item-el>
+
+    <inkapp-action-item-el>
+      <h5>Load database</h5>
+      <p>Fetch from remote gist</p>
+      <a (click)="loadGists()" class="btn btn-outline-success">Load</a>
+    </inkapp-action-item-el>
+  </div>
+</div>
+
+
+<div class="container mt-5">
+  <div class="col-md-8 mx-auto">
+    <h3 class="ink-page-title mb-5">
+      <i class="ink-icon icon-settings"></i> Import and Export </h3>
+    <inkapp-action-item-el>
+      <h5>Export database</h5>
+      <p>JSON file with all necessary information to import</p>
+      <button class="btn btn-primary" routerLink="/export">Export</button>
+    </inkapp-action-item-el>
+    <inkapp-action-item-el>
+      <h5>Delete app data</h5>
+      <p>Will clear all data and reset to initial</p>
+      <button class="btn btn-danger" (click)="deleteDatabase()">delete</button>
+    </inkapp-action-item-el>
+  </div>
+</div>

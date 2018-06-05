@@ -3,6 +3,6 @@
   "rules": {
     "directive-selector": [true, "attribute", "inkapp", "camelCase"],
     "component-selector": [true, "element", "inkapp", "kebab-case"],
-    "component-class-suffix": [true, "Page", "Component", "App"]
+    "component-class-suffix": [true, "Page", "Component", "App", "Element"]
   }
 }

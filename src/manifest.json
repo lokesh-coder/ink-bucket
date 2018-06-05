@@ -1,7 +1,7 @@
 {
   "name": "ink-bucket",
   "short_name": "ink-bucket",
-  "theme_color": "#1976d2",
+  "theme_color": "#6b66ca",
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "/",
