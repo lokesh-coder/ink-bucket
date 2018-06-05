@@ -1,4 +1,4 @@
-import { InkAppSettings } from '@lib/models';
+import { InkAppSettings, InkAppSettingsItem, InkSettingsMeta } from '@lib/models';
 
 export class PopulateSettings {
   static readonly type = '[Settings] load all settings';
@@ -10,9 +10,19 @@ export class MergeSettings {
   constructor(public settings: InkAppSettings) {}
 }
 
+export class CreateSettingsItem {
+  static readonly type = '[Settings] create settings';
+  constructor(public key: string, public value: any) {}
+}
+
+export class AddSettingsItem {
+  static readonly type = '[Settings] add settings';
+  constructor(public settingsItem: InkSettingsMeta) {}
+}
+
 export class UpdateSettingsItem {
   static readonly type = '[Settings] update';
-  constructor(public key: string, public value: string) {}
+  constructor(public key: string, public value: any) {}
 }
 
 export class DeleteSettingsItem {

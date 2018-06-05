@@ -9,7 +9,7 @@ export const SettingsSchema = {
       type: 'string'
     },
     value: {
-      type: 'string'
+      type: ['string', 'boolean', 'number', 'integer', 'null', 'array', 'object']
     }
   },
   required: ['key', 'value']

@@ -6,11 +6,13 @@ import {
   MergeSettings,
   FetchRemoteGist,
   CreateRemoteGist,
-  UpdateRemoteGist
+  UpdateRemoteGist,
+  AddSettingsItem,
+  CreateSettingsItem
 } from '@store/actions';
 import { SelectMultipleControlValueAccessor } from '@angular/forms';
 import { InkSettingsService, InkGistService } from '@lib/services';
-import { tap } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
 
 @State<Partial<InkAppSettings>>({
   name: 'settings',
@@ -43,6 +45,19 @@ export class SettingsState implements NgxsOnInit {
     });
   }
 
+  @Action(CreateSettingsItem)
+  createSettingsItem(ctx: StateContext<InkAppSettings>, action: CreateSettingsItem) {
+    this._service.add(action.key, action.value).then(settingsItem => {
+      ctx.dispatch(new AddSettingsItem({ key: action.key, value: action.value }));
+    });
+  }
+
+  @Action(AddSettingsItem)
+  addSettingsItem(ctx: StateContext<InkAppSettings>, action: AddSettingsItem) {
+    const state = ctx.getState();
+    ctx.setState([...state, action.settingsItem]);
+  }
+
   @Action(PopulateSettings)
   populateSettings(ctx: StateContext<InkAppSettings>, action: PopulateSettings) {
     ctx.setState(action.settings);
@@ -58,14 +73,17 @@ export class SettingsState implements NgxsOnInit {
     return this._gistService.get();
   }
 
-  // @Action(CreateRemoteGist)
-  // createRemoteGist(ctx: StateContext<InkAppSettings>, action: CreateRemoteGist) {
-  //   const state = ctx.getState();
-  //   ctx.setState([...state, ...action.settings]);
-  // }
-  // @Action(UpdateRemoteGist)
-  // updateRemoteGist(ctx: StateContext<InkAppSettings>, action: UpdateRemoteGist) {
-  //   const state = ctx.getState();
-  //   ctx.setState([...state, ...action.settings]);
-  // }
+  @Action(CreateRemoteGist)
+  createRemoteGist(ctx: StateContext<InkAppSettings>, action: CreateRemoteGist) {
+    return this._gistService
+      .create(action.gistData)
+      .pipe(tap(gist => ctx.dispatch(new CreateSettingsItem('gist', gist))));
+  }
+
+  @Action(UpdateRemoteGist)
+  updateRemoteGist(ctx: StateContext<InkAppSettings>, action: UpdateRemoteGist) {
+    return this._gistService
+      .edit(action.gistId, action.gistData)
+      .pipe(tap(gist => ctx.dispatch(new UpdateSettingsItem('gist', gist))));
+  }
 }

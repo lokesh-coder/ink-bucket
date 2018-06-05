@@ -13,42 +13,20 @@ export class InkGistService {
   constructor(private _http: HttpClient, private _utilityService: InkUtilsService) {}
   create(data) {
     return this._http
-      .post('https://api.github.com/gists', {
-        description: GIST_NAME,
-        public: false,
-        files: {
-          'inkapp-database.json': {
-            content: JSON.stringify(data, null, ' ')
-          },
-          'last-sync.json': {
-            content: JSON.stringify(this._utilityService.getCurrentStatus(), null, ' ')
-          }
-        }
-      })
+      .post('https://api.github.com/gists', this._getGistPostData(data))
       .pipe(map(gist => this._getGistBasicData(gist)));
   }
 
-  edit(gistId, data) {
-    return this._http
-      .patch(`https://api.github.com/gists/${gistId}`, {
-        files: {
-          'inkapp-database.json': {
-            content: JSON.stringify(data, null, ' ')
-          },
-          'last-sync.json': {
-            content: JSON.stringify(this._utilityService.getCurrentStatus(), null, ' ')
-          }
+  edit(gistId: string, gistData: object) {
+    return this._http.patch(`https://api.github.com/gists/${gistId}`, this._getGistPostData(gistData)).pipe(
+      map(gist => this._getGistBasicData(gist)),
+      catchError(err => {
+        if (err.status === 404) {
+          return this.create(gistData);
         }
+        return of(new Error('Something went wrong!'));
       })
-      .pipe(
-        map(gist => this._getGistBasicData(gist)),
-        catchError(err => {
-          if (err.status === 404) {
-            return this.create(data);
-          }
-          return of(new Error('Something went wrong!'));
-        })
-      );
+    );
   }
 
   get() {
@@ -78,6 +56,19 @@ export class InkGistService {
       owner_img: gist.owner.avatar_url,
       owner_name: gist.owner.login,
       owner_profile: gist.owner.html_url
+    };
+  }
+
+  private _getGistPostData(gistData) {
+    return {
+      files: {
+        'inkapp-database.json': {
+          content: JSON.stringify(gistData, null, ' ')
+        },
+        'last-sync.json': {
+          content: JSON.stringify(this._utilityService.getCurrentStatus(), null, ' ')
+        }
+      }
     };
   }
 }

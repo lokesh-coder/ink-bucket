@@ -28,7 +28,7 @@ export interface InkDropMeta {
 }
 export interface InkSettingsMeta {
   key: string;
-  value: string;
+  value: any;
   _id?: string;
 }
 
@@ -45,7 +45,7 @@ export type InkAppSettings = InkAppSettingsItem[];
 
 export interface InkAppSettingsItem {
   key: string;
-  value: string;
+  value: any;
 }
 
 /* doc methods */

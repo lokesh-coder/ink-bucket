@@ -4,15 +4,21 @@ import merge from 'deepmerge';
 import { environment } from '../../../environments/environment';
 import { InkAppSettingsItem, InkGist } from '@lib/models';
 import { InkDatabaseService, InkSettingsService, InkGithubService, InkGistService } from '@lib/services';
-import { PopulateSettings, UpdateSettingsItem, MergeSettings, FetchRemoteGist } from '@store/actions';
+import {
+  PopulateSettings,
+  UpdateSettingsItem,
+  MergeSettings,
+  FetchRemoteGist,
+  CreateRemoteGist,
+  UpdateRemoteGist
+} from '@store/actions';
 import { GITHUB_ACCESS_TOKEN_NAME } from '../../ink.config';
 import { Observable } from 'rxjs';
 import { SettingsState } from '@store/states';
 
 @Component({
   selector: 'inkapp-settings-page',
-  templateUrl: './settings.page.html',
-  styles: []
+  templateUrl: './settings.page.html'
 })
 export class SettingsPage implements OnInit {
   @Select(SettingsState.view) view$: Observable<string>;
@@ -31,7 +37,7 @@ export class SettingsPage implements OnInit {
     this._settingsService.getAll().then(doc => {
       const user = doc.filter(s => s.key === 'gist');
       if (user.length > 0) {
-        this.userData = JSON.parse(user[0].value);
+        this.userData = user[0].value;
       }
       this._store.dispatch(new MergeSettings(doc));
     });
@@ -47,23 +53,13 @@ export class SettingsPage implements OnInit {
     const data = await db.dump();
     const gist = await db.settings.findOne({ key: 'gist' }).exec();
     if (gist) {
-      const gistData = JSON.parse(gist.value);
-      this._gistService.edit(gistData.id, data).subscribe(
-        res => {
-          this._settingsService.update('gist', JSON.stringify(res)).then(doc => {
-            console.log('settings updated with sync', doc);
-          });
-        },
-        err => {
-          console.log('something went wrong', err);
-        }
-      );
+      this._store.dispatch(new UpdateRemoteGist(gist.value.id, data)).subscribe(res => {
+        console.log('hooohoo remote gist is updated!');
+      });
       return;
     }
-    this._gistService.create(data).subscribe(res => {
-      this._settingsService.add('gist', JSON.stringify(res)).then(doc => {
-        console.log('settings updatedw ith sync', doc);
-      });
+    this._store.dispatch(new CreateRemoteGist(data)).subscribe(res => {
+      console.log('hooohoo remote gist ready!');
     });
   }
   async loadGists() {
