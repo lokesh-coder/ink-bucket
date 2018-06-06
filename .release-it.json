@@ -1,14 +1,14 @@
 {
   "non-interactive": false,
-  "dry-run": true,
-  "verbose": false,
+  "dry-run": false,
+  "verbose": true,
   "force": false,
   "pkgFiles": [
     "package.json"
   ],
   "preReleaseId": "beta",
-  "buildCommand": false,
-  "requireCleanWorkingDir": true,
+  "buildCommand": "ng build --prod",
+  "requireCleanWorkingDir": false,
   "requireUpstream": false,
   "increment": "conventional:angular",
   "beforeChangelogCommand": "conventional-changelog -p angular -i CHANGELOG.md -s",
@@ -17,7 +17,7 @@
   "src": {
     "commit": true,
     "commitMessage": "Release %s",
-    "commitArgs": "",
+    "commitArgs": "--no-verify",
     "tag": true,
     "tagName": "%s",
     "tagAnnotation": "Release %s",
@@ -48,20 +48,20 @@
   "dist": {
     "repo": "git@github.com:lokesh-coder/ink-bucket.git#gh-pages",
     "stageDir": ".stage",
-    "baseDir": "dist",
+    "baseDir": "dist/ink-bucket",
     "files": [
       "**/*"
     ],
     "pkgFiles": null,
     "commit": true,
     "commitMessage": "Release %s",
-    "commitArgs": "",
+    "commitArgs": "--no-verify",
     "tag": true,
     "tagName": "%s",
     "tagAnnotation": "Release %s",
     "push": true,
     "pushArgs": "",
-    "beforeStageCommand": "cat ../gh-pages/index.yml ../README.md > index.md && cp ../assets/* ./assets",
+    "beforeStageCommand": false,
     "afterReleaseCommand": false,
     "addUntrackedFiles": false,
     "github": {
