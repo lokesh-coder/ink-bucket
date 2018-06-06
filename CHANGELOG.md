@@ -1,3 +1,8 @@
+<a name="1.0.0-beta.4"></a>
+# [1.0.0-beta.4](https://github.com/lokesh-coder/ink-bucket/compare/1.0.0-beta.3...v1.0.0-beta.4) (2018-06-06)
+
+
+
 <a name="1.0.0-beta.3"></a>
 # [1.0.0-beta.3](https://github.com/lokesh-coder/ink-bucket/compare/v1.0.0-beta.2...v1.0.0-beta.3) (2018-06-06)
 
