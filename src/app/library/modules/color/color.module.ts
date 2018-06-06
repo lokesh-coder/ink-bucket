@@ -10,17 +10,17 @@ import { ColorGithubModule } from 'ngx-color/github'; // <color-github></color-g
 import { ColorHueModule } from 'ngx-color/hue'; // <color-hue-picker></color-hue-picker>
 import { ColorMaterialModule } from 'ngx-color/material'; // <color-material></color-material>
 import { ColorPhotoshopModule } from 'ngx-color/photoshop'; // <color-photoshop></color-photoshop>
-import { ColorSketchModule } from 'ngx-color/sketch'; // <color-sketch></color-sketch>
+import { ColorSketchModule, SketchComponent } from 'ngx-color/sketch'; // <color-sketch></color-sketch>
 import { ColorSliderModule } from 'ngx-color/slider'; // <color-slider></color-slider>
 import { ColorSwatchesModule } from 'ngx-color/swatches'; // <color-swatches></color-swatches>
 import { ColorTwitterModule } from 'ngx-color/twitter'; // <color-twitter></color-twitter>
-import { ChromeColorPickerComponent } from './components/chrome-color-picker.component';
+import { ColorPickerComponent } from './components/color-picker/color-picker.component';
 
 @NgModule({
-  imports: [CommonModule, ColorChromeModule],
-  exports: [ColorChromeModule, ChromeColorPickerComponent],
-  declarations: [ChromeColorPickerComponent],
+  imports: [CommonModule, ColorSketchModule],
+  exports: [ColorChromeModule, ColorPickerComponent],
+  declarations: [ColorPickerComponent],
   providers: [],
-  entryComponents: [ChromeComponent, ChromeColorPickerComponent]
+  entryComponents: [SketchComponent, ColorPickerComponent]
 })
 export class ColorModule {}

@@ -2,15 +2,15 @@ import { Injectable, ElementRef, ComponentRef } from '@angular/core';
 import { OverlayConfig, Overlay, OverlayRef, CloseScrollStrategy } from '@angular/cdk/overlay';
 import { Element } from '@angular/compiler';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { ChromeComponent } from 'ngx-color/chrome';
 import { tap } from 'rxjs/operators';
+import { ColorPickerComponent } from '@lib/modules/color/components/color-picker/color-picker.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InkColorPickerService {
-  colorPickerRef: ComponentRef<ChromeComponent>;
-  colorPanelPortal: ComponentPortal<ChromeComponent>;
+  colorPickerRef: ComponentRef<ColorPickerComponent>;
+  colorPanelPortal: ComponentPortal<ColorPickerComponent>;
   overlayRef: OverlayRef;
   config: OverlayConfig;
   constructor(private overlay: Overlay) {
@@ -24,7 +24,7 @@ export class InkColorPickerService {
       .position()
       .connectedTo(el, { originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' });
     this.overlayRef = this.overlay.create(this.config);
-    this.colorPanelPortal = new ComponentPortal(ChromeComponent);
+    this.colorPanelPortal = new ComponentPortal(ColorPickerComponent);
   }
   getRef() {
     this.colorPickerRef = this.overlayRef.attach(this.colorPanelPortal);
