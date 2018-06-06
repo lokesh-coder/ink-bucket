@@ -4,9 +4,11 @@
     {
       "name": "feature/refactor",
       "base": "develop"
-    },
+    }
+  ],
+  "gitflow4code.releases": [
     {
-      "name": "feature/better-color-picker",
+      "name": "release/v1beta3",
       "base": "develop"
     }
   ]
