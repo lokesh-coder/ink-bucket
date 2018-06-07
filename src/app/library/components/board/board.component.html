@@ -1,3 +1,8 @@
-<ng-container *ngFor="let bucket of buckets$|async; index as i">
-  <inkapp-bucket [data]="bucket" [index]="i+1" class="ink-color-container" [ngClass]="'ink-view-'+(view$|async)"></inkapp-bucket>
+<ng-container *ngIf="buckets$|async as allBuckets">
+  <ng-container *ngFor="let bucket of allBuckets; index as i">
+    <inkapp-bucket [data]="bucket" [index]="i+1" class="ink-color-container" [ngClass]="'ink-view-'+(view$|async)"></inkapp-bucket>
+  </ng-container>
+  <inkapp-billboard-el *ngIf="allBuckets.length==0" heading="Oops!" subHeading="Looks like there is no bucktes!">
+    <button class="btn btn-success" (click)="createBucket()">Create new bucket</button>
+  </inkapp-billboard-el>
 </ng-container>
