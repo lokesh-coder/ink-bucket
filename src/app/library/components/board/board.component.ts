@@ -6,6 +6,8 @@ import { InkBoardMeta, InkBucketMeta, InkBuckets, InkAppSettings, InkAppSettings
 import { InkBucketsService } from '@lib/services';
 import { BucketsState, SettingsState } from '@store/states';
 import { children } from '@lib/operators';
+import { CreateBucket } from '@store/actions';
+import { DEFAULT_BUCKET_NAME } from '@root/ink.config';
 
 @Component({
   selector: 'inkapp-board',
@@ -19,5 +21,9 @@ export class BoardComponent implements OnInit {
 
   ngOnInit() {
     this.buckets$ = this._store.select(s => s.buckets).pipe(children(this.data._id, 'boardId'));
+  }
+
+  createBucket() {
+    this._store.dispatch(new CreateBucket({ name: DEFAULT_BUCKET_NAME, boardId: this.data._id }));
   }
 }

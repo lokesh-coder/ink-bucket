@@ -9,7 +9,7 @@ import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { BoardComponent, BucketComponent, DropComponent, HeaderComponent } from '@lib/components';
-import { ActionItemElement, EditableTitleElement, UserCardElement } from '@lib/elements';
+import { ActionItemElement, EditableTitleElement, UserCardElement, BillboardElement } from '@lib/elements';
 import { ExportPage, HomePage, NotFoundPage, RedirectPage, SettingsPage } from './pages';
 import { BoardsState, BucketsState, DropsState, SettingsState } from '@lib/store/states';
 import { InkApp } from './ink.component';
@@ -41,7 +41,7 @@ export const MODULES = [
   })
 ];
 export const COMPONENTS = [InkApp, HeaderComponent, BoardComponent, BucketComponent, DropComponent];
-export const ELEMENTS = [ActionItemElement, EditableTitleElement, UserCardElement];
+export const ELEMENTS = [ActionItemElement, EditableTitleElement, UserCardElement, BillboardElement];
 export const PAGES = [HomePage, SettingsPage, ExportPage, RedirectPage, NotFoundPage];
 
 @NgModule({

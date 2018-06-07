@@ -4,6 +4,10 @@
     {
       "name": "feature/refactor",
       "base": "develop"
+    },
+    {
+      "name": "feature/empty-state",
+      "base": "develop"
     }
   ],
   "gitflow4code.releases": [
