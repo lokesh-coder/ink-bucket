@@ -1,6 +1,6 @@
 {
   "name": "ink-bucket",
-  "version": "1.0.0-beta.4",
+  "version": "1.0.0-beta.2",
   "main": "main.js",
   "scripts": {
     "ng": "ng",
@@ -80,6 +80,7 @@
     "@types/node": "~8.9.4",
     "@types/pouchdb": "^6.3.2",
     "codelyzer": "~4.2.1",
+    "conventional-changelog": "^2.0.1",
     "dotenv": "^5.0.1",
     "electron": "^2.0.2",
     "github-release-notes": "^0.15.0",
