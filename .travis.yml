@@ -1,8 +1,20 @@
 language: node_js
 node_js:
-  - "6"
-  - "8"
+  - "9"
   - "10"
+branches:
+  only:
+  - /^release\/v\d+\.\d+(\.\d+)?(-\S*)?$/
+script:
+- npm run release-it
 cache:
   directories:
     - "node_modules"
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN 
+  keep-history: true
+  local-dir: "dist"
+  on:
+    branch: master
