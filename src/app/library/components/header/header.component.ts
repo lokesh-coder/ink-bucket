@@ -4,6 +4,7 @@ import { map, tap, filter } from 'rxjs/operators';
 import { InkBucketsService } from '@lib/services';
 import { CreateBucket } from '@store/actions';
 import { BoardsState } from '@store/states';
+import { DEFAULT_BUCKET_NAME } from '@root/ink.config';
 
 @Component({
   selector: 'inkapp-header',
@@ -14,6 +15,6 @@ export class HeaderComponent {
   constructor(private _store: Store, private _bucketService: InkBucketsService) {}
   newBucket() {
     const defaultBoardId = this._store.selectSnapshot(BoardsState.defaultBoard);
-    this._store.dispatch(new CreateBucket({ name: 'Hello-123', boardId: defaultBoardId }));
+    this._store.dispatch(new CreateBucket({ name: DEFAULT_BUCKET_NAME, boardId: defaultBoardId }));
   }
 }

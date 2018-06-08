@@ -1,0 +1,14 @@
+.ink-billboard {
+  text-align: center;
+  > .heading {
+    font-size: 3rem;
+    font-weight: 300;
+    color: clr('heading');
+  }
+  > .sub-heading {
+    color: clr('para');
+    margin: 1rem 0;
+  }
+  > .action {
+  }
+}
