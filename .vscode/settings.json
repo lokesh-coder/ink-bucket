@@ -15,5 +15,11 @@
       "name": "release/v1beta3",
       "base": "develop"
     }
+  ],
+  "gitflow4code.releases": [
+    {
+      "name": "release/v1beta3",
+      "base": "develop"
+    }
   ]
 }
