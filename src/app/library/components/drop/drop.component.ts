@@ -9,6 +9,7 @@ import { UpdateDrop } from '@store/actions';
 import { InkColorPickerService } from '@services/color-picker.service';
 import { SketchComponent } from 'ngx-color/sketch';
 import { ColorPickerComponent } from '@lib/modules/color/components/color-picker/color-picker.component';
+import { DEFAULT_COLOR } from '@root/ink.config';
 
 @Component({
   selector: 'inkapp-drop',
@@ -28,9 +29,7 @@ export class DropComponent implements OnInit, OnDestroy {
   }
   openColorPicker() {
     this.colorPickerRef = this._colorPickerService.getRef();
-    if (this.data.meta.hsl) {
-      this.colorPickerRef.instance.color = this.data.meta.hsl;
-    }
+    this.colorPickerRef.instance.color = this.data.meta.hsl ? this.data.meta.hsl : DEFAULT_COLOR;
     this.colorPickerRef.instance.onChange.pipe(map(c => c.color)).subscribe(color => {
       this.drop = {
         name: color.hex,

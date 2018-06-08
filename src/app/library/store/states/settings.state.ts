@@ -18,18 +18,13 @@ import { tap, map } from 'rxjs/operators';
   name: 'settings',
   defaults: [{ key: 'view', value: 'thin' }]
 })
-export class SettingsState implements NgxsOnInit {
+export class SettingsState {
   @Selector()
   static view(state) {
     return state.filter(s => s.key === 'view')[0].value;
   }
 
   constructor(private _service: InkSettingsService, private _gistService: InkGistService) {}
-  ngxsOnInit(ctx: StateContext<InkAppSettings>) {
-    return this._service.getAll().then(settings => {
-      ctx.dispatch(new MergeSettings(settings));
-    });
-  }
 
   @Action(UpdateSettingsItem)
   updateSettings(ctx: StateContext<InkAppSettings>, action: UpdateSettingsItem) {

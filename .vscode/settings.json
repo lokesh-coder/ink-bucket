@@ -6,7 +6,7 @@
       "base": "develop"
     },
     {
-      "name": "feature/empty-state",
+      "name": "feature/circle-view",
       "base": "develop"
     }
   ],
