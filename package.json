@@ -17,8 +17,6 @@
     "electron-build": "ng build --prod && electron .",
     "server:prod": "http-server dist/ink-bucket -p 1234 -s -o --cors",
     "run:prod": "npm run build:prod && npm run server:prod",
-    "release": "gren release --token=TOKEN --data-source=commits --override",
-    "generate:changelog": "gren changelog --token=TOKEN --data-source=commits --override",
     "release-it": "release-it --preRelease=beta"
   },
   "private": true,
