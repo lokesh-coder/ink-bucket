@@ -1,0 +1,40 @@
+{
+  "non-interactive": true,
+  "dry-run": false,
+  "verbose": false,
+  "force": false,
+  "pkgFiles": ["package.json"],
+  "preReleaseId": "beta",
+  "buildCommand": "ng build --prod",
+  "requireCleanWorkingDir": false,
+  "requireUpstream": false,
+  "increment": "conventional:angular",
+  "beforeChangelogCommand": "conventional-changelog -p angular -i CHANGELOG.md -s",
+  "afterReleaseCommand": "echo Successfully released ${version} to ${dist.repo}.",
+  "changelogCommand": "conventional-changelog -p angular | tail -n +3",
+  "safeBump": true,
+  "src": {
+    "commit": true,
+    "commitMessage": "Release %s",
+    "commitArgs": "--no-verify",
+    "tag": true,
+    "tagName": "v%s",
+    "tagAnnotation": "Release %s",
+    "push": true,
+    "pushArgs": "",
+    "pushRepo": "origin master",
+    "beforeStartCommand": false,
+    "afterReleaseCommand": false,
+    "addUntrackedFiles": false
+  },
+  "npm": {
+    "publish": false
+  },
+  "github": {
+    "release": true,
+    "releaseName": "Release %s",
+    "preRelease": true,
+    "tokenRef": "GITHUB_TOKEN",
+    "assets": null
+  }
+}

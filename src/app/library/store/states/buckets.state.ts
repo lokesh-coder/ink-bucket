@@ -14,14 +14,14 @@ import {
   UpdateBucket,
   PatchBucket
 } from '@store/actions';
-import { InkBucketsService } from '@lib/services';
+import { InkBucketsService, InkUtilsService } from '@lib/services';
 
 @State<InkBuckets>({
   name: 'buckets',
   defaults: []
 })
 export class BucketsState implements NgxsOnInit {
-  constructor(private _service: InkBucketsService) {}
+  constructor(private _service: InkBucketsService, private _utilityService: InkUtilsService) {}
 
   async ngxsOnInit(ctx: StateContext<InkBuckets>) {
     const buckets = await this._service.getAll();
@@ -42,6 +42,7 @@ export class BucketsState implements NgxsOnInit {
 
   @Action(CreateBucket)
   createBucket(ctx: StateContext<InkBuckets>, action: CreateBucket) {
+    action.bucketData.name += this._utilityService.getRandomNumber();
     return this._service.create(action.bucketData).then(bucket => {
       ctx.dispatch(new AddBucket(bucket));
     });

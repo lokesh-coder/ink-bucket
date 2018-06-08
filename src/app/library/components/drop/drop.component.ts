@@ -7,7 +7,8 @@ import { InkDropMeta } from '@lib/models';
 import { InkDropsService } from '@lib/services';
 import { UpdateDrop } from '@store/actions';
 import { InkColorPickerService } from '@services/color-picker.service';
-import { ChromeComponent } from 'ngx-color/chrome';
+import { SketchComponent } from 'ngx-color/sketch';
+import { ColorPickerComponent } from '@lib/modules/color/components/color-picker/color-picker.component';
 
 @Component({
   selector: 'inkapp-drop',
@@ -17,7 +18,7 @@ import { ChromeComponent } from 'ngx-color/chrome';
 export class DropComponent implements OnInit, OnDestroy {
   @Input() data: InkDropMeta;
   @Input() bucketId: string;
-  colorPickerRef: ComponentRef<ChromeComponent>;
+  colorPickerRef: ComponentRef<ColorPickerComponent>;
   drop: InkDropMeta = null;
   constructor(private _store: Store, private _colorPickerService: InkColorPickerService, private _elRef: ElementRef) {}
 
