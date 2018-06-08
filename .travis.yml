@@ -5,6 +5,7 @@ branches:
   only:
   - /^release\/.+$/
 script:
+- npm i conventional-changelog --global
 - npm run release-it
 cache:
   directories:
