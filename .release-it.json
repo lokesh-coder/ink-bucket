@@ -34,52 +34,7 @@
     "release": true,
     "releaseName": "Release %s",
     "preRelease": true,
-    "draft": false,
     "tokenRef": "GITHUB_TOKEN",
-    "assets": null,
-    "host": null,
-    "timeout": 0
-  },
-  "dist": {
-    "repo": "git@github.com:lokesh-coder/ink-bucket.git#gh-pages",
-    "stageDir": ".stage",
-    "baseDir": "dist/ink-bucket",
-    "files": ["**/*"],
-    "pkgFiles": null,
-    "commit": true,
-    "commitMessage": "Release %s",
-    "commitArgs": "--no-verify",
-    "tag": false,
-    "tagName": "v%s",
-    "tagAnnotation": "Release %s",
-    "push": true,
-    "pushArgs": "",
-    "beforeStageCommand": false,
-    "afterReleaseCommand": false,
-    "addUntrackedFiles": false,
-    "github": {
-      "release": false
-    },
-    "npm": {
-      "publish": false
-    }
-  },
-  "prompt": {
-    "src": {
-      "status": false,
-      "commit": true,
-      "tag": true,
-      "push": true,
-      "release": true,
-      "publish": true
-    },
-    "dist": {
-      "status": false,
-      "commit": true,
-      "tag": false,
-      "push": true,
-      "release": false,
-      "publish": false
-    }
+    "assets": null
   }
 }
