@@ -8,11 +8,13 @@ import {
   CreateRemoteGist,
   UpdateRemoteGist,
   AddSettingsItem,
-  CreateSettingsItem
+  CreateSettingsItem,
+  PopulateDefaultSettings
 } from '@store/actions';
 import { SelectMultipleControlValueAccessor } from '@angular/forms';
 import { InkSettingsService, InkGistService } from '@lib/services';
 import { tap, map } from 'rxjs/operators';
+import { DEFAULT_SETTINGS } from '@root/ink.config';
 
 @State<Partial<InkAppSettings>>({
   name: 'settings',
@@ -25,10 +27,13 @@ export class SettingsState implements NgxsOnInit {
   }
 
   constructor(private _service: InkSettingsService, private _gistService: InkGistService) {}
-  ngxsOnInit(ctx: StateContext<InkAppSettings>) {
-    return this._service.getAll().then(settings => {
-      ctx.dispatch(new MergeSettings(settings));
-    });
+
+  async ngxsOnInit(ctx: StateContext<InkAppSettings>) {
+    const defaultSettings = await this._service.getAll();
+    if (defaultSettings.length === 0) {
+      return ctx.dispatch(new PopulateDefaultSettings(DEFAULT_SETTINGS));
+    }
+    ctx.dispatch(new PopulateSettings(defaultSettings));
   }
 
   @Action(UpdateSettingsItem)
@@ -56,6 +61,13 @@ export class SettingsState implements NgxsOnInit {
   addSettingsItem(ctx: StateContext<InkAppSettings>, action: AddSettingsItem) {
     const state = ctx.getState();
     ctx.setState([...state, action.settingsItem]);
+  }
+
+  @Action(PopulateDefaultSettings)
+  populateDefaultSettings(ctx: StateContext<InkAppSettings>, action: PopulateDefaultSettings) {
+    this._service.addAll(action.settings).then(settings => {
+      ctx.dispatch(new PopulateSettings(settings));
+    });
   }
 
   @Action(PopulateSettings)
