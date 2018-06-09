@@ -14,6 +14,13 @@ export const BucketSchema = {
     boardId: {
       type: 'string',
       ref: 'boards'
+    },
+    drops: {
+      ref: 'drops',
+      type: 'array',
+      items: {
+        type: 'string'
+      }
     }
   },
   required: ['name', 'boardId']

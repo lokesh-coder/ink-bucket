@@ -6,7 +6,8 @@ export const SettingsSchema = {
   uniqueItems: true,
   properties: {
     key: {
-      type: 'string'
+      type: 'string',
+      primary: true
     },
     value: {
       type: ['string', 'boolean', 'number', 'integer', 'null', 'array', 'object']

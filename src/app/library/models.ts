@@ -78,3 +78,5 @@ export interface InkGist {
   owner_name: string;
   owner_profile: string;
 }
+
+export type InkView = 'THIN' | 'DEFAULT' | 'CIRCLE';
