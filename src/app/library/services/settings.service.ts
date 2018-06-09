@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { InkDatabaseService } from './database.service';
+import { InkAppSettings } from '@lib/models';
 
 @Injectable({
   providedIn: 'root'
@@ -25,16 +26,26 @@ export class InkSettingsService {
 
   async update(key, value) {
     const db = await this._db.getDatabase();
-    return db.settings
-      .findOne({ key })
-      .update({ $set: { value } })
-      .catch(error => {
-        console.error('Error while updating settings!', error);
-      });
+    console.log({ key, value });
+    return db.settings.upsert({ key, value }).catch(error => {
+      console.error('Error while updating settings!', error);
+    });
   }
 
   async getAll() {
     const db = await this._db.getDatabase();
     return db.settings.find().exec();
+  }
+
+  async addAll(settings: InkAppSettings) {
+    const db = await this._db.getDatabase();
+    try {
+      for (const item of settings) {
+        await db.settings.insert({ key: item.key, value: item.value });
+      }
+      return db.settings.find().exec();
+    } catch (error) {
+      console.error('Error while adding settings!', error);
+    }
   }
 }
