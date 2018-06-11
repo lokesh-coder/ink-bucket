@@ -3,6 +3,7 @@ $size: 4rem;
 .ink-color-sticker {
   padding: 1rem;
   font-size: 1.6rem;
+  position: relative;
 
   .ink-color {
     text-align: center;
@@ -15,6 +16,7 @@ $size: 4rem;
     margin-bottom: 1rem;
     box-shadow: 0px 3px 5px clr('shadow');
     cursor: pointer;
+    position: relative;
   }
   &.-empty .ink-color {
     border: 1px dashed clr('border');
@@ -22,8 +24,9 @@ $size: 4rem;
   }
   .ink-name {
     text-transform: uppercase;
-    font-weight: 500;
-    color: transparentize($color: clr('dark'), $amount: 0.62);
-    font-size: 0.9rem;
+    font-weight: 700;
+    color: transparentize($color: clr('dark'), $amount: 0.5);
+    font-size: 0.8rem;
+    font-family: monospace;
   }
 }

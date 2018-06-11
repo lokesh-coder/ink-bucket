@@ -1,8 +1,23 @@
 language: node_js
 node_js:
-  - "6"
-  - "8"
-  - "10"
+  - "9"
+branches:
+  only:
+  - master
+before_script:
+  - npm i conventional-changelog --global
+after_success:
+  - test $TRAVIS_BRANCH = "master" && test $TRAVIS_PULL_REQUEST = "false" && npm run release-it
+script:
+  - echo "skipping..."
 cache:
   directories:
     - "node_modules"
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN 
+  keep-history: true
+  local-dir: "dist"
+  on:
+    branch: master

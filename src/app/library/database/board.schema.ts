@@ -14,6 +14,13 @@ export const BoardSchema = {
     createdAt: {
       type: 'string',
       default: '123'
+    },
+    buckets: {
+      ref: 'buckets',
+      type: 'array',
+      items: {
+        type: 'string'
+      }
     }
   },
   required: ['name']
