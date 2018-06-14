@@ -1,12 +1,15 @@
 .ink-color-container {
+  transition: all 0.5s ease;
+  border-radius: 5px;
+  border: 1px solid clr('border');
   &:hover {
-    background-color: clr('bg3');
+    box-shadow: 0px 4px 20px clr('shadow');
+    border-color: transparent;
     .--only-on-parent-hover {
       display: inherit !important;
     }
   }
   &.ink-view-thin {
-    border-bottom: 0;
     margin-bottom: 0;
     .ink-color-sticker {
       padding: 1rem 0;
