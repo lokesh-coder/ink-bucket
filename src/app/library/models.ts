@@ -25,6 +25,8 @@ export interface InkDropMeta {
   meta: any;
   displayValue: string;
   bucketId: string;
+  createdAt: number;
+  updatedAt: number;
 }
 export interface InkSettingsMeta {
   key: string;

@@ -52,7 +52,6 @@ export class DropsState {
   @Action(CreateDrop)
   createDrop(ctx: StateContext<InkDrops>, action: CreateDrop) {
     return this._service.create(action.dropData).then(drop => {
-      console.log('retrive', drop);
       ctx.dispatch(new AddDrop((drop as any)._data));
     });
   }
