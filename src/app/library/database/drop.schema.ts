@@ -17,6 +17,15 @@ export const DropSchema = {
     description: {
       type: 'string'
     },
+    createdAt: {
+      type: 'number',
+      default: 0,
+      index: true
+    },
+    updatedAt: {
+      type: 'number',
+      default: 0
+    },
     bucketId: {
       type: 'string',
       ref: 'buckets'

@@ -6,7 +6,7 @@
       "base": "develop"
     },
     {
-      "name": "feature/circle-view",
+      "name": "feature/sorting",
       "base": "develop"
     }
   ],
