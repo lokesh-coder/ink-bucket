@@ -8,6 +8,10 @@
     {
       "name": "feature/sorting",
       "base": "develop"
+    },
+    {
+      "name": "feature/test-setup",
+      "base": "develop"
     }
   ],
   "gitflow4code.releases": [
