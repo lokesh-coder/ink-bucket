@@ -29,11 +29,17 @@ export class InkDropsService {
 
   async get(bucketId) {
     const db = await this._db.getDatabase();
-    return db.drops.find({ bucketId }).exec();
+    return db.drops
+      .find({ bucketId })
+      .sort('createdAt')
+      .exec();
   }
   async getAll() {
     const db = await this._db.getDatabase();
-    return db.drops.find().exec();
+    return db.drops
+      .find()
+      .sort('createdAt')
+      .exec();
   }
 
   async deleteAllUnderBucket(bucketId: string) {

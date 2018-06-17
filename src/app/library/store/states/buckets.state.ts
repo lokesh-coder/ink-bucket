@@ -12,7 +12,9 @@ import {
   DeleteBucketsUnderBoard,
   RemoveBucketsUnderBoard,
   UpdateBucket,
-  PatchBucket
+  PatchBucket,
+  DeleteDropsUnderBucket,
+  DeleteAllDrops
 } from '@store/actions';
 import { InkBucketsService, InkUtilsService } from '@lib/services';
 
@@ -51,12 +53,13 @@ export class BucketsState implements NgxsOnInit {
   @Action(AddBucket)
   addBucket(ctx: StateContext<InkBuckets>, action: AddBucket) {
     const state = ctx.getState();
-    ctx.setState([...state, action.bucketData]);
+    ctx.setState([action.bucketData, ...state]);
   }
 
   @Action(DeleteBucket)
   deleteBucket(ctx: StateContext<InkBuckets>, action: DeleteBucket) {
     return this._service.delete(action.bucketId).then(bucket => {
+      ctx.dispatch(new DeleteDropsUnderBucket(action.bucketId));
       ctx.dispatch(new RemoveBucket(action.bucketId));
     });
   }
