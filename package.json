@@ -90,7 +90,7 @@
     "babel-jest": "23.0.1",
     "codelyzer": "4.3.0",
     "conventional-changelog": "2.0.1",
-    "dotenv": "5.0.1",
+    "dotenv": "6.0.0",
     "electron": "2.0.2",
     "github-release-notes": "0.16.0",
     "husky": "0.14.3",
