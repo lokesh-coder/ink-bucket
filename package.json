@@ -50,7 +50,7 @@
     "core-js": "2.5.6",
     "deep-freeze-strict": "1.1.1",
     "deepmerge": "2.1.1",
-    "fuse.js": "3.2.0",
+    "fuse.js": "3.2.1",
     "gun": "0.9.996",
     "keypress.js": "2.1.5",
     "lodash-es": "4.17.10",
