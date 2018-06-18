@@ -4,6 +4,28 @@
     {
       "name": "feature/refactor",
       "base": "develop"
+    },
+    {
+      "name": "feature/sorting",
+      "base": "develop"
+    },
+    {
+      "name": "feature/test-setup",
+      "base": "develop"
+    },
+    {
+      "name": "feature/travis-sematic-renovate-setup",
+      "base": "develop"
+    }
+  ],
+  "gitflow4code.releases": [
+    {
+      "name": "release/v1beta3",
+      "base": "develop"
+    },
+    {
+      "name": "feature/redesign",
+      "base": "develop"
     }
   ],
   "gitflow4code.releases": [

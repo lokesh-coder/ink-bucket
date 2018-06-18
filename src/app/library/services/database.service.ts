@@ -9,6 +9,7 @@ import { environment } from 'environments/environment.prod';
 import { DB_CONFIG, DB_REMOTE_SYNC_URL } from '@root/ink.config';
 import { collections } from '@lib/database/collections';
 import { InkDb } from '@lib/models';
+import { DropPreSaveHook, DropPreInsertHook } from '@lib/database/hooks';
 
 RxDB.QueryChangeDetector.enable();
 RxDB.QueryChangeDetector.enableDebugging();
@@ -50,6 +51,7 @@ export class InkDatabaseService {
       .then(async (db: InkDb) => {
         await Promise.all(collections.map((colData: any): Promise<RxCollection<any>> => db.collection(colData)));
         this.showLeaderInTitle(db);
+        this.attachHooks(db, collections);
         // this.sync(db, collections);
         return db;
       })
@@ -69,5 +71,10 @@ export class InkDatabaseService {
       .filter(col => col.sync)
       .map(col => col.name)
       .forEach(colName => db[colName].sync({ remote: syncURL + colName + '/' }));
+  }
+
+  private attachHooks(db: InkDb, coll) {
+    db.drops.preInsert(DropPreInsertHook, false);
+    db.drops.preSave(DropPreSaveHook, false);
   }
 }

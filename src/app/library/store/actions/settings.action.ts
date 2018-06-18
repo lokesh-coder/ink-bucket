@@ -1,5 +1,15 @@
 import { InkAppSettings, InkAppSettingsItem, InkSettingsMeta } from '@lib/models';
 
+export class FetchSettings {
+  static readonly type = '[Settings] fetch settings';
+  constructor(public settings: InkAppSettings) {}
+}
+
+export class PopulateDefaultSettings {
+  static readonly type = '[Settings] populate default settings';
+  constructor(public settings: InkAppSettings) {}
+}
+
 export class PopulateSettings {
   static readonly type = '[Settings] load all settings';
   constructor(public settings: InkAppSettings) {}

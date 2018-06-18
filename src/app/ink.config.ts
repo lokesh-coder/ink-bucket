@@ -14,3 +14,16 @@ export const DEFAULT_BUCKET_NAME = `Bucket #`;
 
 export const GITHUB_ACCESS_TOKEN_NAME = 'inkapp_access_token';
 export const GIST_NAME = 'INKAPP :: SYNC SETTINGS';
+
+export const DEFAULT_COLOR = '#ffffff';
+
+export const DEFAULT_SETTINGS = [
+  {
+    key: 'view',
+    value: 'default'
+  },
+  {
+    key: 'gist',
+    value: null
+  }
+];
