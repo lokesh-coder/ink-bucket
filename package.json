@@ -109,7 +109,7 @@
     "tslint": "5.10.0",
     "typescript": "2.9.2",
     "validate-npm-package-name": "3.0.0",
-    "write": "^1.0.3"
+    "write": "1.0.3"
   },
   "engines": {
     "npm": "5.10.0"
