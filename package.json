@@ -67,7 +67,7 @@
     "pretty-checkbox": "3.0.3",
     "relational-pouch": "3.0.1",
     "rxdb": "7.6.1",
-    "rxjs": "6.1.0",
+    "rxjs": "6.2.1",
     "zone.js": "0.8.26"
   },
   "devDependencies": {
