@@ -34,7 +34,7 @@
     "@angular/material": "6.0.2",
     "@angular/platform-browser": "6.0.1",
     "@angular/platform-browser-dynamic": "6.0.1",
-    "@angular/pwa": "0.6.5",
+    "@angular/pwa": "0.6.8",
     "@angular/router": "6.0.1",
     "@angular/service-worker": "6.0.3",
     "@auth0/angular-jwt": "2.0.0",
