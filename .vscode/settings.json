@@ -12,6 +12,10 @@
     {
       "name": "feature/test-setup",
       "base": "develop"
+    },
+    {
+      "name": "feature/travis-sematic-renovate-setup",
+      "base": "develop"
     }
   ],
   "gitflow4code.releases": [
