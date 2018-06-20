@@ -38,7 +38,7 @@
     "@angular/platform-browser-dynamic": "6.0.5",
     "@angular/pwa": "0.6.8",
     "@angular/router": "6.0.5",
-    "@angular/service-worker": "6.0.5",
+    "@angular/service-worker": "6.0.6",
     "@auth0/angular-jwt": "2.0.0",
     "@ctrl/tinycolor": "2.0.0",
     "@ngxs/devtools-plugin": "3.1.4",
