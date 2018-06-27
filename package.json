@@ -59,7 +59,7 @@
     "nedb": "1.8.0",
     "ngx-clipboard": "11.1.1",
     "ngx-color": "2.0.1",
-    "ngx-smart-modal": "6.0.3",
+    "ngx-smart-modal": "6.0.4",
     "ngx-toastr": "8.8.0",
     "pouchdb": "7.0.0",
     "pouchdb-adapter-idb": "7.0.0",
