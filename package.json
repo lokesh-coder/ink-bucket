@@ -94,7 +94,7 @@
     "electron": "2.0.4",
     "github-release-notes": "0.16.0",
     "husky": "0.14.3",
-    "jest": "23.2.0",
+    "jest": "23.3.0",
     "jest-preset-angular": "5.2.3",
     "pouchdb-adapter-http": "7.0.0",
     "pouchdb-server": "4.0.1",
