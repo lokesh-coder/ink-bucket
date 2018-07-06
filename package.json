@@ -66,7 +66,7 @@
     "pouchdb-find": "7.0.0",
     "pretty-checkbox": "3.0.3",
     "relational-pouch": "3.1.0",
-    "rxdb": "7.6.1",
+    "rxdb": "7.7.0",
     "rxjs": "6.2.1",
     "zone.js": "0.8.26"
   },
