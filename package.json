@@ -84,7 +84,7 @@
     "@semantic-release/github": "4.2.18",
     "@types/jasmine": "2.8.8",
     "@types/jasminewd2": "2.0.3",
-    "@types/node": "8.10.20",
+    "@types/node": "8.10.21",
     "@types/pouchdb": "6.3.2",
     "babel-core": "6.26.3",
     "babel-jest": "23.2.0",
