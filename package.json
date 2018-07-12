@@ -48,7 +48,7 @@
     "@types/pouchdb-find": "6.3.3",
     "a-color-picker": "1.0.6",
     "babel-polyfill": "6.26.0",
-    "bootstrap": "4.1.1",
+    "bootstrap": "4.1.2",
     "core-js": "2.5.7",
     "deep-freeze-strict": "1.1.1",
     "deepmerge": "2.1.1",
