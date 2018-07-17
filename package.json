@@ -78,7 +78,7 @@
     "@commitlint/cli": "7.0.0",
     "@commitlint/config-conventional": "7.0.1",
     "@commitlint/travis-cli": "7.0.0",
-    "@semantic-release/changelog": "2.1.1",
+    "@semantic-release/changelog": "2.1.2",
     "@semantic-release/exec": "2.2.4",
     "@semantic-release/git": "6.0.1",
     "@semantic-release/github": "4.4.1",
