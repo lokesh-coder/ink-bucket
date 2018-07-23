@@ -91,7 +91,7 @@
     "codelyzer": "4.4.2",
     "conventional-changelog": "2.0.1",
     "dotenv": "6.0.0",
-    "electron": "2.0.4",
+    "electron": "2.0.5",
     "github-release-notes": "0.16.0",
     "husky": "0.14.3",
     "jest": "23.4.1",
