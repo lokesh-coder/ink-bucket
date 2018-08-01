@@ -40,7 +40,7 @@
     "@angular/router": "6.1.0",
     "@angular/service-worker": "6.1.0",
     "@auth0/angular-jwt": "2.0.0",
-    "@ctrl/tinycolor": "2.0.0",
+    "@ctrl/tinycolor": "2.0.1",
     "@ngxs/devtools-plugin": "3.2.0",
     "@ngxs/store": "3.2.0",
     "@types/nedb": "1.8.5",
