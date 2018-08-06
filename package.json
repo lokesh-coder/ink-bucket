@@ -44,7 +44,7 @@
     "@ngxs/devtools-plugin": "3.2.0",
     "@ngxs/store": "3.2.0",
     "@types/nedb": "1.8.5",
-    "@types/pouchdb-core": "6.4.1",
+    "@types/pouchdb-core": "6.4.2",
     "@types/pouchdb-find": "6.3.3",
     "a-color-picker": "1.0.6",
     "babel-polyfill": "6.26.0",
