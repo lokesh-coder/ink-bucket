@@ -100,7 +100,7 @@
     "pouchdb-server": "4.0.1",
     "protractor": "5.4.0",
     "release-it": "7.5.0",
-    "semantic-release": "15.9.6",
+    "semantic-release": "15.9.8",
     "stylelint": "9.4.0",
     "stylelint-config-recommended-scss": "3.2.0",
     "stylelint-scss": "3.2.0",
