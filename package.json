@@ -88,7 +88,7 @@
     "@types/pouchdb": "6.3.2",
     "babel-core": "6.26.3",
     "babel-jest": "23.4.2",
-    "codelyzer": "4.4.3",
+    "codelyzer": "4.4.4",
     "conventional-changelog": "2.0.1",
     "dotenv": "6.0.0",
     "electron": "2.0.6",
