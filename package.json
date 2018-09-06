@@ -58,7 +58,7 @@
     "lodash-es": "4.17.10",
     "nedb": "1.8.0",
     "ngx-clipboard": "11.1.7",
-    "ngx-color": "2.0.3",
+    "ngx-color": "2.0.4",
     "ngx-smart-modal": "6.0.4",
     "ngx-toastr": "8.10.2",
     "pouchdb": "7.0.0",
