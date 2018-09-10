@@ -98,7 +98,7 @@
     "jest-preset-angular": "5.2.3",
     "pouchdb-adapter-http": "7.0.0",
     "pouchdb-server": "4.1.0",
-    "protractor": "5.4.0",
+    "protractor": "5.4.1",
     "release-it": "7.6.1",
     "semantic-release": "15.9.14",
     "stylelint": "9.5.0",
