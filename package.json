@@ -55,7 +55,7 @@
     "fuse.js": "3.2.1",
     "gun": "0.9.99993",
     "keypress.js": "2.1.5",
-    "lodash-es": "4.17.10",
+    "lodash-es": "4.17.11",
     "nedb": "1.8.0",
     "ngx-clipboard": "11.1.7",
     "ngx-color": "2.0.4",
