@@ -6,6 +6,7 @@ import { UserService } from '@services/user.service';
 import { FetchAllBoards, FetchAllBuckets, FetchAllDrops, RemoveAllBuckets, RemoveAllDrops, SaveUser } from '@store/actions';
 import { BoardsState } from '@store/states';
 import { Observable } from 'rxjs';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'inkapp-home-page',
