@@ -6,19 +6,30 @@ export enum DropType {
   HSL
 }
 
+export interface User {
+  id: string;
+  email?: string;
+  displayName?: string;
+  isAnonymous: boolean;
+  photoURL?: string;
+}
+
 export interface InkBoardMeta {
+  createdby: string;
   name?: string;
   _id?: string;
   description?: string;
   createdAt?: string;
 }
 export interface InkBucketMeta {
+  createdby: string;
   name?: string;
   _id?: string;
   description?: string;
   boardId: string;
 }
 export interface InkDropMeta {
+  createdby: string;
   name?: string;
   _id?: string;
   description?: string;
