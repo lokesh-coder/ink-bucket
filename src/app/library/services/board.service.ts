@@ -8,7 +8,7 @@ import { InkDatabaseService } from './database.service';
 import { BOARD_DEFAULT_NAME, BOARD_DEFAULT_DESC } from '../../ink.config';
 import { AngularFirestore, DocumentReference } from '@angular/fire/firestore';
 import { AuthService } from '@services/auth.service';
-import { take, switchMap, tap, map } from 'rxjs/operators';
+import { take, switchMap, tap, map, skipWhile } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -28,8 +28,20 @@ export class InkBoardsService {
     return from(this._firestore.collection<InkBoardMeta>('boards').add(boardData));
   }
 
-  async fetchAllBoards() {
-    const db = await this._db.getDatabase();
-    return await db.boards.find().exec();
+  createIfNot(boardData: InkBoardMeta): Observable<any> {
+    const docId = this._firestore.createId();
+    return this._firestore
+    .collection<InkBoardMeta>('boards', ref => ref.where('name', '==', boardData.name))
+    .snapshotChanges()
+    .pipe(
+      take(1),
+      skipWhile(data => data.length > 0),
+      map(_ => from(this._firestore.collection<InkBoardMeta>(`boards`).doc(docId).set({...boardData, _id: docId})))
+    );
+  }
+
+  fetchAllBoards() {
+    return this._firestore
+    .collection<InkBoardMeta>('boards').valueChanges();
   }
 }
