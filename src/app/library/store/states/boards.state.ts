@@ -11,7 +11,7 @@ import {
   RemoveAllBoards
 } from '@store/actions';
 import { InkBoardsService } from '@lib/services';
-import { tap } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
 
 @State<InkBoards>({
   name: 'boards',
@@ -27,9 +27,9 @@ export class BoardsState {
 
   @Action(FetchAllBoards)
   fetchAllBoards(ctx: StateContext<InkBoards>, action: FetchAllBoards) {
-    return this._service.fetchAllBoards().then(boards => {
+    return this._service.fetchAllBoards().pipe(map(boards => {
       ctx.dispatch(new PopulateAllBoards(boards));
-    });
+    }));
   }
 
   @Action(PopulateAllBoards)
@@ -39,7 +39,7 @@ export class BoardsState {
 
   @Action(CreateBoard)
   createBoard(ctx: StateContext<InkBoards>, action: CreateBoard) {
-    return this._service.create(action.boardData).pipe(tap(_ => ctx.dispatch(new AddBoard(action.boardData))));
+    return this._service.createIfNot(action.boardData).pipe(tap(_ => ctx.dispatch(new AddBoard(action.boardData))));
   }
 
   @Action(AddBoard)
