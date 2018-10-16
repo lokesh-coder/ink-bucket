@@ -15,23 +15,23 @@ export interface User {
 }
 
 export interface InkBoardMeta {
-  createdby?: string; // update
+  createdby: string; // update
   name?: string;
-  _id?: string;
+  id: string;
   description?: string;
-  createdAt?: string;
+  createdAt: number;
 }
 export interface InkBucketMeta {
-  createdby?: string; // update
+  id: string;
+  createdby?: string;
   name?: string;
-  _id?: string;
   description?: string;
   boardId: string;
 }
 export interface InkDropMeta {
   createdby?: string; // update
   name?: string;
-  _id?: string;
+  id?: string;
   description?: string;
   meta: any;
   displayValue: string;
