@@ -5,6 +5,7 @@ import { InkDatabaseService } from './database.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AuthService } from './auth.service';
 import { from } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -12,17 +13,17 @@ import { from } from 'rxjs';
 export class InkBucketsService {
   constructor(private _firestore: AngularFirestore, private _auth: AuthService, private _db: InkDatabaseService, private _store: Store) {}
   create(bucketData: InkBucketMeta) {
-    const id = this._firestore.createId();
-    const createdAt = Date.now();
-    return from(this._firestore.collection<InkBucketMeta>(`buckets`).doc(id).set({...bucketData, id, createdAt}).then(_ => bucketData));
+    bucketData.id = this._firestore.createId();
+    bucketData.createdAt = Date.now();
+    return from(this._firestore.collection<InkBucketMeta>(`buckets`).doc(bucketData.id).set(bucketData).then(_ => bucketData));
   }
 
   get(boardId) {
-    return this._firestore.collection<InkBucketMeta>(`buckets`).doc(boardId).valueChanges();
+    return this._firestore.collection<InkBucketMeta>(`buckets`).doc(boardId).valueChanges().pipe(take(1));
   }
 
   getAll() {
-    return this._firestore.collection<InkBucketMeta>(`buckets`).valueChanges();
+    return this._firestore.collection<InkBucketMeta>(`buckets`).valueChanges().pipe(take(1));
   }
 
   update(bucketData: Partial<InkBucketMeta>) {

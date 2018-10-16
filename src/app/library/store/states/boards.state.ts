@@ -20,7 +20,7 @@ import { tap, map } from 'rxjs/operators';
 export class BoardsState {
   @Selector()
   static defaultBoard(state: InkBoards) {
-    return state[0]._id;
+    return state[0].id;
   }
 
   constructor(private _service: InkBoardsService) {}
