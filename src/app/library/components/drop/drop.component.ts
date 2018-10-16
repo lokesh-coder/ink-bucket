@@ -36,7 +36,7 @@ export class DropComponent implements OnInit, OnDestroy {
         displayValue: color.hex,
         meta: color,
         bucketId: this.bucketId,
-        _id: this.data._id
+        id: this.data.id
       };
     });
     this._colorPickerService.backdropClick().subscribe(b => {
