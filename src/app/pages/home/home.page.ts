@@ -8,6 +8,7 @@ import { BoardsState } from '@store/states';
 import { Observable } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AuthService } from '@services/auth.service';
+import { UserService } from '@services/user.service';
 
 @Component({
   selector: 'inkapp-home-page',
