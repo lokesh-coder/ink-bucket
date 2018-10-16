@@ -20,10 +20,10 @@ export class BoardComponent implements OnInit {
   constructor(private _store: Store) {}
 
   ngOnInit() {
-    this.buckets$ = this._store.select(s => s.buckets).pipe(children(this.data._id, 'boardId'));
+    this.buckets$ = this._store.select(s => s.buckets).pipe(children(this.data.id, 'boardId'));
   }
 
   createBucket() {
-    this._store.dispatch(new CreateBucket({ name: DEFAULT_BUCKET_NAME, boardId: this.data._id }));
+    this._store.dispatch(new CreateBucket({ name: DEFAULT_BUCKET_NAME, boardId: this.data.id }));
   }
 }
