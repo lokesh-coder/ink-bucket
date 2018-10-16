@@ -44,7 +44,7 @@ export class BucketsState implements NgxsOnInit {
   @Action(CreateBucket)
   createBucket(ctx: StateContext<InkBuckets>, action: CreateBucket) {
     action.bucketData.name += this._utilityService.getRandomNumber();
-    return this._service.create(action.bucketData).pipe(map(bucket => {
+    return this._service.create(action.bucketData as any).pipe(map(bucket => {
       ctx.dispatch(new AddBucket(bucket));
     }));
   }
@@ -72,7 +72,7 @@ export class BucketsState implements NgxsOnInit {
 
   @Action(UpdateBucket)
   updateBucket(ctx: StateContext<InkBuckets>, action: UpdateBucket) {
-    this._service.update(action.bucketData).pipe(map(bucket => {
+    return this._service.update(action.bucketData).pipe(map(bucket => {
       ctx.dispatch(new PatchBucket(bucket));
     }));
   }

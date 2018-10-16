@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 
-export const children = <T>(parentId: string, childId: string = '_id') => (source: Observable<T[]>) =>
+export const children = <T>(parentId: string, childId: string = 'id') => (source: Observable<T[]>) =>
   new Observable<T[]>(subscriber => {
     source.subscribe({
       next(value) {
