@@ -27,6 +27,7 @@ export interface InkBucketMeta {
   name?: string;
   description?: string;
   boardId: string;
+  createdAt?: number;
 }
 export interface InkDropMeta {
   createdby?: string; // update

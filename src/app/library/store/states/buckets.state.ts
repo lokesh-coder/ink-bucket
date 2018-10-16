@@ -25,7 +25,6 @@ export class BucketsState implements NgxsOnInit {
 
   ngxsOnInit(ctx: StateContext<InkBuckets>) {
     this._service.getAll().subscribe(buckets => {
-      console.log('kk', buckets.docs);
       ctx.setState(buckets);
     });
   }
@@ -67,7 +66,7 @@ export class BucketsState implements NgxsOnInit {
   @Action(RemoveBucket)
   removeBucket(ctx: StateContext<InkBuckets>, action: RemoveBucket) {
     const state: any = ctx.getState();
-    const newState = state.filter(b => b._id !== action.bucketId);
+    const newState = state.filter(b => b.id !== action.bucketId);
     ctx.setState(newState);
   }
 
@@ -82,7 +81,7 @@ export class BucketsState implements NgxsOnInit {
   patchBucket(ctx: StateContext<InkBuckets>, action: PatchBucket) {
     let state: any = ctx.getState();
     state = state.map((a: any) => {
-      if (a.id === action.bucketData._id) {
+      if (a.id === action.bucketData.id) {
         a.name = action.bucketData.name;
       }
       return a;

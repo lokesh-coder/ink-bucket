@@ -16,7 +16,7 @@ export class HeaderComponent {
   constructor(public auth: AuthService, private _store: Store, private _bucketService: InkBucketsService) {}
   newBucket() {
     const defaultBoardId = this._store.selectSnapshot(BoardsState.defaultBoard);
-    this._store.dispatch(new CreateBucket({ name: DEFAULT_BUCKET_NAME, boardId: defaultBoardId }));
+    this._store.dispatch(new CreateBucket({ name: DEFAULT_BUCKET_NAME, boardId: defaultBoardId, id: null }));
   }
   googleLogin() {
     this.auth.googleLogin().subscribe(user => {

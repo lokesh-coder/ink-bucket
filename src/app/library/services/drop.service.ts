@@ -12,9 +12,9 @@ export class InkDropsService {
   constructor(private _firestore: AngularFirestore, private _db: InkDatabaseService) {}
 
   create(dropData: InkDropMeta) {
-    const id = this._firestore.createId();
-    const createdAt = Date.now();
-    return from(this._firestore.collection<InkDropMeta>(`drops`).doc(id).set({...dropData, id, createdAt}).then(_ => dropData));
+    dropData.id = this._firestore.createId();
+    dropData.createdAt = Date.now();
+    return from(this._firestore.collection<InkDropMeta>(`drops`).doc(dropData.id).set(dropData).then(_ => dropData));
   }
 
   update(dropData: Partial<InkDropMeta>) {
