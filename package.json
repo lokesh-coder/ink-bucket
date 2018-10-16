@@ -92,7 +92,7 @@
     "conventional-changelog": "2.0.3",
     "dotenv": "6.1.0",
     "electron": "2.0.9",
-    "github-release-notes": "0.16.0",
+    "github-release-notes": "0.17.0",
     "husky": "0.14.3",
     "jest": "23.6.0",
     "jest-preset-angular": "5.2.3",
