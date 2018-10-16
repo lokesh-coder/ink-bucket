@@ -24,6 +24,6 @@ export class BoardComponent implements OnInit {
   }
 
   createBucket() {
-    this._store.dispatch(new CreateBucket({ name: DEFAULT_BUCKET_NAME, boardId: this.data.id , id: null}));
+    this._store.dispatch(new CreateBucket({ name: DEFAULT_BUCKET_NAME, boardId: this.data.id}));
   }
 }

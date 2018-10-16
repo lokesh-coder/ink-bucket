@@ -6,15 +6,17 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { AuthService } from './auth.service';
 import { from } from 'rxjs';
 import { take } from 'rxjs/operators';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InkBucketsService {
-  constructor(private _firestore: AngularFirestore, private _auth: AuthService, private _db: InkDatabaseService, private _store: Store) {}
+  constructor(private _firestore: AngularFirestore, private _auth: AuthService, private _user: UserService, private _store: Store) {}
   create(bucketData: InkBucketMeta) {
     bucketData.id = this._firestore.createId();
     bucketData.createdAt = Date.now();
+    bucketData.createdBy = this._user.getUserData().id;
     return from(this._firestore.collection<InkBucketMeta>(`buckets`).doc(bucketData.id).set(bucketData).then(_ => bucketData));
   }
 

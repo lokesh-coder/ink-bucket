@@ -4,16 +4,18 @@ import { InkDatabaseService } from './database.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { from } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InkDropsService {
-  constructor(private _firestore: AngularFirestore, private _db: InkDatabaseService) {}
+  constructor(private _firestore: AngularFirestore, private _user: UserService) {}
 
   create(dropData: InkDropMeta) {
     dropData.id = this._firestore.createId();
     dropData.createdAt = Date.now();
+    dropData.createdBy = this._user.getUserData().id;
     return from(this._firestore.collection<InkDropMeta>(`drops`).doc(dropData.id).set(dropData).then(_ => dropData));
   }
 

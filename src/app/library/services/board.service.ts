@@ -7,21 +7,18 @@ import { BOARD_DEFAULT_NAME, BOARD_DEFAULT_DESC } from '../../ink.config';
 import { AngularFirestore, DocumentReference } from '@angular/fire/firestore';
 import { AuthService } from '@services/auth.service';
 import { take, map, skipWhile } from 'rxjs/operators';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InkBoardsService {
-  constructor(private _firestore: AngularFirestore, private _auth: AuthService, private _store: Store) {
-    this._auth.userInfo.pipe(
-      take(1),
-      map(user => {
-        const id = this._firestore.createId();
-        const createdAt = Date.now();
-        const boardData = { name: BOARD_DEFAULT_NAME, description: BOARD_DEFAULT_DESC, createdby: user.uid, createdAt, id  };
-        this._store.dispatch(new CreateBoard(boardData));
-      })
-    ).subscribe();
+  constructor(private _firestore: AngularFirestore, private _auth: AuthService, private _user: UserService, private _store: Store) {
+    const id = this._firestore.createId();
+    const createdAt = Date.now();
+    const createdBy = this._user.getUserData();
+    const boardData = { name: BOARD_DEFAULT_NAME, description: BOARD_DEFAULT_DESC, createdBy, createdAt, id  };
+    this._store.dispatch(new CreateBoard(boardData));
   }
 
   create(boardData: InkBoardMeta): Observable<any> {

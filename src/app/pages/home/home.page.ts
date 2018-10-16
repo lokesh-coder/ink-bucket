@@ -8,6 +8,7 @@ import { BoardsState } from '@store/states';
 import { Observable } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AuthService } from '@services/auth.service';
+import { UserService } from '@services/user.service';
 
 @Component({
   selector: 'inkapp-home-page',
@@ -15,10 +16,11 @@ import { AuthService } from '@services/auth.service';
 })
 export class HomePage implements OnInit, OnDestroy {
   @Select(BoardsState) boards$: Observable<InkBoardMeta[]>;
-  constructor(private _store: Store, private _authService: AuthService) {
+  constructor(private _store: Store, private _authService: AuthService, private _userService: UserService) {
     this._authService.auth().onAuthStateChanged((user) => {
       if (user) {
         console.log('user', user);
+        this._userService.updateUserData(user);
         this._store.dispatch(new SaveUser({
           id: user.uid,
           isAnonymous: user.isAnonymous,

@@ -28,6 +28,7 @@ export class BucketComponent implements OnInit {
   newDrop() {
     const data: InkDropMeta = {
       id: null,
+      createdBy: null,
       bucketId: this.data.id,
       displayValue: '#ffffff',
       meta: {},
@@ -36,7 +37,7 @@ export class BucketComponent implements OnInit {
     this._store.dispatch(new CreateDrop(data));
   }
   onTitleChange(name) {
-    this._store.dispatch(new UpdateBucket({ ...(this.data as any)._data, name }));
+    this._store.dispatch(new UpdateBucket({ ...this.data, name }));
   }
 
   deleteBucket() {
