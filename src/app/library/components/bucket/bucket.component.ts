@@ -23,11 +23,11 @@ export class BucketComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.drops$ = this._store.select(s => s.drops).pipe(children(this.data._id, 'bucketId'));
+    this.drops$ = this._store.select(s => s.drops).pipe(children(this.data.id, 'bucketId'));
   }
   newDrop() {
     const data: InkDropMeta = {
-      bucketId: this.data._id,
+      bucketId: this.data.id,
       displayValue: '#ffffff',
       meta: {},
       name: '#ffffff'
@@ -39,6 +39,6 @@ export class BucketComponent implements OnInit {
   }
 
   deleteBucket() {
-    this._store.dispatch(new DeleteBucket(this.data._id));
+    this._store.dispatch(new DeleteBucket(this.data.id));
   }
 }

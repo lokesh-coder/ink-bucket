@@ -31,7 +31,7 @@ export interface InkBucketMeta {
 export interface InkDropMeta {
   createdby?: string; // update
   name?: string;
-  id?: string;
+  id: string;
   description?: string;
   meta: any;
   displayValue: string;
