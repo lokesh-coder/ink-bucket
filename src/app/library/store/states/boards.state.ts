@@ -1,17 +1,8 @@
-import { State, Action, StateContext, NgxsOnInit, Selector } from '@ngxs/store';
 import { InkBoards } from '@lib/models';
-import {
-  FetchAllBoards,
-  PopulateAllBoards,
-  CreateBoard,
-  AddBoard,
-  DeleteBoard,
-  RemoveBoard,
-  DeleteAllBoards,
-  RemoveAllBoards
-} from '@store/actions';
 import { InkBoardsService } from '@lib/services';
-import { tap, map } from 'rxjs/operators';
+import { Action, Selector, State, StateContext } from '@ngxs/store';
+import { AddBoard, CreateBoard, DeleteAllBoards, DeleteBoard, FetchAllBoards, PopulateAllBoards, RemoveAllBoards, RemoveBoard } from '@store/actions';
+import { map, tap } from 'rxjs/operators';
 
 @State<InkBoards>({
   name: 'boards',

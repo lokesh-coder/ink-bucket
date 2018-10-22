@@ -1,20 +1,9 @@
-import { State, Action, StateContext, Selector, NgxsOnInit } from '@ngxs/store';
-import { InkAppSettingsItem, InkAppSettings } from '@lib/models';
-import {
-  UpdateSettingsItem,
-  PopulateSettings,
-  MergeSettings,
-  FetchRemoteGist,
-  CreateRemoteGist,
-  UpdateRemoteGist,
-  AddSettingsItem,
-  CreateSettingsItem,
-  PopulateDefaultSettings
-} from '@store/actions';
-import { SelectMultipleControlValueAccessor } from '@angular/forms';
-import { InkSettingsService, InkGistService } from '@lib/services';
-import { tap, map } from 'rxjs/operators';
+import { InkAppSettings } from '@lib/models';
+import { InkGistService, InkSettingsService } from '@lib/services';
+import { Action, NgxsOnInit, Selector, State, StateContext } from '@ngxs/store';
 import { DEFAULT_SETTINGS } from '@root/ink.config';
+import { AddSettingsItem, CreateRemoteGist, CreateSettingsItem, FetchRemoteGist, MergeSettings, PopulateDefaultSettings, PopulateSettings, UpdateRemoteGist, UpdateSettingsItem } from '@store/actions';
+import { tap } from 'rxjs/operators';
 
 @State<Partial<InkAppSettings>>({
   name: 'settings',

@@ -1,14 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Store, Select } from '@ngxs/store';
-import { filter, map } from 'rxjs/operators';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { InkBoardMeta } from '@lib/models';
-import { InkBoardsService, InkDatabaseService } from '@lib/services';
+import { Select, Store } from '@ngxs/store';
+import { AuthService } from '@services/auth.service';
+import { UserService } from '@services/user.service';
 import { FetchAllBoards, FetchAllBuckets, FetchAllDrops, RemoveAllBuckets, RemoveAllDrops, SaveUser } from '@store/actions';
 import { BoardsState } from '@store/states';
 import { Observable } from 'rxjs';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { AuthService } from '@services/auth.service';
-import { UserService } from '@services/user.service';
 
 @Component({
   selector: 'inkapp-home-page',

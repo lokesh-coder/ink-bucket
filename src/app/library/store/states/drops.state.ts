@@ -1,20 +1,7 @@
-import { State, Action, StateContext } from '@ngxs/store';
 import { InkDrops } from '@lib/models';
-import {
-  FetchAllDrops,
-  PopulateAllDrops,
-  UpdateDrop,
-  PatchDrop,
-  CreateDrop,
-  AddDrop,
-  DeleteDrop,
-  RemoveDrop,
-  DeleteAllDrops,
-  RemoveAllDrops,
-  DeleteDropsUnderBucket,
-  RemoveDropsUnderBucket
-} from '@store/actions';
 import { InkDropsService } from '@lib/services';
+import { Action, State, StateContext } from '@ngxs/store';
+import { AddDrop, CreateDrop, DeleteDrop, DeleteDropsUnderBucket, FetchAllDrops, PatchDrop, PopulateAllDrops, RemoveDrop, RemoveDropsUnderBucket, UpdateDrop } from '@store/actions';
 import { map } from 'rxjs/operators';
 
 @State<InkDrops>({

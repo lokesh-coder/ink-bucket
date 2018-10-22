@@ -1,4 +1,4 @@
-import { githubClientSecret, githubClientID, firebaseApiKey } from './secrets';
+import { firebaseApiKey, githubClientID, githubClientSecret } from './secrets';
 
 export const environment = {
   production: false,

@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Store } from '@ngxs/store';
-import { InkBucketMeta } from '../models';
-import { InkDatabaseService } from './database.service';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { AuthService } from './auth.service';
+import { Store } from '@ngxs/store';
 import { from } from 'rxjs';
 import { take } from 'rxjs/operators';
+import { InkBucketMeta } from '../models';
+import { AuthService } from './auth.service';
 import { UserService } from './user.service';
 
 @Injectable({

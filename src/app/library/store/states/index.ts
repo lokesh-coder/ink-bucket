@@ -1,5 +1,6 @@
-export { BucketsState } from './buckets.state';
 export { BoardsState } from './boards.state';
-export { SettingsState } from './settings.state';
+export { BucketsState } from './buckets.state';
 export { DropsState } from './drops.state';
+export { SettingsState } from './settings.state';
 export { UserState } from './user.state';
+

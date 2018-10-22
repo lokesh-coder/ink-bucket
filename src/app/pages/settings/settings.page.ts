@@ -1,20 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Store, Select } from '@ngxs/store';
-import merge from 'deepmerge';
-import { environment } from '../../../environments/environment';
-import { InkAppSettingsItem, InkGist } from '@lib/models';
-import { InkDatabaseService, InkSettingsService, InkGithubService, InkGistService } from '@lib/services';
-import {
-  PopulateSettings,
-  UpdateSettingsItem,
-  MergeSettings,
-  FetchRemoteGist,
-  CreateRemoteGist,
-  UpdateRemoteGist
-} from '@store/actions';
-import { GITHUB_ACCESS_TOKEN_NAME } from '../../ink.config';
-import { Observable } from 'rxjs';
+import { InkGist } from '@lib/models';
+import { InkDatabaseService, InkGistService, InkGithubService, InkSettingsService } from '@lib/services';
+import { Select, Store } from '@ngxs/store';
+import { CreateRemoteGist, FetchRemoteGist, MergeSettings, UpdateRemoteGist, UpdateSettingsItem } from '@store/actions';
 import { SettingsState } from '@store/states';
+import { Observable } from 'rxjs';
+import { GITHUB_ACCESS_TOKEN_NAME } from '../../ink.config';
 
 @Component({
   selector: 'inkapp-settings-page',

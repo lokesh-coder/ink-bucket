@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
-import RxDB, { RxDatabase, RxCollection } from 'rxdb';
-import * as PouchdbAdapterIdb from 'pouchdb-adapter-idb';
-import * as PouchdbAdapterHttp from 'pouchdb-adapter-http';
-import RxDBSchemaCheckModule from 'rxdb/plugins/schema-check';
-import RxDBErrorMessagesModule from 'rxdb/plugins/error-messages';
-import RxDBValidateModule from 'rxdb/plugins/validate';
-import { environment } from 'environments/environment.prod';
-import { DB_CONFIG, DB_REMOTE_SYNC_URL } from '@root/ink.config';
 import { collections } from '@lib/database/collections';
+import { DropPreInsertHook, DropPreSaveHook } from '@lib/database/hooks';
 import { InkDb } from '@lib/models';
-import { DropPreSaveHook, DropPreInsertHook } from '@lib/database/hooks';
+import { DB_CONFIG, DB_REMOTE_SYNC_URL } from '@root/ink.config';
+import { environment } from 'environments/environment.prod';
+import * as PouchdbAdapterHttp from 'pouchdb-adapter-http';
+import * as PouchdbAdapterIdb from 'pouchdb-adapter-idb';
+import RxDB, { RxCollection, RxDatabase } from 'rxdb';
+import RxDBErrorMessagesModule from 'rxdb/plugins/error-messages';
+import RxDBSchemaCheckModule from 'rxdb/plugins/schema-check';
+import RxDBValidateModule from 'rxdb/plugins/validate';
 
 RxDB.QueryChangeDetector.enable();
 RxDB.QueryChangeDetector.enableDebugging();

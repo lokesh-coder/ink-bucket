@@ -1,12 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Store, Select } from '@ngxs/store';
-import { Observable } from 'rxjs';
-import { filter, tap, map } from 'rxjs/operators';
-import { InkBucketMeta, InkAppView, InkDropMeta, InkAppSettingsItem, InkDrops } from '@lib/models';
-import { InkBucketsService, InkDropsService } from '@lib/services';
-import { CreateDrop, UpdateBucket, DeleteBucket } from '@store/actions';
-import { SettingsState } from '@store/states';
+import { Component, Input, OnInit } from '@angular/core';
+import { InkBucketMeta, InkDropMeta, InkDrops } from '@lib/models';
 import { children } from '@lib/operators';
+import { InkBucketsService, InkDropsService } from '@lib/services';
+import { Store } from '@ngxs/store';
+import { CreateDrop, DeleteBucket, UpdateBucket } from '@store/actions';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'inkapp-bucket',

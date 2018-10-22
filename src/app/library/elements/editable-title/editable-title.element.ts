@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output, Input, HostListener } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'inkapp-editable-title-el',

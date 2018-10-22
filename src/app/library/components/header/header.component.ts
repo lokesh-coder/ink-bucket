@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { Store } from '@ngxs/store';
-import { map, tap, filter } from 'rxjs/operators';
 import { InkBucketsService } from '@lib/services';
-import { CreateBucket, ResetUser } from '@store/actions';
-import { BoardsState } from '@store/states';
+import { Store } from '@ngxs/store';
 import { DEFAULT_BUCKET_NAME } from '@root/ink.config';
 import { AuthService } from '@services/auth.service';
+import { CreateBucket, ResetUser } from '@store/actions';
+import { BoardsState } from '@store/states';
 
 @Component({
   selector: 'inkapp-header',

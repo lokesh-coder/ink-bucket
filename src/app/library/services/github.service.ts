@@ -1,7 +1,5 @@
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { filter, map, switchMap } from 'rxjs/operators';
-import { of } from 'rxjs';
 import { environment } from 'environments/environment';
 
 @Injectable({

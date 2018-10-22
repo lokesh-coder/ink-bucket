@@ -1,19 +1,7 @@
-import { State, Action, StateContext, Selector, NgxsOnInit } from '@ngxs/store';
 import { InkBuckets } from '@lib/models';
-import {
-  FetchAllBuckets,
-  PopulateAllBuckets,
-  CreateBucket,
-  AddBucket,
-  DeleteBucket,
-  RemoveBucket,
-  DeleteBucketsUnderBoard,
-  RemoveBucketsUnderBoard,
-  UpdateBucket,
-  PatchBucket,
-  DeleteDropsUnderBucket,
-} from '@store/actions';
 import { InkBucketsService, InkUtilsService } from '@lib/services';
+import { Action, NgxsOnInit, State, StateContext } from '@ngxs/store';
+import { AddBucket, CreateBucket, DeleteBucket, DeleteBucketsUnderBoard, DeleteDropsUnderBucket, FetchAllBuckets, PatchBucket, PopulateAllBuckets, RemoveBucket, RemoveBucketsUnderBoard, UpdateBucket } from '@store/actions';
 import { map } from 'rxjs/operators';
 
 @State<InkBuckets>({
