@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { InkDropMeta } from '../models';
-import { InkDatabaseService } from './database.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { from } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { InkDropMeta } from '../models';
 import { UserService } from './user.service';
 
 @Injectable({

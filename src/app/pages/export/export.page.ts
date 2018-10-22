@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ClipboardService } from 'ngx-clipboard';
 import { InkDatabaseService } from '@lib/services';
+import { ClipboardService } from 'ngx-clipboard';
 
 @Component({
   selector: 'inkapp-export-page',

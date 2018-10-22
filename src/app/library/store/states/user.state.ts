@@ -1,10 +1,6 @@
-import { State, Action, StateContext } from '@ngxs/store';
 import { User } from '@lib/models';
-import {
-  SaveUser,
-  UpdateUser,
-  ResetUser
-} from '@store/actions';
+import { Action, State, StateContext } from '@ngxs/store';
+import { ResetUser, SaveUser } from '@store/actions';
 
 @State<User>({
   name: 'user',

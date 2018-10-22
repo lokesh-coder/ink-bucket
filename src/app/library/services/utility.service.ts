@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
+import { INKAPP_VERSION } from 'environments/version';
 import now from 'lodash-es/now';
 import random from 'lodash-es/random';
 import uniqueId from 'lodash-es/uniqueId';
-import { INKAPP_VERSION } from 'environments/version';
 
 @Injectable({
   providedIn: 'root'

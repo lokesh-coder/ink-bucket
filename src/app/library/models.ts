@@ -1,4 +1,4 @@
-import { RxDatabase, RxDocument, RxCollection } from 'rxdb';
+import { RxCollection, RxDatabase, RxDocument } from 'rxdb';
 
 export enum DropType {
   RGB,

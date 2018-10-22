@@ -1,10 +1,10 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { map, switchMap, catchError } from 'rxjs/operators';
-import { of } from 'rxjs';
-import { GIST_NAME } from '@root/ink.config';
-import { InkUtilsService } from '@lib/services/utility.service';
 import { InkGist } from '@lib/models';
+import { InkUtilsService } from '@lib/services/utility.service';
+import { GIST_NAME } from '@root/ink.config';
+import { of } from 'rxjs';
+import { catchError, map, switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'

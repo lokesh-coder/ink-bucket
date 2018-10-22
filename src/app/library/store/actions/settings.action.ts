@@ -1,4 +1,4 @@
-import { InkAppSettings, InkAppSettingsItem, InkSettingsMeta } from '@lib/models';
+import { InkAppSettings, InkSettingsMeta } from '@lib/models';
 
 export class FetchSettings {
   static readonly type = '[Settings] fetch settings';

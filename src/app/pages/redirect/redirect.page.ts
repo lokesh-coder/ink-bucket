@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { InkGithubService } from '@lib/services';
 import { GITHUB_ACCESS_TOKEN_NAME } from '@root/ink.config';
 

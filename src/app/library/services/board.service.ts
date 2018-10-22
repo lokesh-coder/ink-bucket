@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { from, Observable } from 'rxjs';
-import {  InkBoardMeta } from '../models';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { Store } from '@ngxs/store';
-import { CreateBoard } from '../store/actions/board.actions';
-import { BOARD_DEFAULT_NAME, BOARD_DEFAULT_DESC } from '../../ink.config';
-import { AngularFirestore, DocumentReference } from '@angular/fire/firestore';
 import { AuthService } from '@services/auth.service';
-import { take, map, skipWhile } from 'rxjs/operators';
+import { from, Observable } from 'rxjs';
+import { map, skipWhile, take } from 'rxjs/operators';
+import { BOARD_DEFAULT_DESC, BOARD_DEFAULT_NAME } from '../../ink.config';
+import { InkBoardMeta } from '../models';
+import { CreateBoard } from '../store/actions/board.actions';
 import { UserService } from './user.service';
 
 @Injectable({

@@ -1,13 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Store, Select } from '@ngxs/store';
-import { Observable } from 'rxjs';
-import { map, filter, tap } from 'rxjs/operators';
-import { InkBoardMeta, InkBucketMeta, InkBuckets, InkAppSettings, InkAppSettingsItem } from '@lib/models';
-import { InkBucketsService } from '@lib/services';
-import { BucketsState, SettingsState } from '@store/states';
+import { Component, Input, OnInit } from '@angular/core';
+import { InkBoardMeta, InkBuckets } from '@lib/models';
 import { children } from '@lib/operators';
-import { CreateBucket } from '@store/actions';
+import { Select, Store } from '@ngxs/store';
 import { DEFAULT_BUCKET_NAME } from '@root/ink.config';
+import { CreateBucket } from '@store/actions';
+import { SettingsState } from '@store/states';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'inkapp-board',

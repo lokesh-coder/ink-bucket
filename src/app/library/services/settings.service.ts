@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { InkDatabaseService } from './database.service';
 import { InkAppSettings } from '@lib/models';
+import { InkDatabaseService } from './database.service';
 
 @Injectable({
   providedIn: 'root'
