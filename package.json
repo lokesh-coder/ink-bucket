@@ -103,7 +103,7 @@
     "semantic-release": "15.10.5",
     "stylelint": "9.6.0",
     "stylelint-config-recommended-scss": "3.2.0",
-    "stylelint-scss": "3.3.1",
+    "stylelint-scss": "3.3.2",
     "travis-deploy-once": "5.0.9",
     "ts-node": "7.0.1",
     "tslint": "5.11.0",
