@@ -101,7 +101,7 @@
     "protractor": "5.4.1",
     "release-it": "7.6.2",
     "semantic-release": "15.10.6",
-    "stylelint": "9.7.0",
+    "stylelint": "9.7.1",
     "stylelint-config-recommended-scss": "3.2.0",
     "stylelint-scss": "3.3.2",
     "travis-deploy-once": "5.0.9",
