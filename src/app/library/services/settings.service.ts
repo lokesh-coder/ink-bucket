@@ -1,51 +1,48 @@
 import { Injectable } from '@angular/core';
 import { InkAppSettings } from '@lib/models';
-import { InkDatabaseService } from './database.service';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InkSettingsService {
-  constructor(private _db: InkDatabaseService) {}
-  async setDefaultSettings() {
-    const db = await this._db.getDatabase();
-    const view = await db.settings.find({ key: 'view' }).exec();
-    if (view.length > 1) {
-      return db.settings.find().exec();
-    }
-    return db.settings.insert({ key: 'view', value: 'default' }).catch(error => {
-      console.log('Error while settings default settings', error);
-    });
+  constructor() {}
+  setDefaultSettings() {
+    this._set([{view: 'default'}]);
   }
-  async add(key, value) {
-    const db = await this._db.getDatabase();
-    return db.settings.insert({ key, value }).catch(error => {
-      console.error('Error while adding settings!', error);
-    });
+  add(key, value) {
+    const settings = this._get() || [];
+    this._set([...settings, {key, value}]);
+    return of({key, value});
   }
 
-  async update(key, value) {
-    const db = await this._db.getDatabase();
-    console.log({ key, value });
-    return db.settings.upsert({ key, value }).catch(error => {
-      console.error('Error while updating settings!', error);
-    });
-  }
-
-  async getAll() {
-    const db = await this._db.getDatabase();
-    return db.settings.find().exec();
-  }
-
-  async addAll(settings: InkAppSettings) {
-    const db = await this._db.getDatabase();
-    try {
-      for (const item of settings) {
-        await db.settings.insert({ key: item.key, value: item.value });
+  update(key, value) {
+    let settings =  this._get();
+    settings = settings.map(x => {
+      if (x.key === key) {
+        x.value = value;
       }
-      return db.settings.find().exec();
-    } catch (error) {
-      console.error('Error while adding settings!', error);
-    }
+      return x;
+    });
+    this._set(settings);
+    return of({key, value});
+  }
+
+  getAll() {
+    return this._get() || [];
+  }
+
+  addAll(settings: InkAppSettings) {
+    for (const item of settings) {
+      this.add(item.key, item.value);
+     }
+     return of(settings);
+  }
+
+  private _get(key= 'inkapp.settings') {
+   return JSON.parse(localStorage.getItem(key));
+  }
+  private _set(value) {
+    localStorage.setItem(`inkapp.settings`, JSON.stringify(value));
   }
 }
