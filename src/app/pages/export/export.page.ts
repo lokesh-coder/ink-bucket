@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { InkDatabaseService } from '@lib/services';
 import { ClipboardService } from 'ngx-clipboard';
 
 @Component({
@@ -8,15 +7,13 @@ import { ClipboardService } from 'ngx-clipboard';
 })
 export class ExportPage implements OnInit {
   jsonData: string;
-  constructor(private _db: InkDatabaseService, private _copyService: ClipboardService) {}
+  constructor(private _copyService: ClipboardService) {}
 
   ngOnInit() {
-    this.getDatabaseContent();
   }
 
-  async getDatabaseContent() {
-    const db = await this._db.getDatabase();
-    this.jsonData = JSON.stringify(await db.dump(), null, ' ');
+  getDatabaseContent() {
+
   }
 
   copy() {
