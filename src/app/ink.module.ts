@@ -7,7 +7,6 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { JwtModule } from '@auth0/angular-jwt';
 import { BoardComponent, BucketComponent, DropComponent, HeaderComponent } from '@lib/components';
 import { ActionItemElement, BillboardElement, EditableTitleElement } from '@lib/elements';
 import { ColorModule } from '@lib/modules/color/color.module';
