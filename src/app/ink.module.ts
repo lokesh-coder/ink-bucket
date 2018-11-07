@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { BoardComponent, BucketComponent, DropComponent, HeaderComponent } from '@lib/components';
-import { ActionItemElement, BillboardElement, EditableTitleElement, UserCardElement } from '@lib/elements';
+import { ActionItemElement, BillboardElement, EditableTitleElement } from '@lib/elements';
 import { ColorModule } from '@lib/modules/color/color.module';
 import { BoardsState, BucketsState, DropsState, SettingsState, UserState } from '@lib/store/states';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
@@ -35,7 +35,7 @@ export const MODULES = [
   ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
 ];
 export const COMPONENTS = [InkApp, HeaderComponent, BoardComponent, BucketComponent, DropComponent];
-export const ELEMENTS = [ActionItemElement, EditableTitleElement, UserCardElement, BillboardElement];
+export const ELEMENTS = [ActionItemElement, EditableTitleElement, BillboardElement];
 export const PAGES = [HomePage, SettingsPage, ExportPage, RedirectPage, NotFoundPage];
 
 @NgModule({

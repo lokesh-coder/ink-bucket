@@ -39,10 +39,7 @@ export class InkDropsService {
     return from(deleteQuery);
   }
 
-  // async deleteAll() {
-  //   const db = await this._db.getDatabase();
-  //   return db.drops.find().remove();
-  // }
+  // deleteAll() {}
 
   delete(dropId: string ) {
     return from(this._firestore.collection<InkDropMeta>('drops').doc(dropId).delete());

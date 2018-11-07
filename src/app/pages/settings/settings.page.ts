@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { InkGist } from '@lib/models';
 import { InkSettingsService } from '@lib/services';
 import { Select, Store } from '@ngxs/store';
 import {MergeSettings, UpdateSettingsItem } from '@store/actions';
@@ -13,7 +12,6 @@ import { Observable } from 'rxjs';
 export class SettingsPage implements OnInit {
   @Select(SettingsState.view) view$: Observable<string>;
   currentView;
-  userData: InkGist;
   constructor(
     private _store: Store,
     private _settingsService: InkSettingsService
