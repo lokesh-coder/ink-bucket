@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { InkBucketsService } from '@lib/services';
 import { Store } from '@ngxs/store';
-import { DEFAULT_BUCKET_NAME } from '@root/ink.config';
+import { BUCKET_DEFAULT_NAME } from '@root/ink.config';
 import { AuthService } from '@services/auth.service';
 import { CreateBucket, ResetUser } from '@store/actions';
 import { BoardsState } from '@store/states';
@@ -15,7 +15,7 @@ export class HeaderComponent {
   constructor(public auth: AuthService, private _store: Store, private _bucketService: InkBucketsService) {}
   newBucket() {
     const defaultBoardId = this._store.selectSnapshot(BoardsState.defaultBoard);
-    this._store.dispatch(new CreateBucket({ name: DEFAULT_BUCKET_NAME, boardId: defaultBoardId }));
+    this._store.dispatch(new CreateBucket({ name: BUCKET_DEFAULT_NAME, boardId: defaultBoardId }));
   }
   googleLogin() {
     this.auth.googleLogin().subscribe(user => {
