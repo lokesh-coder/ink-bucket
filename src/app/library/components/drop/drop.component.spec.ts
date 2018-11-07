@@ -5,11 +5,21 @@ import { InkColorPickerService } from '@services/color-picker.service';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { NgxsModule } from '@ngxs/store';
 import { DropsState } from '@store/states';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { environment } from 'environments/environment';
 
 describe('DropComponenet', () => {
   beforeEach(async () => {
     TestBed.configureTestingModule({
-      imports: [OverlayModule, NgxsModule.forRoot([DropsState])],
+      imports: [
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFireAuthModule,
+        AngularFirestoreModule,
+        OverlayModule,
+        NgxsModule.forRoot([DropsState])
+      ],
       declarations: [DropComponent],
       providers: [InkColorPickerService],
       schemas: [NO_ERRORS_SCHEMA]
