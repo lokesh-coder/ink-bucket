@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { InkBoardMeta, InkBuckets } from '@lib/models';
 import { children } from '@lib/operators';
 import { Select, Store } from '@ngxs/store';
-import { DEFAULT_BUCKET_NAME } from '@root/ink.config';
+import { BUCKET_DEFAULT_NAME } from '@root/ink.config';
 import { CreateBucket } from '@store/actions';
 import { SettingsState } from '@store/states';
 import { Observable } from 'rxjs';
@@ -22,6 +22,6 @@ export class BoardComponent implements OnInit {
   }
 
   createBucket() {
-    this._store.dispatch(new CreateBucket({ name: DEFAULT_BUCKET_NAME, boardId: this.data.id}));
+    this._store.dispatch(new CreateBucket({ name: BUCKET_DEFAULT_NAME, boardId: this.data.id}));
   }
 }

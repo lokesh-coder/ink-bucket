@@ -16,7 +16,6 @@ export class HomePage implements OnInit, OnDestroy {
   constructor(private _store: Store, private _authService: AuthService, private _userService: UserService) {
     this._authService.auth().onAuthStateChanged((user) => {
       if (user) {
-        console.log('user', user);
         this._userService.updateUserData(user);
         this._store.dispatch(new SaveUser({
           id: user.uid,

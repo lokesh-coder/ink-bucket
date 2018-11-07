@@ -7,7 +7,6 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { JwtModule } from '@auth0/angular-jwt';
 import { BoardComponent, BucketComponent, DropComponent, HeaderComponent } from '@lib/components';
 import { ActionItemElement, BillboardElement, EditableTitleElement, UserCardElement } from '@lib/elements';
 import { ColorModule } from '@lib/modules/color/color.module';
@@ -17,13 +16,8 @@ import { NgxsModule } from '@ngxs/store';
 import { ClipboardModule } from 'ngx-clipboard';
 import { environment } from '../environments/environment';
 import { InkApp } from './ink.component';
-import { GITHUB_ACCESS_TOKEN_NAME } from './ink.config';
 import { RoutingModule } from './ink.routing';
 import { ExportPage, HomePage, NotFoundPage, RedirectPage, SettingsPage } from './pages';
-
-export function tokenGetter() {
-  return localStorage.getItem(GITHUB_ACCESS_TOKEN_NAME);
-}
 
 export const MODULES = [
   BrowserModule,
@@ -38,13 +32,7 @@ export const MODULES = [
   ColorModule,
   ClipboardModule,
   OverlayModule,
-  ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
-  JwtModule.forRoot({
-    config: {
-      tokenGetter: tokenGetter,
-      whitelistedDomains: ['api.github.com']
-    }
-  })
+  ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
 ];
 export const COMPONENTS = [InkApp, HeaderComponent, BoardComponent, BucketComponent, DropComponent];
 export const ELEMENTS = [ActionItemElement, EditableTitleElement, UserCardElement, BillboardElement];
