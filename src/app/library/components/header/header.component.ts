@@ -25,12 +25,4 @@ export class HeaderComponent {
   logout() {
     this._store.dispatch(new ResetUser());
   }
-  googleLogin() {
-    this.auth.googleLogin().subscribe(user => {
-      console.log('gogole login', user);
-    });
-  }
-  logout() {
-    this._store.dispatch(new ResetUser());
-  }
 }
