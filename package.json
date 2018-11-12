@@ -61,7 +61,7 @@
     "ngx-clipboard": "11.1.9",
     "ngx-color": "2.0.5",
     "ngx-smart-modal": "6.0.4",
-    "ngx-toastr": "8.10.2",
+    "ngx-toastr": "9.1.1",
     "pouchdb": "7.0.0",
     "pouchdb-adapter-idb": "7.0.0",
     "pouchdb-find": "7.0.0",
