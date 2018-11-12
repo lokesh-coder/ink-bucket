@@ -1,9 +1,8 @@
-import { Injectable, ElementRef, ComponentRef } from '@angular/core';
-import { OverlayConfig, Overlay, OverlayRef, CloseScrollStrategy } from '@angular/cdk/overlay';
-import { Element } from '@angular/compiler';
+import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { tap } from 'rxjs/operators';
+import { ComponentRef, ElementRef, Injectable } from '@angular/core';
 import { ColorPickerComponent } from '@lib/modules/color/components/color-picker/color-picker.component';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'

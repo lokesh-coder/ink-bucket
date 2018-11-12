@@ -1,16 +1,8 @@
-import { State, Action, StateContext, NgxsOnInit, Selector } from '@ngxs/store';
 import { InkBoards } from '@lib/models';
-import {
-  FetchAllBoards,
-  PopulateAllBoards,
-  CreateBoard,
-  AddBoard,
-  DeleteBoard,
-  RemoveBoard,
-  DeleteAllBoards,
-  RemoveAllBoards
-} from '@store/actions';
 import { InkBoardsService } from '@lib/services';
+import { Action, Selector, State, StateContext } from '@ngxs/store';
+import { AddBoard, CreateBoard, DeleteAllBoards, DeleteBoard, FetchAllBoards, PopulateAllBoards, RemoveAllBoards, RemoveBoard } from '@store/actions';
+import { map, tap } from 'rxjs/operators';
 
 @State<InkBoards>({
   name: 'boards',
@@ -19,16 +11,16 @@ import { InkBoardsService } from '@lib/services';
 export class BoardsState {
   @Selector()
   static defaultBoard(state: InkBoards) {
-    return state[0]._id;
+    return state[0].id;
   }
 
   constructor(private _service: InkBoardsService) {}
 
   @Action(FetchAllBoards)
   fetchAllBoards(ctx: StateContext<InkBoards>, action: FetchAllBoards) {
-    return this._service.fetchAllBoards().then(boards => {
+    return this._service.fetchAllBoards().pipe(map(boards => {
       ctx.dispatch(new PopulateAllBoards(boards));
-    });
+    }));
   }
 
   @Action(PopulateAllBoards)
@@ -38,9 +30,7 @@ export class BoardsState {
 
   @Action(CreateBoard)
   createBoard(ctx: StateContext<InkBoards>, action: CreateBoard) {
-    return this._service.create(action.boardData).then(board => {
-      ctx.dispatch(new AddBoard(board));
-    });
+    return this._service.createIfNot(action.boardData).pipe(tap(_ => ctx.dispatch(new AddBoard(action.boardData))));
   }
 
   @Action(AddBoard)

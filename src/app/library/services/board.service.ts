@@ -1,39 +1,45 @@
 import { Injectable } from '@angular/core';
-import { from, Observable } from 'rxjs';
-import { RxDocument } from 'rxdb';
-import { InkBoardDoc, InkBoardMeta } from '../models';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { Store } from '@ngxs/store';
+import { AuthService } from '@services/auth.service';
+import { from, Observable } from 'rxjs';
+import { map, skipWhile, take } from 'rxjs/operators';
+import { BOARD_DEFAULT_DESC, BOARD_DEFAULT_NAME } from '../../ink.config';
+import { InkBoardMeta } from '../models';
 import { CreateBoard } from '../store/actions/board.actions';
-import { InkDatabaseService } from './database.service';
-import { BOARD_DEFAULT_NAME, BOARD_DEFAULT_DESC } from '../../ink.config';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InkBoardsService {
-  constructor(private _db: InkDatabaseService, private _store: Store) {
-    this.create({ name: BOARD_DEFAULT_NAME, description: BOARD_DEFAULT_DESC }).then(doc => {
-      if (!doc) {
-        return;
-      }
-      const board = { _id: doc._id, name: doc.name, description: doc.description, createdAt: doc.createdAt };
-      this._store.dispatch(new CreateBoard(board));
-    });
-  }
-  async create(boardData: InkBoardMeta): Promise<RxDocument<InkBoardDoc>> {
-    const db = await this._db.getDatabase();
-    const existingRecords = await db.boards.find().exec();
-    if (existingRecords.length > 0) {
-      return null;
-    }
-    return db.boards.insert(boardData).catch(error => {
-      console.error('Error while saving board record!', error);
-      return null;
-    });
+  constructor(private _firestore: AngularFirestore, private _auth: AuthService, private _user: UserService, private _store: Store) {
+    const id = this._firestore.createId();
+    const createdAt = Date.now();
+    const createdBy = this._user.getUserData();
+    const boardData = { name: BOARD_DEFAULT_NAME, description: BOARD_DEFAULT_DESC, createdBy, createdAt, id  };
+    this._store.dispatch(new CreateBoard(boardData));
   }
 
-  async fetchAllBoards() {
-    const db = await this._db.getDatabase();
-    return await db.boards.find().exec();
+  create(boardData: InkBoardMeta): Observable<any> {
+    return from(this._firestore.collection<InkBoardMeta>('boards').doc(boardData.id).set(boardData).then(_ => boardData));
+  }
+
+  createIfNot(boardData: InkBoardMeta): Observable<any> {
+    const id = this._firestore.createId();
+    const createdAt = Date.now();
+    return this._firestore
+    .collection<InkBoardMeta>('boards', ref => ref.where('name', '==', boardData.name))
+    .snapshotChanges()
+    .pipe(
+      take(1),
+      skipWhile(data => data.length > 0),
+      map(_ => from(this._firestore.collection<InkBoardMeta>(`boards`).doc(id).set({...boardData, id, createdAt})))
+    );
+  }
+
+  fetchAllBoards() {
+    return this._firestore
+    .collection<InkBoardMeta>('boards').valueChanges();
   }
 }

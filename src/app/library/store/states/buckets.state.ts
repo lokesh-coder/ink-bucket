@@ -1,22 +1,8 @@
-import { State, Action, StateContext, Selector, NgxsOnInit } from '@ngxs/store';
 import { InkBuckets } from '@lib/models';
-import {
-  FetchAllBuckets,
-  PopulateAllBuckets,
-  CreateBucket,
-  AddBucket,
-  DeleteBucket,
-  RemoveBucket,
-  DeleteAllBuckets,
-  RemoveAllBuckets,
-  DeleteBucketsUnderBoard,
-  RemoveBucketsUnderBoard,
-  UpdateBucket,
-  PatchBucket,
-  DeleteDropsUnderBucket,
-  DeleteAllDrops
-} from '@store/actions';
 import { InkBucketsService, InkUtilsService } from '@lib/services';
+import { Action, NgxsOnInit, State, StateContext } from '@ngxs/store';
+import { AddBucket, CreateBucket, DeleteBucket, DeleteBucketsUnderBoard, DeleteDropsUnderBucket, FetchAllBuckets, PatchBucket, PopulateAllBuckets, RemoveBucket, RemoveBucketsUnderBoard, UpdateBucket } from '@store/actions';
+import { map } from 'rxjs/operators';
 
 @State<InkBuckets>({
   name: 'buckets',
@@ -25,16 +11,17 @@ import { InkBucketsService, InkUtilsService } from '@lib/services';
 export class BucketsState implements NgxsOnInit {
   constructor(private _service: InkBucketsService, private _utilityService: InkUtilsService) {}
 
-  async ngxsOnInit(ctx: StateContext<InkBuckets>) {
-    const buckets = await this._service.getAll();
-    ctx.setState(buckets);
+  ngxsOnInit(ctx: StateContext<InkBuckets>) {
+    this._service.getAll().subscribe(buckets => {
+      ctx.setState(buckets);
+    });
   }
 
   @Action(FetchAllBuckets)
   fetchAllBuckets(ctx: StateContext<InkBuckets>, action: FetchAllBuckets) {
-    return this._service.getAll().then(buckets => {
+    return this._service.getAll().pipe(map(buckets => {
       ctx.dispatch(new PopulateAllBuckets(buckets));
-    });
+    }));
   }
 
   @Action(PopulateAllBuckets)
@@ -45,9 +32,9 @@ export class BucketsState implements NgxsOnInit {
   @Action(CreateBucket)
   createBucket(ctx: StateContext<InkBuckets>, action: CreateBucket) {
     action.bucketData.name += this._utilityService.getRandomNumber();
-    return this._service.create(action.bucketData).then(bucket => {
+    return this._service.create(action.bucketData as any).pipe(map(bucket => {
       ctx.dispatch(new AddBucket(bucket));
-    });
+    }));
   }
 
   @Action(AddBucket)
@@ -58,43 +45,31 @@ export class BucketsState implements NgxsOnInit {
 
   @Action(DeleteBucket)
   deleteBucket(ctx: StateContext<InkBuckets>, action: DeleteBucket) {
-    return this._service.delete(action.bucketId).then(bucket => {
+    return this._service.delete(action.bucketId).pipe(map(_ => {
       ctx.dispatch(new DeleteDropsUnderBucket(action.bucketId));
       ctx.dispatch(new RemoveBucket(action.bucketId));
-    });
+    }));
   }
 
   @Action(RemoveBucket)
   removeBucket(ctx: StateContext<InkBuckets>, action: RemoveBucket) {
     const state: any = ctx.getState();
-    const newState = state.filter(b => b._id !== action.bucketId);
+    const newState = state.filter(b => b.id !== action.bucketId);
     ctx.setState(newState);
-  }
-
-  @Action(DeleteAllBuckets)
-  deleteAllBuckets(ctx: StateContext<InkBuckets>, action: DeleteAllBuckets) {
-    return this._service.deleteAll().then(_ => {
-      ctx.dispatch(new RemoveAllBuckets());
-    });
-  }
-
-  @Action(RemoveAllBuckets)
-  removeAllBuckets(ctx: StateContext<InkBuckets>, action: RemoveAllBuckets) {
-    ctx.setState([]);
   }
 
   @Action(UpdateBucket)
   updateBucket(ctx: StateContext<InkBuckets>, action: UpdateBucket) {
-    this._service.update(action.bucketData).then(bucket => {
+    return this._service.update(action.bucketData).pipe(map(bucket => {
       ctx.dispatch(new PatchBucket(bucket));
-    });
+    }));
   }
 
   @Action(PatchBucket)
   patchBucket(ctx: StateContext<InkBuckets>, action: PatchBucket) {
     let state: any = ctx.getState();
     state = state.map((a: any) => {
-      if (a.id === action.bucketData._id) {
+      if (a.id === action.bucketData.id) {
         a.name = action.bucketData.name;
       }
       return a;

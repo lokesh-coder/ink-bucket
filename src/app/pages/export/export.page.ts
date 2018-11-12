@@ -1,23 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ClipboardService } from 'ngx-clipboard';
-import { InkDatabaseService } from '@lib/services';
 
 @Component({
   selector: 'inkapp-export-page',
   templateUrl: 'export.page.html'
 })
-export class ExportPage implements OnInit {
+export class ExportPage {
   jsonData: string;
-  constructor(private _db: InkDatabaseService, private _copyService: ClipboardService) {}
 
-  ngOnInit() {
-    this.getDatabaseContent();
-  }
-
-  async getDatabaseContent() {
-    const db = await this._db.getDatabase();
-    this.jsonData = JSON.stringify(await db.dump(), null, ' ');
-  }
+  constructor(private _copyService: ClipboardService) {}
 
   copy() {
     this._copyService.copyFromContent(this.jsonData);

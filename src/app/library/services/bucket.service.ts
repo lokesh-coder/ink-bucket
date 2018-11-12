@@ -1,58 +1,37 @@
 import { Injectable } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { Store } from '@ngxs/store';
+import { from } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { InkBucketMeta } from '../models';
-import { InkDatabaseService } from './database.service';
+import { AuthService } from './auth.service';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InkBucketsService {
-  constructor(private _db: InkDatabaseService, private _store: Store) {}
-  async create(bucketData: InkBucketMeta) {
-    const db = await this._db.getDatabase();
-    return db.buckets.insert(bucketData).catch(error => {
-      console.error('Error while creating bucket record!', error);
-      return null;
-    });
+  constructor(private _firestore: AngularFirestore, private _auth: AuthService, private _user: UserService, private _store: Store) {}
+  create(bucketData: InkBucketMeta) {
+    bucketData.id = this._firestore.createId();
+    bucketData.createdAt = Date.now();
+    bucketData.createdBy = this._user.getUserData().id;
+    return from(this._firestore.collection<InkBucketMeta>(`buckets`).doc(bucketData.id).set(bucketData).then(_ => bucketData));
   }
 
-  async get(boardId) {
-    const db = await this._db.getDatabase();
-    return db.buckets.find({ boardId }).exec();
+  get(boardId) {
+    return this._firestore.collection<InkBucketMeta>(`buckets`).doc(boardId).valueChanges().pipe(take(1));
   }
 
-  async getAll() {
-    const db = await this._db.getDatabase();
-    return db.buckets.find().exec();
+  getAll() {
+    return this._firestore.collection<InkBucketMeta>(`buckets`).valueChanges().pipe(take(1));
   }
 
-  async deleteAll() {
-    const db = await this._db.getDatabase();
-    return db.buckets.find().remove();
+  update(bucketData: Partial<InkBucketMeta>) {
+    return from(this._firestore.collection<InkBucketMeta>('buckets').doc(bucketData.id).update(bucketData).then(_ => bucketData));
   }
 
-  async update(bucketData: Partial<InkBucketMeta>) {
-    const db = await this._db.getDatabase();
-    console.log('edit', bucketData);
-    return db.buckets
-      .findOne(bucketData._id)
-      .update({
-        $set: bucketData
-      })
-      .catch(error => {
-        console.error('Error while updating bucket name');
-        return null;
-      });
-  }
-
-  async delete(bucketId: string) {
-    const db = await this._db.getDatabase();
-    return db.buckets
-      .findOne(bucketId)
-      .remove()
-      .catch(error => {
-        console.error('Error while removing bucket name');
-        return null;
-      });
+  delete(bucketId: string) {
+    return from(this._firestore.collection<InkBucketMeta>('buckets').doc(bucketId).delete());
   }
 }

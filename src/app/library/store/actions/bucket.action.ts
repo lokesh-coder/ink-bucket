@@ -13,7 +13,7 @@ export class PopulateAllBuckets {
 /* create bucket */
 export class CreateBucket {
   static readonly type = '[Bucket] create bucket';
-  constructor(public bucketData: InkBucketMeta) {}
+  constructor(public bucketData: {name: string, boardId: string}) {}
 }
 /* add bucket */
 export class AddBucket {

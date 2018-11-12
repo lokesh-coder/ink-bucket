@@ -1,4 +1,4 @@
-import { githubClientSecret, githubClientID } from './secrets';
+import { githubClientID, githubClientSecret } from './secrets';
 
 export const environment = {
   production: true,
