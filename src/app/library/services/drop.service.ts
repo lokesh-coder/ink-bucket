@@ -1,58 +1,47 @@
 import { Injectable } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { from } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { InkDropMeta } from '../models';
-import { InkDatabaseService } from './database.service';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InkDropsService {
-  constructor(private _db: InkDatabaseService) {}
+  constructor(private _firestore: AngularFirestore, private _user: UserService) {}
 
-  async create(dropData: InkDropMeta) {
-    const db = await this._db.getDatabase();
-    return db.drops.insert(dropData).catch(error => {
-      console.error('Error while saving ink color!', error);
-    });
-  }
-
-  async update(dropData: Partial<InkDropMeta>) {
-    const db = await this._db.getDatabase();
-    return db.drops
-      .findOne(dropData._id)
-      .update({
-        $set: dropData
-      })
-      .catch(error => {
-        console.error('Error while updating ink color!', error);
-      });
+  create(dropData: InkDropMeta) {
+    dropData.id = this._firestore.createId();
+    dropData.createdAt = Date.now();
+    dropData.createdBy = this._user.getUserData().id;
+    return from(this._firestore.collection<InkDropMeta>(`drops`).doc(dropData.id).set(dropData).then(_ => dropData));
   }
 
-  async get(bucketId) {
-    const db = await this._db.getDatabase();
-    return db.drops
-      .find({ bucketId })
-      .sort('createdAt')
-      .exec();
-  }
-  async getAll() {
-    const db = await this._db.getDatabase();
-    return db.drops
-      .find()
-      .sort('createdAt')
-      .exec();
+  update(dropData: Partial<InkDropMeta>) {
+      return from(this._firestore.collection<InkDropMeta>('drops').doc(dropData.id).update(dropData).then(_ => dropData));
   }
 
-  async deleteAllUnderBucket(bucketId: string) {
-    const db = await this._db.getDatabase();
-    return db.drops.find({ bucketId: { $eq: bucketId } }).remove();
+  get(bucketId) {
+      return this._firestore.collection<InkDropMeta>(`drops`, ref => ref.orderBy('createdAt')).doc(bucketId).valueChanges();
   }
 
-  async deleteAll() {
-    const db = await this._db.getDatabase();
-    return db.drops.find().remove();
+  getAll() {
+      return this._firestore.collection<InkDropMeta>(`drops`, ref => ref.orderBy('createdAt')).valueChanges();
   }
-  async delete(dropId: string) {
-    const db = await this._db.getDatabase();
-    return db.drops.find(dropId).remove();
+
+  deleteAllUnderBucket(bucketId: string) {
+    const deleteQuery = this._firestore.collection<InkDropMeta>('drops', ref => ref.where('bucketId', '==', bucketId))
+    .snapshotChanges()
+    .pipe(map(querySnapshot => {
+      querySnapshot.forEach(snapshot => snapshot.payload.doc.ref.delete());
+    }));
+    return from(deleteQuery);
+  }
+
+  // deleteAll() {}
+
+  delete(dropId: string ) {
+    return from(this._firestore.collection<InkDropMeta>('drops').doc(dropId).delete());
   }
 }

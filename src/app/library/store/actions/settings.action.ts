@@ -1,4 +1,14 @@
-import { InkAppSettings, InkAppSettingsItem, InkSettingsMeta } from '@lib/models';
+import { InkAppSettings, InkSettingsMeta } from '@lib/models';
+
+export class FetchSettings {
+  static readonly type = '[Settings] fetch settings';
+  constructor(public settings: InkAppSettings) {}
+}
+
+export class PopulateDefaultSettings {
+  static readonly type = '[Settings] populate default settings';
+  constructor(public settings: InkAppSettings) {}
+}
 
 export class FetchSettings {
   static readonly type = '[Settings] fetch settings';
@@ -38,18 +48,4 @@ export class UpdateSettingsItem {
 export class DeleteSettingsItem {
   static readonly type = '[Settings] delete';
   constructor(public key: string) {}
-}
-
-export class FetchRemoteGist {
-  static readonly type = '[Settings] fetch remote gist';
-}
-
-export class CreateRemoteGist {
-  static readonly type = '[Settings] create remote gist';
-  constructor(public gistData: object) {}
-}
-
-export class UpdateRemoteGist {
-  static readonly type = '[Settings] update remote gist';
-  constructor(public gistId: string, public gistData: object) {}
 }

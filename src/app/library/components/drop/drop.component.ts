@@ -1,15 +1,11 @@
-import { Component, OnInit, Input, OnDestroy, ComponentRef, ElementRef } from '@angular/core';
-import { Store } from '@ngxs/store';
-import { Overlay, OverlayRef, OverlayConfig } from '@angular/cdk/overlay';
-import { ComponentPortal } from '@angular/cdk/portal';
-import { map, debounceTime } from 'rxjs/operators';
+import { Component, ComponentRef, ElementRef, Input, OnDestroy, OnInit } from '@angular/core';
 import { InkDropMeta } from '@lib/models';
-import { InkDropsService } from '@lib/services';
-import { UpdateDrop } from '@store/actions';
-import { InkColorPickerService } from '@services/color-picker.service';
-import { SketchComponent } from 'ngx-color/sketch';
 import { ColorPickerComponent } from '@lib/modules/color/components/color-picker/color-picker.component';
+import { Store } from '@ngxs/store';
 import { DEFAULT_COLOR } from '@root/ink.config';
+import { InkColorPickerService } from '@services/color-picker.service';
+import { UpdateDrop } from '@store/actions';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'inkapp-drop',
@@ -36,7 +32,8 @@ export class DropComponent implements OnInit, OnDestroy {
         displayValue: color.hex,
         meta: color,
         bucketId: this.bucketId,
-        _id: this.data._id
+        id: this.data.id,
+        createdBy: null
       };
     });
     this._colorPickerService.backdropClick().subscribe(b => {

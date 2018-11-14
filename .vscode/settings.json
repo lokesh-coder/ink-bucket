@@ -16,6 +16,10 @@
     {
       "name": "feature/travis-sematic-renovate-setup",
       "base": "develop"
+    },
+    {
+      "name": "feature/firebase-integration",
+      "base": "develop"
     }
   ],
   "gitflow4code.releases": [

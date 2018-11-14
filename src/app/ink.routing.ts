@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { NotFoundPage, RedirectPage, ExportPage, SettingsPage, HomePage } from '@root/pages';
+import { RouterModule, Routes } from '@angular/router';
+import { ExportPage, HomePage, NotFoundPage, RedirectPage, SettingsPage } from '@root/pages';
 
 const routes: Routes = [
   { path: '', component: HomePage },
