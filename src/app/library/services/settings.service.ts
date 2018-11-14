@@ -45,4 +45,16 @@ export class InkSettingsService {
   private _set(value) {
     localStorage.setItem(`inkapp.settings`, JSON.stringify(value));
   }
+
+  async addAll(settings: InkAppSettings) {
+    const db = await this._db.getDatabase();
+    try {
+      for (const item of settings) {
+        await db.settings.insert({ key: item.key, value: item.value });
+      }
+      return db.settings.find().exec();
+    } catch (error) {
+      console.error('Error while adding settings!', error);
+    }
+  }
 }
