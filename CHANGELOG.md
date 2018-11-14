@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/lokesh-coder/ink-bucket/compare/v1.1.0...v1.1.1) (2018-11-14)
+
+
+### Bug Fixes
+
+* resolve linting issues ([393316a](https://github.com/lokesh-coder/ink-bucket/commit/393316a))
+
 # [1.1.0](https://github.com/lokesh-coder/ink-bucket/compare/v1.0.0...v1.1.0) (2018-11-14)
 
 
