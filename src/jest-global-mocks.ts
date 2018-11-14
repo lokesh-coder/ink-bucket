@@ -1,4 +1,4 @@
-global['CSS'] = null;
+window['CSS'] = null;
 
 const mock = () => {
   let storage = {};
