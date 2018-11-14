@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/lokesh-coder/ink-bucket/compare/v1.0.0...v1.1.0) (2018-11-14)
+
+
+### Features
+
+* firebase integrated  ([830e83b](https://github.com/lokesh-coder/ink-bucket/commit/830e83b))
+
 # 1.0.0 (2018-06-18)
 
 
