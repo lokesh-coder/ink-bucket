@@ -54,7 +54,7 @@
     "deepmerge": "2.2.1",
     "firebase": "5.5.8",
     "fuse.js": "3.3.0",
-    "gun": "0.9.99997",
+    "gun": "0.9.99998",
     "keypress.js": "2.1.5",
     "lodash-es": "4.17.11",
     "nedb": "1.8.0",
