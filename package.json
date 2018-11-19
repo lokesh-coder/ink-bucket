@@ -83,7 +83,7 @@
     "@semantic-release/exec": "2.3.0",
     "@semantic-release/git": "6.0.2",
     "@semantic-release/github": "4.4.2",
-    "@types/jasmine": "2.8.11",
+    "@types/jasmine": "2.8.12",
     "@types/jasminewd2": "2.0.6",
     "@types/node": "8.10.38",
     "@types/pouchdb": "6.3.2",
