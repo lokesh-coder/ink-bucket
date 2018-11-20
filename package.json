@@ -52,7 +52,7 @@
     "core-js": "2.5.7",
     "deep-freeze-strict": "1.1.1",
     "deepmerge": "2.2.1",
-    "firebase": "5.5.8",
+    "firebase": "5.5.9",
     "fuse.js": "3.3.0",
     "gun": "0.9.99999",
     "keypress.js": "2.1.5",
