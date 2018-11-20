@@ -41,7 +41,7 @@
     "@angular/service-worker": "6.1.10",
     "@auth0/angular-jwt": "2.0.0",
     "@ctrl/tinycolor": "2.2.1",
-    "@ngxs/devtools-plugin": "3.2.0",
+    "@ngxs/devtools-plugin": "3.3.0",
     "@ngxs/store": "3.2.0",
     "@types/nedb": "1.8.6",
     "@types/pouchdb-core": "6.4.3",
