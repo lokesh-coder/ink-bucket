@@ -42,7 +42,7 @@
     "@auth0/angular-jwt": "2.0.0",
     "@ctrl/tinycolor": "2.2.1",
     "@ngxs/devtools-plugin": "3.3.0",
-    "@ngxs/store": "3.2.0",
+    "@ngxs/store": "3.3.0",
     "@types/nedb": "1.8.6",
     "@types/pouchdb-core": "6.4.3",
     "@types/pouchdb-find": "6.3.3",
