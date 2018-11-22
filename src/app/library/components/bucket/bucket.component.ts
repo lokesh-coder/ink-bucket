@@ -41,4 +41,7 @@ export class BucketComponent implements OnInit {
   deleteBucket() {
     this._store.dispatch(new DeleteBucket(this.data.id));
   }
+  updateFirestore(e) {
+    console.log('stopp', e);
+  }
 }

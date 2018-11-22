@@ -18,6 +18,8 @@ import { environment } from '../environments/environment';
 import { InkApp } from './ink.component';
 import { RoutingModule } from './ink.routing';
 import { ExportPage, HomePage, NotFoundPage, RedirectPage, SettingsPage } from './pages';
+import { DraggableDirective } from '@lib/directives/draggable.directive';
+import { SlateComponent } from '@components/slate/slate.component';
 
 export const MODULES = [
   BrowserModule,
@@ -34,12 +36,15 @@ export const MODULES = [
   OverlayModule,
   ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
 ];
-export const COMPONENTS = [InkApp, HeaderComponent, BoardComponent, BucketComponent, DropComponent];
+export const COMPONENTS = [InkApp, HeaderComponent, BoardComponent, BucketComponent, DropComponent, SlateComponent];
+export const ENTRY_COMPONENTS = [SlateComponent];
+export const DIRECTIVES = [DraggableDirective];
 export const ELEMENTS = [ActionItemElement, EditableTitleElement, BillboardElement];
 export const PAGES = [HomePage, SettingsPage, ExportPage, RedirectPage, NotFoundPage];
 
 @NgModule({
-  declarations: [...COMPONENTS, ...ELEMENTS, ...PAGES],
+  declarations: [...COMPONENTS, ...DIRECTIVES, ...ELEMENTS, ...PAGES],
+  entryComponents: [...ENTRY_COMPONENTS],
   imports: [...MODULES],
   bootstrap: [InkApp]
 })

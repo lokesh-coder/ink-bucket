@@ -1,6 +1,6 @@
 <inkapp-editable-title-el [title]="data.name" (changed)="onTitleChange($event)" [index]="index" (delete)="deleteBucket()">
 </inkapp-editable-title-el>
-<div class="d-flex flex-wrap">
+<div class="d-flex flex-wrap" inkappDraggable (stop)="updateFirestore($event)">
   <ng-container *ngFor="let color of drops$|async as drops">
     <inkapp-drop [data]="color" [bucketId]="data.id"></inkapp-drop>
   </ng-container>
