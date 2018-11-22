@@ -6,6 +6,8 @@ import { DEFAULT_COLOR } from '@root/ink.config';
 import { InkColorPickerService } from '@services/color-picker.service';
 import { UpdateDrop } from '@store/actions';
 import { map } from 'rxjs/operators';
+import { FullscreenOverlayService } from '@services/fullscreen-overlay.service';
+import { SlateComponent } from '@components/slate/slate.component';
 
 @Component({
   selector: 'inkapp-drop',
@@ -17,7 +19,11 @@ export class DropComponent implements OnInit, OnDestroy {
   @Input() bucketId: string;
   colorPickerRef: ComponentRef<ColorPickerComponent>;
   drop: InkDropMeta = null;
-  constructor(private _store: Store, private _colorPickerService: InkColorPickerService, private _elRef: ElementRef) {}
+  constructor(
+    private _store: Store,
+    private _colorPickerService: InkColorPickerService,
+    private _fullscreenOverlayService: FullscreenOverlayService,
+    private _elRef: ElementRef) {}
 
   ngOnInit() {
     this._colorPickerService.configure(this._elRef);
@@ -41,6 +47,9 @@ export class DropComponent implements OnInit, OnDestroy {
         this._store.dispatch(new UpdateDrop(this.drop));
       }
     });
+  }
+  open(drop) {
+    this._fullscreenOverlayService.setComponent(SlateComponent, drop).open();
   }
 
   ngOnDestroy() {
